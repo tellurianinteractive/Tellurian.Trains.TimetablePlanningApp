@@ -16,9 +16,6 @@ to make all source code and other assets open source.
 8. Option for manually writing driver instructions in several languages.
 9. User authentication and authorization.
 
-## Development plan
-See separate document [Development Plan](../../wiki/Development-Plan).
-
 ## Contribute
 I you are interested of scheduling of model trains, especially for module meetings, you can contribute in many ways:
 1. Follow the project with happy shouts!
