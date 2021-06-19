@@ -1,22 +1,23 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
+using TimetablePlanning.App.Server.Data;
 
-namespace App.Server
+namespace TimetablePlanning.App.Server
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -25,6 +26,10 @@ namespace App.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddDbContextFactory<TimetablesDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("TimetablePlanningDatabase")).EnableSensitiveDataLogging(Environment.IsDevelopment());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

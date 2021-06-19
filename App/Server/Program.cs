@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace App.Server
+namespace TimetablePlanning.App.Server
 {
     public class Program
     {
@@ -18,9 +13,16 @@ namespace App.Server
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            .ConfigureAppConfiguration((context, config) =>
+            {
+                if (context.HostingEnvironment.IsDevelopment())
                 {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    config.AddUserSecrets<Program>();
+                }
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }
