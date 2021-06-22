@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>TimetablePlanning.App.Shared</AssemblyName>
     <RootNamespace>TimetablePlanning.App.Shared</RootNamespace>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
+    <Version>0.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

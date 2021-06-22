@@ -1,6 +1,17 @@
 ﻿@page "/"
+@using Tellurian.Trains.Scheduling.Components
+@using Tellurian.Trains.Scheduling.Services
+@using Tellurian.Trains.Scheduling.Model
 
-<h1>Hello, world!</h1>
+@inject ITimetableService TimetableService
 
-Welcome to your new app.
+<GraphicalScheduleEditor TimetableStretches="TimetableStretches" />
 
+@code {
+	IEnumerable<TimetableStretch>? TimetableStretches;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		TimetableStretches = await TimetableService.GetTimetableStretchesAsync();
+	}
+}

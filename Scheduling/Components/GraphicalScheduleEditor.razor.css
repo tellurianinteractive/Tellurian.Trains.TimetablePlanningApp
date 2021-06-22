@@ -1,0 +1,50 @@
+﻿.time {
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+    .time.horizontal {
+        text-anchor: middle;
+    }
+
+    .time.vertical {
+        text-anchor: start;
+    }
+
+.timeline {
+    stroke: lightgray;
+}
+
+.distance {
+}
+
+.trackline {
+    stroke: lightgray;
+}
+
+.stationname {
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+    .stationname.horizontal {
+        text-anchor: start;
+    }
+
+    .stationname.vertical {
+        text-anchor: middle;
+    }
+
+.stationkm {
+    font-weight: normal;
+    font-size: 7pt;
+    text-anchor: middle;
+}
+
+    .stationkm.horizontal {
+        text-anchor: end;
+    }
+
+    .stationkm.vertical {
+        text-anchor: middle;
+    }

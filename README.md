@@ -27,5 +27,6 @@ I you are interested of scheduling of model trains, especially for module meetin
 
 All interaction takes place on GitHub and we use en English only.
 So you will need a GitHub account and apply for membership in the project.
+You find more details in the [Contribution page](CONTRIBUTING.md).
 
 Welcome to participate!

@@ -9,7 +9,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Client", "App\Client\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Shared", "App\Shared\App.Shared.csproj", "{37968CF5-51F3-4AFA-9E85-4778CC592DC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduling", "Scheduling\Scheduling.csproj", "{5E06DE08-3065-47C6-AAA9-CFAB80CDBF61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scheduling", "Scheduling\Scheduling.csproj", "{5E06DE08-3065-47C6-AAA9-CFAB80CDBF61}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scheduling.Tests", "Scheduling.Tests\Scheduling.Tests.csproj", "{40E0CFBB-7671-473C-BA4E-A5E417AB5F58}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD13AD96-DE12-4698-A1A1-2AACD4709FAC}"
+	ProjectSection(SolutionItems) = preProject
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+		RELEASENOTES.md = RELEASENOTES.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +43,10 @@ Global
 		{5E06DE08-3065-47C6-AAA9-CFAB80CDBF61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E06DE08-3065-47C6-AAA9-CFAB80CDBF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E06DE08-3065-47C6-AAA9-CFAB80CDBF61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40E0CFBB-7671-473C-BA4E-A5E417AB5F58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40E0CFBB-7671-473C-BA4E-A5E417AB5F58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40E0CFBB-7671-473C-BA4E-A5E417AB5F58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40E0CFBB-7671-473C-BA4E-A5E417AB5F58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

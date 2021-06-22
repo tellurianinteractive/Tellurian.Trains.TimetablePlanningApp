@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>Tellurian.Trains.Scheduling</AssemblyName>
     <RootNamespace>Tellurian.Trains.Scheduling</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -10,10 +10,20 @@
     <Description>Razor components and data contracts for train scheduling.</Description>
     <RepositoryUrl>https://github.com/tellurianinteractive/Tellurian.Trains.TimetablePlanningApp</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <Version>0.1.0</Version>
+    <Version>0.0.1</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags>anup of code</PackageTags>
+    <PackageTags></PackageTags>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Components\GraphicalScheduleEditor.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Components\GraphicalScheduleEditor.razor.css" />
+  </ItemGroup>
 
   
   <ItemGroup>
@@ -22,11 +32,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.7" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Components\" />
-    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>
