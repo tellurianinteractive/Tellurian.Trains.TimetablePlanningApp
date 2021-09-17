@@ -18,9 +18,21 @@
 .distance {
 }
 
-.trackline {
+.track {
     stroke: lightgray;
 }
+
+.number {
+    font-weight: normal;
+    font-size: 6pt;
+}
+
+    .number.horizontal {
+        text-anchor: end;
+    }
+    .number.vertical {
+        text-anchor: middle;
+    }
 
 .stationname {
     font-weight: bold;

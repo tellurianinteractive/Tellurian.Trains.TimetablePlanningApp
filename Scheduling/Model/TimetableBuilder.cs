@@ -23,7 +23,7 @@ namespace Tellurian.Trains.Scheduling.Model
             new ("Grohed", "Gro") { Km = 75, Tracks = new StationTrack[] { new("1") {HasPlatform=false }, new("2") { HasPlatform = false } } },
             new ("Ljungskile", "Lj") { Km = 67 , Tracks = new StationTrack[] { new("1"), new("2") }},
             new ("Svenshögen", "Svg") { Km = 60 , Tracks = new StationTrack[] { new("1"), new("2") }},
-            new ("Stenungsund", "Snu") { Km = 48 , Tracks = new StationTrack[] { new("1b"), new("2") }},
+            new ("Stenungsund", "Snu") { Km = 48 , Tracks = new StationTrack[] { new("1b"), new("2"), new StationTrack("3") { HasPlatform=false }, new StationTrack("4") {IsScheduled=false, HasPlatform=false } } },
             new ("Stora Höga", "Sth") { Km = 41 , Tracks = new StationTrack[] { new("1"), new("2") }},
             new ("Kode", "Kde") { Km = 33 , Tracks = new StationTrack[] { new("1"), new("2") }},
             new ("Ytterby", "Yb") { Km = 22 , Tracks = new StationTrack[] { new("1"), new("2") }},

@@ -46,7 +46,7 @@ namespace Tellurian.Trains.Scheduling.Extensions
             me.TimeAxisDirection switch
             {
                 TimeAxisDirection.Horisontal => me.TimeLine(time).Start - new Offset(5, 5),
-                TimeAxisDirection.Vertical => me.TimeLine(time).Start - new Offset(me.Settings.TimeAxisSpacing.X-5, 0),
+                TimeAxisDirection.Vertical => me.TimeLine(time).Start - new Offset(me.Settings.TimeAxisSpacing.X - 5, 0),
                 _ => throw new NotSupportedException()
             };
 
@@ -54,11 +54,11 @@ namespace Tellurian.Trains.Scheduling.Extensions
         {
             var offset = me.Stations[stationIndex].Tracks.Length / 2 * me.Settings.TrackSpacing;
             return me.TimeAxisDirection switch
-                {
-                    TimeAxisDirection.Horisontal => new(5, me.Y(stationIndex, 0) + offset),
-                    TimeAxisDirection.Vertical => new(me.X(stationIndex, 0) + offset, 25),
-                    _ => Offset.Invalid
-                };
+            {
+                TimeAxisDirection.Horisontal => new(5, me.Y(stationIndex, 0) + offset),
+                TimeAxisDirection.Vertical => new(me.X(stationIndex, 0) + offset, 25),
+                _ => Offset.Invalid
+            };
         }
 
         public static Offset KmLabelOffset(this TimetableStretch me, int stationIndex)
@@ -66,10 +66,21 @@ namespace Tellurian.Trains.Scheduling.Extensions
             var offset = me.Stations[stationIndex].Tracks.Length / 2 * me.Settings.TrackSpacing;
             return me.TimeAxisDirection switch
             {
-                TimeAxisDirection.Horisontal => new(me.Settings.KilometerAxisSpacing.X - 5, me.Y(stationIndex, 0) + offset),
-                TimeAxisDirection.Vertical => new(me.X(stationIndex, 0) + offset, me.Settings.KilometerAxisSpacing.Y - 5),
+                TimeAxisDirection.Horisontal => new(me.Settings.KilometerAxisSpacing.X - 15, me.Y(stationIndex, 0) + offset),
+                TimeAxisDirection.Vertical => new(me.X(stationIndex, 0) + offset, me.Settings.KilometerAxisSpacing.Y - 15),
                 _ => Offset.Invalid
             };
+        }
+
+        public static Offset TrackNumberOffset(this TimetableStretch me, int stationIndex, int trackIndex)
+        {
+            return me.TimeAxisDirection switch
+            {
+                TimeAxisDirection.Horisontal => new(me.Settings.KilometerAxisSpacing.X - 2, me.Y(stationIndex, trackIndex) + 3),
+                TimeAxisDirection.Vertical => new(me.X(stationIndex, trackIndex) + 0, me.Settings.KilometerAxisSpacing.Y - 2),
+                _ => Offset.Invalid
+            };
+
         }
 
         public static TimeSpan? Time(this TimetableStretch me, int xOffset, int yOffset)
@@ -88,6 +99,7 @@ namespace Tellurian.Trains.Scheduling.Extensions
             }
             throw new NotSupportedException(me.TimeAxisDirection.ToString());
         }
+
 
         public static Offset TimeOffset(this TimetableStretch me, TimeSpan time)
         {
@@ -120,6 +132,12 @@ namespace Tellurian.Trains.Scheduling.Extensions
                  TimeAxisDirection.Vertical => TrackOffset(me, stationIndex, trackIndex).X,
                  _ => 0
              };
+
+        public static Offset TrackStartLocation(this TimetableStretch me, int stationIndex, int trackIndex) =>
+              me.TrackOffset(stationIndex, trackIndex) + me.TimeOffset(me.StartTime);
+
+        public static Offset TrackEndLocation(this TimetableStretch me, int stationIndex, int trackIndex) =>
+             me.TrackOffset(stationIndex, trackIndex) + me.TimeOffset(me.EndTime);
 
         public static Offset TrackOffset(this TimetableStretch me, int stationIndex, int trackIndex)
         {

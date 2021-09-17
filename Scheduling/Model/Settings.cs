@@ -9,7 +9,7 @@ namespace Tellurian.Trains.Scheduling.Model
         public Offset TimeAxisSpacing { get; init; } = new(30, 30);
         public Offset KilometerAxisSpacing { get; init; } = new(100, 60);
         public int EndMargin { get; init; } = 20;
-        public int TrackSpacing { get; init; } = 5;
+        public int TrackSpacing { get; init; } = 8;
         public int MinStationSpacing { get; init; } = 40;
         public int MinuteSpacing { get; set; } = 2;
         public int KilometerSpacing { get; set; } = 10;
