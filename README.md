@@ -1,14 +1,15 @@
 # Timetable Planning App
 Web application for working with scheduling of model railway operation at module meetings.
+The application will be integrated with the [Module Registry](https://moduleregistry.azurewebsites.net).
 
 ## Goal
 To build a web and cloud based scheduling system for multiuse and multi tenancy, and
 to make all source code and other assets open source.
 
-## Plan as of February 2022
+## Plan as of March 2023
 The development of the Timetable Planning App is started.
 It is in its initial phase and the preview will be updated when new features are available.
-Other projects has been in my focus during 2021, so we'll see when I can make progress.
+Other projects will be in my focus during 2023, so we'll see when I can make progress.
 
 The printing functionality will be based on earlier development. Take a look at [the examples](Examples).
 
@@ -24,7 +25,7 @@ If you have questions, comments or ideas, please file them at the GitHub discuss
 7. Automatic creation of driver instructions based on scheduling data.
 8. Automatic creation of instructions for train dispatcher and shunting staff.
 9. Option for manually writing driver instructions in several languages.
-10. User authentication and authorization.
+10. User authorization.
 
 
 ## Environment
