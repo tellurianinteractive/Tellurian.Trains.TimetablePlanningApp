@@ -1,6 +1,11 @@
 ## Release Notes
 
-#### Version 0.0.1
+### Version 0.0.2
+Release date 2023-03-07
+
+First implementation of notes to drivers, shunters and displatchers.
+
+### Version 0.0.1
 Release date 2021-06-22
 
 This is the first deployment to Azure. 

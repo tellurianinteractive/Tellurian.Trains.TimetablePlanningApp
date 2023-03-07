@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net70</TargetFramework>
     <AssemblyName>TimetablePlanning.App.Shared</AssemblyName>
     <RootNamespace>TimetablePlanning.App.Shared</RootNamespace>
     <LangVersion>latest</LangVersion>
