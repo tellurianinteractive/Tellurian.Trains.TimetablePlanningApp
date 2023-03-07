@@ -5,12 +5,10 @@ Web application for working with scheduling of model railway operation at module
 To build a web and cloud based scheduling system for multiuse and multi tenancy, and
 to make all source code and other assets open source.
 
-## Plan as of June 2021
+## Plan as of February 2022
 The development of the Timetable Planning App is started.
 It is in its initial phase and the preview will be updated when new features are available.
-
-The plan is to have it working before the end of this year, 
-after Microsoft releases the final version of .NET 6.0. 
+Other projects has been in my focus during 2021, so we'll see when I can make progress.
 
 The printing functionality will be based on earlier development. Take a look at [the examples](Examples).
 
@@ -45,7 +43,6 @@ Printing to PDF will be supported, including correct paginatnation for booklet p
 The app will work integrated with the [Module Registry App](https://moduleregistry.azurewebsites.net/).
 The data will be stored in the same database, 
 and the user authentication and authorization will be the same.
-
 
 ## Contribute
 I you are interested of scheduling of model trains, especially for module meetings, you can contribute in many ways:
