@@ -6,10 +6,10 @@ namespace TimetablePlanning.Models.CallNotes.Extensions;
 
 public static class LocoCallNoteExtensions
 {
-    public static IEnumerable<LocoConnectNote> AsLocoAssignmentNotes(this IEnumerable<LocoConnect> locoAssignments) =>
+    public static IEnumerable<LocoConnectNote> AsLocoAssignmentNotes(this IEnumerable<LocoConnectEvent> locoAssignments) =>
         locoAssignments.Select(la => la.AsLocoConnectioNote());
 
-    public static LocoConnectNote AsLocoConnectioNote(this LocoConnect locoConnect) =>
+    public static LocoConnectNote AsLocoConnectioNote(this LocoConnectEvent locoConnect) =>
         new ()
         {
             ForCallId = locoConnect.CallId,
@@ -19,10 +19,10 @@ public static class LocoCallNoteExtensions
             CollectFromStagingArea = locoConnect.CollectFromStagingArea,
         };
 
-    public static IEnumerable<LocoDisconnectNote> AsLocoDisconnectNotes(this IEnumerable<LocoDisconnect> locoDisconnects) =>
+    public static IEnumerable<LocoDisconnectNote> AsLocoDisconnectNotes(this IEnumerable<LocoDisconnectEvent> locoDisconnects) =>
         locoDisconnects.Select(ld => ld.AsLocoDisconnectNote());
 
-    public static LocoDisconnectNote AsLocoDisconnectNote(this LocoDisconnect locoDisconnect) =>
+    public static LocoDisconnectNote AsLocoDisconnectNote(this LocoDisconnectEvent locoDisconnect) =>
          new ()
          {
              ForCallId = locoDisconnect.CallId,
@@ -34,7 +34,7 @@ public static class LocoCallNoteExtensions
              TurnLoco = locoDisconnect.TurnLoco,
          };
 
-    private static LocoInfo AsLocoInfo(this LocoAction action) =>
+    private static LocoInfo AsLocoInfo(this LocoEvent action) =>
         new()
         {
             Class = action.LocoClass,

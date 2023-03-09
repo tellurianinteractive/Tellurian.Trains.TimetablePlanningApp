@@ -18,7 +18,7 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public void NoteWithDays()
     {
-        var note = new LocoDisconnect()
+        var note = new LocoDisconnectEvent()
         {
             CallId = 24,
             LocoOperatorSignature = "SJ",
@@ -34,12 +34,19 @@ public class LocoDisconnectionNoteTests
             <span class="note-days">Tu,Th,Sa,Su </span><span class="note-text">Disconnect loco </span><span class="note-item">SJ Rc6 turn 2. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+
+        // These need only to be tested once
+        Assert.IsTrue(note.IsForArrival);
+        Assert.IsFalse(note.IsForDeparture);
+        Assert.IsTrue(note.IsToLocoDriver);
+        Assert.IsTrue(note.IsToDispatecher);
+        Assert.IsTrue(note.IsToShunter);
     }
 
     [TestMethod]
     public void NoteWithOtherDays()
     {
-        var note = new LocoDisconnect()
+        var note = new LocoDisconnectEvent()
         {
             CallId = 24,
             LocoOperatorSignature = "SJ",
@@ -61,7 +68,7 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public void NoteWithLocoNumberAndDriveStoStagingAreaRemark()
     {
-        var note = new LocoDisconnect()
+        var note = new LocoDisconnectEvent()
         {
             CallId = 25,
             LocoOperatorSignature = "SJ",
@@ -84,7 +91,7 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public void NoteWithLocoNumberAndTurnRemark()
     {
-        var note = new LocoDisconnect()
+        var note = new LocoDisconnectEvent()
         {
             LocoOperatorSignature = "SJ",
             CallId = 25,
@@ -107,7 +114,7 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public void NoteWithLocoNumberAndCirculateRemark()
     {
-        var note = new LocoDisconnect()
+        var note = new LocoDisconnectEvent()
         {
             LocoOperatorSignature = "SJ",
             CallId = 25,
@@ -130,7 +137,7 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public void NoteWithLocoNumberAndBothTurnAndCirculateRemark()
     {
-        var note = new LocoDisconnect()
+        var note = new LocoDisconnectEvent()
         {
             LocoOperatorSignature = "SJ",
             CallId = 25,
@@ -154,7 +161,7 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public void NoteWithLocoNumberAndBothDriveToStagingAreaAndTurnLocoRemarks()
     {
-        var note = new LocoDisconnect()
+        var note = new LocoDisconnectEvent()
         {
             LocoOperatorSignature = "SJ",
             CallId = 25,
@@ -178,7 +185,7 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public void NoteWithDriveToStagingAreaAndTurnLocoAndCirculateIsError()
     {
-        var note = new LocoDisconnect()
+        var note = new LocoDisconnectEvent()
         {
             LocoOperatorSignature = "SJ",
             CallId = 25,

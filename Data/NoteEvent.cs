@@ -1,6 +1,6 @@
 ﻿namespace TimetablePlanning.Data;
 
-public abstract class NoteBase
+public abstract class NoteEvent
 {
     public required int CallId { get; init; }
     public required byte TrainOperatingDaysFlags { get; init; }

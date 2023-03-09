@@ -11,9 +11,10 @@ public class LocoInfo
     public required OperationDays OperationDays { get; init; }
     public bool IsDoubleDirectionTrain { get; init; }
     public bool IsSingleDirectionTractionUnit => !IsDoubleDirectionTrain;
-    public override string ToString() =>
-        LocoNumber.HasValue() ? $"{OperatorSignature} {Class} {LocoNumber} {Resources.Notes.Turn} {TurnusNumber}".Trim() :
-        $"{OperatorSignature} {Class} {Resources.Notes.Turn} {TurnusNumber}".Trim();
+    public override string ToString() => ToString(' ');
+    public  string ToString(char punctuation = ' ') =>
+        LocoNumber.HasValue() ? $"{OperatorSignature} {Class} {LocoNumber} {Resources.Notes.Turn} {TurnusNumber}{punctuation}".Trim() :
+        $"{OperatorSignature} {Class} {Resources.Notes.Turn} {TurnusNumber}{punctuation}".Trim();
 }
 
 

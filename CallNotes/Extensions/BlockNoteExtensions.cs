@@ -5,10 +5,10 @@ using TimetablePlanning.Data;
 namespace TimetablePlanning.Models.CallNotes.Extensions;
 public static class BlockNoteExtensions
 {
-    public static IEnumerable<BlockArrivalNote> AsBlockArrivalNotes(this IEnumerable<BlockArrival> blockArrivals) =>
+    public static IEnumerable<BlockArrivalNote> AsBlockArrivalNotes(this IEnumerable<BlockArrivalEvent> blockArrivals) =>
         blockArrivals.GroupBy(b => b.CallId).Select(g => g.AsBlockArrivalNote());
 
-    public static BlockArrivalNote AsBlockArrivalNote(this IEnumerable<BlockArrival> sameCallBlockArrivals) =>
+    public static BlockArrivalNote AsBlockArrivalNote(this IEnumerable<BlockArrivalEvent> sameCallBlockArrivals) =>
         new()
         {
             ForCallId = sameCallBlockArrivals.First().CallId,

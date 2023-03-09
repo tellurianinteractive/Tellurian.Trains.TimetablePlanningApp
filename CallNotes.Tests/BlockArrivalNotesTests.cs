@@ -12,7 +12,7 @@ public class BlockArrivalNotesTests
     [TestMethod]
     public void SingleDestination()
     {
-        var note = new BlockArrival()
+        var note = new BlockArrivalEvent()
         {
             CallId = 1,
             PositionInTrain = 2,
@@ -36,8 +36,8 @@ public class BlockArrivalNotesTests
     public void MultipleDestination()
     {
         var notes =
-             new BlockArrival[] {
-                    new BlockArrival()
+             new BlockArrivalEvent[] {
+                    new BlockArrivalEvent()
                     {
                         CallId = 1,
                         PositionInTrain = 2,
@@ -49,7 +49,7 @@ public class BlockArrivalNotesTests
                         DutyOperatingDaysFlags = OperationDays.Daily,
                         Uncouple = true,
                     },
-                   new BlockArrival()
+                   new BlockArrivalEvent()
                     {
                         CallId = 1,
                         PositionInTrain = 1,
@@ -74,8 +74,8 @@ public class BlockArrivalNotesTests
     public void TwoCallDestination()
     {
         var notes =
-             new BlockArrival[] {
-                    new BlockArrival()
+             new BlockArrivalEvent[] {
+                    new BlockArrivalEvent()
                     {
                         CallId = 2,
                         PositionInTrain = 2,
@@ -87,7 +87,7 @@ public class BlockArrivalNotesTests
                         DutyOperatingDaysFlags = OperationDays.Daily,
                         Uncouple = false,
                     },
-                   new BlockArrival()
+                   new BlockArrivalEvent()
                     {
                         CallId = 1,
                         PositionInTrain = 1,

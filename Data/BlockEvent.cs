@@ -1,5 +1,5 @@
 ﻿namespace TimetablePlanning.Data;
-public abstract class BlockAction : NoteBase
+public abstract class BlockEvent : NoteEvent
 {
     public int PositionInTrain { get; init; }
     public required string OriginFullName { get; init; }
@@ -12,7 +12,7 @@ public abstract class BlockAction : NoteBase
     public string DestinationBackColor { get; init; } = "#C0C0C0";
 }
 
-public sealed class BlockArrival : BlockAction
+public sealed class BlockArrivalEvent : BlockEvent
 {
     public bool Uncouple { get; init; }
     public bool AlsoSwitch { get; init; }

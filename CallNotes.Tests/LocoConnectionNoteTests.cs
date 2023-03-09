@@ -16,7 +16,7 @@ public class LocoConnectionNoteTests
     [TestMethod]
     public void NoteWithDays()
     {
-        var note = new LocoConnect(){ 
+        var note = new LocoConnectEvent(){ 
             CallId = 24, 
             LocoOperatorSignature = "SJ", 
             LocoClass = "Rc6", 
@@ -32,12 +32,19 @@ public class LocoConnectionNoteTests
             <span class="note-days">Tu,Th,Sa,Su </span><span class="note-text">Connect loco </span><span class="note-item">SJ Rc6 turn 2. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        
+        // These need only to be tested once
+        Assert.IsFalse(note.IsForArrival);
+        Assert.IsTrue(note.IsForDeparture);
+        Assert.IsTrue(note.IsToLocoDriver);
+        Assert.IsTrue(note.IsToDispatecher);
+        Assert.IsTrue(note.IsToShunter);
     }
 
     [TestMethod]
     public void NoteWithOtherDays()
     {
-        var note = new LocoConnect()
+        var note = new LocoConnectEvent()
         {
             CallId = 24,
             LocoOperatorSignature = "SJ",
@@ -59,7 +66,7 @@ public class LocoConnectionNoteTests
     [TestMethod]
     public void NoteWithLocoNumberAndCollectRemark()
     {
-        var note = new LocoConnect()
+        var note = new LocoConnectEvent()
         {
             CallId = 24,
             LocoOperatorSignature = "SJ",
