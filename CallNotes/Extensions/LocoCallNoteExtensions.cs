@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TimetablePlanning.Data;
+using TimetablePlanning.Models.CallNotes.Data;
 
 namespace TimetablePlanning.Models.CallNotes.Extensions;
 
 public static class LocoCallNoteExtensions
 {
-    public static IEnumerable<LocoConnectNote> AsLocoAssignmentNotes(this IEnumerable<LocoConnectEvent> locoAssignments) =>
+    public static IEnumerable<LocoConnectNote> AsLocoConnectNotes(this IEnumerable<LocoConnectEvent> locoAssignments) =>
         locoAssignments.Select(la => la.AsLocoConnectioNote());
 
     public static LocoConnectNote AsLocoConnectioNote(this LocoConnectEvent locoConnect) =>

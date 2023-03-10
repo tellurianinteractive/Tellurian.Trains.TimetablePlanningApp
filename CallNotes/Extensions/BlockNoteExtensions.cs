@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using TimetablePlanning.Data;
+using TimetablePlanning.Models.CallNotes.Data;
 
 namespace TimetablePlanning.Models.CallNotes.Extensions;
-public static class BlockNoteExtensions
-{
-    public static IEnumerable<BlockArrivalNote> AsBlockArrivalNotes(this IEnumerable<BlockArrivalEvent> blockArrivals) =>
-        blockArrivals.GroupBy(b => b.CallId).Select(g => g.AsBlockArrivalNote());
+public static class BlockNoteExtensions {
+    public static IEnumerable<BlockDisconnectNote> AsBlockDisconnectNotes(this IEnumerable<BlockDisconnectEvent> blockArrivals) =>
+        blockArrivals.GroupBy(b => b.CallId).Select(g => g.AsBlockDisconnectNote());
 
-    public static BlockArrivalNote AsBlockArrivalNote(this IEnumerable<BlockArrivalEvent> sameCallBlockArrivals) =>
+    public static BlockDisconnectNote AsBlockDisconnectNote(this IEnumerable<BlockDisconnectEvent> sameCallBlockArrivals) =>
         new()
         {
             ForCallId = sameCallBlockArrivals.First().CallId,
@@ -18,10 +17,16 @@ public static class BlockNoteExtensions
                 new BlockInfo
                 {
                     PositionInTrain = d.PositionInTrain,
-                    OriginName = d.OriginFullName,
-                    DestinationName = d.DestinationFullName,
-                    DestinationForeColor = d.DestinationForeColor,
-                    DestinationBackColor = d.DestinationBackColor,
+                    Origin = new OriginInfo()
+                    {
+                        FullName = d.OriginFullName
+                    },
+                    Destination = new DestinationInfo()
+                    {
+                        FullName = d.DestinationFullName,
+                        ForeColor = d.DestinationForeColor,
+                        BackColor = d.DestinationBackColor
+                    },
                     UncoupleHere = d.Uncouple,
                 }),
         };

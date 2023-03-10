@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CallNotes\CallNotes.csproj" />
-    <ProjectReference Include="..\Data\Data.csproj" />
   </ItemGroup>
 
 </Project>

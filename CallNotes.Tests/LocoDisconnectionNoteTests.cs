@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
-using TimetablePlanning.Data;
+using System.Threading.Tasks;
+using TimetablePlanning.Models.CallNotes.Data;
 using TimetablePlanning.Models.CallNotes.Extensions;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;
@@ -9,25 +10,27 @@ namespace TimetablePlanning.Models.CallNotes.Tests;
 [TestClass]
 public class LocoDisconnectionNoteTests
 {
+    private ICallEventsService? CallEventsService;
+
+
     [TestInitialize]
     public void TestInitialize()
     {
         TestHelpers.SetTestLanguage();
+        CallEventsService = new TestCallEventsService();
+    }
+
+    private async Task<IEnumerable<LocoDisconnectNote>> Notes(int testCase)
+    {
+        var events = await CallEventsService!.GetLocoDisconnectEventsAsync(testCase).ConfigureAwait(false);
+        return events.AsLocoDisconnectNotes();
     }
 
     [TestMethod]
-    public void NoteWithDays()
+    public async Task NoteWithDays()
     {
-        var note = new LocoDisconnectEvent()
-        {
-            CallId = 24,
-            LocoOperatorSignature = "SJ",
-            LocoClass = "Rc6",
-            TurnNumber = "2",
-            LocoOperatingDaysFlags = 0b01101010,
-            TrainOperatingDaysFlags = OperationDays.Daily,
-            DutyOperatingDaysFlags = OperationDays.Daily
-        }.AsLocoDisconnectNote();
+        var notes = await Notes(1);
+        var note = notes.First();
 
         const string expected =
             """
@@ -44,19 +47,10 @@ public class LocoDisconnectionNoteTests
     }
 
     [TestMethod]
-    public void NoteWithOtherDays()
+    public async Task NoteWithOtherDays()
     {
-        var note = new LocoDisconnectEvent()
-        {
-            CallId = 24,
-            LocoOperatorSignature = "SJ",
-            LocoClass = "Rc6",
-            LocoNumber = "",
-            TurnNumber = "1",
-            LocoOperatingDaysFlags = 0b00010101,
-            TrainOperatingDaysFlags = OperationDays.Daily,
-            DutyOperatingDaysFlags = OperationDays.Daily
-        }.AsLocoDisconnectNote();
+        var notes = await Notes(2);
+        var note = notes.First();
 
         const string expected =
             """
@@ -66,20 +60,10 @@ public class LocoDisconnectionNoteTests
     }
 
     [TestMethod]
-    public void NoteWithLocoNumberAndDriveStoStagingAreaRemark()
+    public async Task NoteWithLocoNumberAndDriveStoStagingAreaRemark()
     {
-        var note = new LocoDisconnectEvent()
-        {
-            CallId = 25,
-            LocoOperatorSignature = "SJ",
-            LocoClass = "T44",
-            LocoNumber = "232",
-            TurnNumber = "3",
-            LocoOperatingDaysFlags = 0b00010101,
-            TrainOperatingDaysFlags = OperationDays.Daily,
-            DutyOperatingDaysFlags = 0b00010101,
-            DriveToStagingArea = true
-        }.AsLocoDisconnectNote();
+        var notes = await Notes(3);
+        var note = notes.First();
 
         const string expected =
             """
@@ -89,20 +73,10 @@ public class LocoDisconnectionNoteTests
     }
 
     [TestMethod]
-    public void NoteWithLocoNumberAndTurnRemark()
+    public async Task NoteWithLocoNumberAndTurnRemark()
     {
-        var note = new LocoDisconnectEvent()
-        {
-            LocoOperatorSignature = "SJ",
-            CallId = 25,
-            LocoClass = "T44",
-            LocoNumber = "236",
-            TurnNumber = "8",
-            LocoOperatingDaysFlags = OperationDays.Daily,
-            TrainOperatingDaysFlags = OperationDays.Daily,
-            DutyOperatingDaysFlags = OperationDays.Daily,
-            TurnLoco = true
-        }.AsLocoDisconnectNote();
+        var notes = await Notes(4);
+        var note = notes.First();
 
         const string expected =
             """
@@ -112,20 +86,10 @@ public class LocoDisconnectionNoteTests
     }
 
     [TestMethod]
-    public void NoteWithLocoNumberAndCirculateRemark()
+    public async Task NoteWithLocoNumberAndCirculateRemark()
     {
-        var note = new LocoDisconnectEvent()
-        {
-            LocoOperatorSignature = "SJ",
-            CallId = 25,
-            LocoClass = "T44",
-            LocoNumber = "236",
-            TurnNumber = "8",
-            LocoOperatingDaysFlags = OperationDays.Daily,
-            TrainOperatingDaysFlags = OperationDays.Daily,
-            DutyOperatingDaysFlags = OperationDays.Daily,
-            CirculateLoco = true
-        }.AsLocoDisconnectNote();
+        var notes = await Notes(5);
+        var note = notes.First();
 
         const string expected =
             """
@@ -135,21 +99,10 @@ public class LocoDisconnectionNoteTests
     }
 
     [TestMethod]
-    public void NoteWithLocoNumberAndBothTurnAndCirculateRemark()
+    public async Task NoteWithLocoNumberAndBothTurnAndCirculateRemark()
     {
-        var note = new LocoDisconnectEvent()
-        {
-            LocoOperatorSignature = "SJ",
-            CallId = 25,
-            LocoClass = "T44",
-            LocoNumber = "236",
-            TurnNumber = "8",
-            LocoOperatingDaysFlags = OperationDays.Daily,
-            TrainOperatingDaysFlags = OperationDays.Daily,
-            DutyOperatingDaysFlags = OperationDays.Daily,
-            CirculateLoco = true,
-            TurnLoco= true,
-        }.AsLocoDisconnectNote();
+        var notes = await Notes(6);
+        var note = notes.First();
 
         const string expected =
             """
@@ -159,21 +112,10 @@ public class LocoDisconnectionNoteTests
     }
 
     [TestMethod]
-    public void NoteWithLocoNumberAndBothDriveToStagingAreaAndTurnLocoRemarks()
+    public async Task NoteWithLocoNumberAndBothDriveToStagingAreaAndTurnLocoRemarks()
     {
-        var note = new LocoDisconnectEvent()
-        {
-            LocoOperatorSignature = "SJ",
-            CallId = 25,
-            LocoClass = "T44",
-            LocoNumber = "236",
-            TurnNumber = "8",
-            LocoOperatingDaysFlags = OperationDays.Daily,
-            TrainOperatingDaysFlags = OperationDays.Daily,
-            DutyOperatingDaysFlags = OperationDays.Daily,
-            DriveToStagingArea = true,
-            TurnLoco = true,
-        }.AsLocoDisconnectNote();
+        var notes = await Notes(7);
+        var note = notes.First();
 
         const string expected =
             """
@@ -183,22 +125,10 @@ public class LocoDisconnectionNoteTests
     }
 
     [TestMethod]
-    public void NoteWithDriveToStagingAreaAndTurnLocoAndCirculateIsError()
+    public async Task NoteWithDriveToStagingAreaAndTurnLocoAndCirculateIsError()
     {
-        var note = new LocoDisconnectEvent()
-        {
-            LocoOperatorSignature = "SJ",
-            CallId = 25,
-            LocoClass = "T44",
-            LocoNumber = "236",
-            TurnNumber = "8",
-            LocoOperatingDaysFlags = OperationDays.Daily,
-            TrainOperatingDaysFlags = OperationDays.Daily,
-            DutyOperatingDaysFlags = OperationDays.Daily,
-            DriveToStagingArea = true,
-            TurnLoco = true,
-            CirculateLoco = true,
-        }.AsLocoDisconnectNote();
+        var notes = await Notes(8);
+        var note = notes.First();
 
         const string expected =
             """
