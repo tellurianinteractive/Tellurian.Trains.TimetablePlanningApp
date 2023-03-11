@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tellurian.Trains.Scheduling.Extensions;
 
 
-namespace Tellurian.Trains.Scheduling.Model
-{
+namespace Tellurian.Trains.Scheduling.Model {
     public record GraphScheduleModel(GraphStation[] Stations, GraphTime[] Times)
     {
 

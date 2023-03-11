@@ -10,8 +10,10 @@ namespace TimetablePlanning.Models.CallNotes.Data;
 /// </summary>
 public interface ICallEventsService
 {
+    Task<IEnumerable<BlockConnectEvent>> GetBlockConnectEventsAsync(int layoutId);
     Task<IEnumerable<BlockDisconnectEvent>> GetBlockDisconnectEventsAsync(int layoutId);
     Task<IEnumerable<LocoConnectEvent>> GetLocoConnectEventsAsync(int layoutId);
     Task<IEnumerable<LocoDisconnectEvent>> GetLocoDisconnectEventsAsync(int layoutId);
+    Task<IEnumerable<TrainMeetEvent>> GetTrainMeetEventsAsync(int layoutId);
 
 }

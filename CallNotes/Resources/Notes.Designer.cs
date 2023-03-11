@@ -88,11 +88,11 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Continuing wagons.
+        ///   Looks up a localized string similar to Connect wagons to.
         /// </summary>
-        internal static string ContinuingWagonsTo {
+        internal static string ConnectWagonsTo {
             get {
-                return ResourceManager.GetString("ContinuingWagonsTo", resourceCulture);
+                return ResourceManager.GetString("ConnectWagonsTo", resourceCulture);
             }
         }
         
@@ -102,6 +102,15 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         internal static string DisconnectLoco {
             get {
                 return ResourceManager.GetString("DisconnectLoco", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnect wagons to.
+        /// </summary>
+        internal static string DisconnectWagonsTo {
+            get {
+                return ResourceManager.GetString("DisconnectWagonsTo", resourceCulture);
             }
         }
         
@@ -133,11 +142,20 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to to.
+        ///   Looks up a localized string similar to Meets.
         /// </summary>
-        internal static string To {
+        internal static string Meets {
             get {
-                return ResourceManager.GetString("To", resourceCulture);
+                return ResourceManager.GetString("Meets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passes.
+        /// </summary>
+        internal static string Passes {
+            get {
+                return ResourceManager.GetString("Passes", resourceCulture);
             }
         }
         
@@ -156,15 +174,6 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         internal static string TurnLoco {
             get {
                 return ResourceManager.GetString("TurnLoco", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uncouple wagons to.
-        /// </summary>
-        internal static string UncoupleWagonsTo {
-            get {
-                return ResourceManager.GetString("UncoupleWagonsTo", resourceCulture);
             }
         }
     }

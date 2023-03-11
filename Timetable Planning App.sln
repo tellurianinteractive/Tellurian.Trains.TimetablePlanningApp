@@ -21,11 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		RELEASENOTES.md = RELEASENOTES.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallNotes", "CallNotes\CallNotes.csproj", "{5BF81DAC-F55A-4FC1-8D90-F90179865FC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.CallNotes", "CallNotes\Models.CallNotes.csproj", "{5BF81DAC-F55A-4FC1-8D90-F90179865FC1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallNotes.Tests", "CallNotes.Tests\CallNotes.Tests.csproj", "{D3DE6B4F-C0A9-41D2-B364-A18FBF88CF18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.CallNotes.Tests", "CallNotes.Tests\Models.CallNotes.Tests.csproj", "{D3DE6B4F-C0A9-41D2-B364-A18FBF88CF18}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.Common", "Models\Models.Common.csproj", "{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

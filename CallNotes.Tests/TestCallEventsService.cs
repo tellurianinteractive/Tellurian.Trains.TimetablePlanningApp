@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TimetablePlanning.Models.CallNotes.Data;
+using TimetablePlanning.Models.Common;
 using TimetablePlanning.Utilities.Extensions;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;
@@ -11,6 +13,58 @@ namespace TimetablePlanning.Models.CallNotes.Tests;
 /// The layoutId corresponds to a test case.
 /// </summary>
 internal class TestCallEventsService : ICallEventsService {
+
+    public Task<IEnumerable<BlockConnectEvent>> GetBlockConnectEventsAsync(int layoutId)
+    {
+
+        return Task.FromResult(Data(layoutId));
+
+        static IEnumerable<BlockConnectEvent> Data(int layoutId) => layoutId switch
+        {
+            1 => new BlockConnectEvent()
+            {
+                CallId = 1,
+                PositionInTrain = 2,
+                DestinationFullName = "Göteborg",
+                DestinationSignature = "Gbg",
+                DestinationForeColor = "#FFFFFF",
+                DestinationBackColor = "#009933",
+                OriginFullName = "Uddevalla",
+                OriginSignature = "Uv",
+                TrainOperatingDaysFlags = OperationDays.Daily,
+                DutyOperatingDaysFlags = OperationDays.Daily,
+            }.AsEnumerable(),
+            2 => new BlockConnectEvent[] {
+                    new BlockConnectEvent()
+                    {
+                        CallId = 1,
+                        PositionInTrain = 2,
+                        DestinationFullName = "Göteborg",
+                        DestinationSignature = "Gbg",
+                        DestinationForeColor = "#FFFFFF",
+                        DestinationBackColor = "#009933",
+                        OriginFullName = "Uddevalla",
+                        OriginSignature = "Uv",
+                        TrainOperatingDaysFlags = OperationDays.Daily,
+                        DutyOperatingDaysFlags = OperationDays.Daily,
+                    },
+                   new BlockConnectEvent()
+                    {
+                        CallId = 1,
+                        PositionInTrain = 1,
+                        MaxNumberOfWagons = 6,
+                        DestinationFullName = "Ytterby",
+                        DestinationSignature = "Yb",
+                        OriginFullName = "Uddevalla",
+                        OriginSignature = "Uv",
+                        TrainOperatingDaysFlags = OperationDays.Daily,
+                        DutyOperatingDaysFlags = OperationDays.Daily,
+                    },
+             },
+
+            _ => Enumerable.Empty<BlockConnectEvent>(),
+        };
+    }
     public Task<IEnumerable<BlockDisconnectEvent>> GetBlockDisconnectEventsAsync(int layoutId)
     {
         return Task.FromResult(Data(layoutId));
@@ -27,7 +81,6 @@ internal class TestCallEventsService : ICallEventsService {
                 OriginSignature = "Uv",
                 TrainOperatingDaysFlags = OperationDays.Daily,
                 DutyOperatingDaysFlags = OperationDays.Daily,
-                Uncouple = true,
             }.AsEnumerable(),
             2 => new BlockDisconnectEvent[] {
                     new BlockDisconnectEvent()
@@ -40,7 +93,6 @@ internal class TestCallEventsService : ICallEventsService {
                         OriginSignature = "Uv",
                         TrainOperatingDaysFlags = OperationDays.Daily,
                         DutyOperatingDaysFlags = OperationDays.Daily,
-                        Uncouple = true,
                     },
                    new BlockDisconnectEvent()
                     {
@@ -52,25 +104,25 @@ internal class TestCallEventsService : ICallEventsService {
                         OriginSignature = "Uv",
                         TrainOperatingDaysFlags = OperationDays.Daily,
                         DutyOperatingDaysFlags = OperationDays.Daily,
-                        Uncouple = true,
                     },
              },
-             3 => new BlockDisconnectEvent[] {
+            3 => new BlockDisconnectEvent[] {
                     new BlockDisconnectEvent()
                     {
-                        CallId = 2,
+                        CallId = 1,
                         PositionInTrain = 2,
                         DestinationFullName = "Göteborg",
                         DestinationSignature = "Gbg",
+                        DestinationForeColor = "#FFFFFF",
+                        DestinationBackColor = "#009933",
                         OriginFullName = "Uddevalla",
                         OriginSignature = "Uv",
                         TrainOperatingDaysFlags = OperationDays.Daily,
                         DutyOperatingDaysFlags = OperationDays.Daily,
-                        Uncouple = false,
                     },
                    new BlockDisconnectEvent()
                     {
-                        CallId = 1,
+                        CallId = 2,
                         PositionInTrain = 1,
                         DestinationFullName = "Ytterby",
                         DestinationSignature = "Yb",
@@ -78,13 +130,11 @@ internal class TestCallEventsService : ICallEventsService {
                         OriginSignature = "Uv",
                         TrainOperatingDaysFlags = OperationDays.Daily,
                         DutyOperatingDaysFlags = OperationDays.Daily,
-                        Uncouple = true,
                     },
              },
             _ => Enumerable.Empty<BlockDisconnectEvent>(),
         };
     }
-
     public Task<IEnumerable<LocoConnectEvent>> GetLocoConnectEventsAsync(int layoutId)
     {
         return Task.FromResult(Data(layoutId));
@@ -128,7 +178,6 @@ internal class TestCallEventsService : ICallEventsService {
             _ => Enumerable.Empty<LocoConnectEvent>(),
         };
     }
-
     public Task<IEnumerable<LocoDisconnectEvent>> GetLocoDisconnectEventsAsync(int layoutId)
     {
         return Task.FromResult(Data(layoutId));
@@ -235,5 +284,39 @@ internal class TestCallEventsService : ICallEventsService {
             _ => Enumerable.Empty<LocoDisconnectEvent>(),
         };
     }
+    public Task<IEnumerable<TrainMeetEvent>> GetTrainMeetEventsAsync(int layoutId) {
+
+        return Task.FromResult(Data(layoutId));
+
+        static IEnumerable<TrainMeetEvent> Data(int layoutId) => layoutId switch
+        {
+            1 => new TrainMeetEvent()
+            {
+                CallId = 1,
+                TrainNumber = 124,
+                MeetingTrainNumber = 4001,
+                MeetingTrainOperatorSignature = "SJ",
+                MeetingTrainPrefix = "Gt",
+                MeetingTrainOperatingDaysFlags = OperationDays.Daily,
+                FromTime = new TimeSpan(12,10,0),
+                ToTime = new TimeSpan(12, 15, 0),
+                TrainOperatingDaysFlags = OperationDays.Daily,
+                DutyOperatingDaysFlags = OperationDays.Daily,
+            }.AsEnumerable(),
+            2 => new TrainMeetEvent()
+            {
+                CallId = 1,
+                TrainNumber = 123,
+                MeetingTrainNumber = 4001,
+                MeetingTrainOperatorSignature = "SJ",
+                MeetingTrainPrefix = "Gt",
+                MeetingTrainOperatingDaysFlags = OperationDays.Daily,
+                FromTime = new TimeSpan(12, 10, 0),
+                ToTime = new TimeSpan(12, 15, 0),
+                TrainOperatingDaysFlags = OperationDays.Daily,
+                DutyOperatingDaysFlags = OperationDays.Daily,
+            }.AsEnumerable(),
+            _ => Enumerable.Empty<TrainMeetEvent>(),
+        }; ;
+    }
 }
- 

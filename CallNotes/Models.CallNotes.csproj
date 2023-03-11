@@ -5,6 +5,8 @@
 	  <AssemblyName>TimetablePlanning.Models.CallNotes</AssemblyName>
 	  <RootNamespace>TimetablePlanning.Models.CallNotes</RootNamespace>
 	  <UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
+	  <Company>Tellurian Interactive AB</Company>
+	  <Authors>Stefan Fjällemark</Authors>
 	  <LangVersion>latest</LangVersion>
 	  <Nullable>enable</Nullable>
 	  <Version>0.0.2</Version>
@@ -15,15 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+	<ProjectReference Include="..\Models\Models.Common.csproj" />
 	<ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-	<Compile Update="Resources\Days.Designer.cs">
-	  <DesignTime>True</DesignTime>
-	  <AutoGen>True</AutoGen>
-	  <DependentUpon>Days.resx</DependentUpon>
-	</Compile>
 	<Compile Update="Resources\Notes.Designer.cs">
 	  <DesignTime>True</DesignTime>
 	  <AutoGen>True</AutoGen>
@@ -32,10 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-	<EmbeddedResource Update="Resources\Days.resx">
-	  <Generator>ResXFileCodeGenerator</Generator>
-	  <LastGenOutput>Days.Designer.cs</LastGenOutput>
-	</EmbeddedResource>
 	<EmbeddedResource Update="Resources\Notes.resx">
 	  <Generator>ResXFileCodeGenerator</Generator>
 	  <LastGenOutput>Notes.Designer.cs</LastGenOutput>

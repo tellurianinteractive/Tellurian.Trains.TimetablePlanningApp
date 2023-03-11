@@ -42,7 +42,7 @@ public class LocoConnectionNoteTests
         Assert.IsFalse(note.IsForArrival);
         Assert.IsTrue(note.IsForDeparture);
         Assert.IsTrue(note.IsToLocoDriver);
-        Assert.IsTrue(note.IsToDispatecher);
+        Assert.IsTrue(note.IsToDispatcher);
         Assert.IsTrue(note.IsToShunter);
     }
 

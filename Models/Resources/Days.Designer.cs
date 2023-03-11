@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TimetablePlanning.Models.CallNotes.Resources {
+namespace TimetablePlanning.Models.Common.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TimetablePlanning.Models.CallNotes.Resources.Days", typeof(Days).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TimetablePlanning.Models.Common.Resources.Days", typeof(Days).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

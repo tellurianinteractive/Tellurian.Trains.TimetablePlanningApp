@@ -1,5 +1,6 @@
 ﻿namespace TimetablePlanning.Models.CallNotes;
 
+using TimetablePlanning.Models.Common;
 using TimetablePlanning.Utilities.Extensions;
 
 public class LocoInfo

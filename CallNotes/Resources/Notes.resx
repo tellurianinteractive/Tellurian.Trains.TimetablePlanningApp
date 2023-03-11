@@ -126,11 +126,14 @@
   <data name="ConnectLoco" xml:space="preserve">
     <value>Connect loco</value>
   </data>
-  <data name="ContinuingWagonsTo" xml:space="preserve">
-    <value>Continuing wagons</value>
+  <data name="ConnectWagonsTo" xml:space="preserve">
+    <value>Connect wagons to</value>
   </data>
   <data name="DisconnectLoco" xml:space="preserve">
     <value>Disconnect loco</value>
+  </data>
+  <data name="DisconnectWagonsTo" xml:space="preserve">
+    <value>Disconnect wagons to</value>
   </data>
   <data name="DriveToStagingArea" xml:space="preserve">
     <value>Drive loco to staging area.</value>
@@ -141,16 +144,16 @@
   <data name="InvalidNoteConfiguration" xml:space="preserve">
     <value>Invalid note configuration:</value>
   </data>
-  <data name="To" xml:space="preserve">
-    <value>to</value>
+  <data name="Meets" xml:space="preserve">
+    <value>Meets</value>
+  </data>
+  <data name="Passes" xml:space="preserve">
+    <value>Passes</value>
   </data>
   <data name="Turn" xml:space="preserve">
     <value>turn</value>
   </data>
   <data name="TurnLoco" xml:space="preserve">
     <value>Turn loco.</value>
-  </data>
-  <data name="UncoupleWagonsTo" xml:space="preserve">
-    <value>Uncouple wagons to</value>
   </data>
 </root>

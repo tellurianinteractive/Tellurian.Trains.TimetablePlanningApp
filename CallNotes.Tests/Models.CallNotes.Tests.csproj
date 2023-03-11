@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CallNotes\CallNotes.csproj" />
+    <ProjectReference Include="..\CallNotes\Models.CallNotes.csproj" />
   </ItemGroup>
 
 </Project>

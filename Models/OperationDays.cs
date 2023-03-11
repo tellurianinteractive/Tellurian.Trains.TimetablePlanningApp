@@ -1,9 +1,7 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text;
 
-namespace TimetablePlanning.Models.CallNotes;
+namespace TimetablePlanning.Models.Common;
 
 public class OperationDays
 {
