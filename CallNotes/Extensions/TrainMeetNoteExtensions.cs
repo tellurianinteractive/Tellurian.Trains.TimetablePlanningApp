@@ -5,7 +5,8 @@ using TimetablePlanning.Models.Common;
 
 namespace TimetablePlanning.Models.CallNotes.Extensions;
 
-public static class TrainMeetNoteExtensions {
+internal static class TrainMeetNoteExtensions
+{
 
     public static IEnumerable<TrainMeetNote> AsTrainMeetNotes(this IEnumerable<TrainMeetEvent> events) =>
         events.Select(e => e.AsTrainMeetNote());
@@ -15,8 +16,11 @@ public static class TrainMeetNoteExtensions {
         {
             ForCallId = e.CallId,
             TrainNumber = e.TrainNumber,
-            FromTime = e.FromTime,
-            ToTime = e.ToTime,
+            TrainCall = new ()
+            {
+                ArrivalTime = e.TrainArrivalTime,
+                DepartureTime = e.TrainDepartureTime
+            },
             DutyOperationDays = e.DutyOperatingDaysFlags.AsOperationDays(),
             TrainOperationDays = e.TrainOperatingDaysFlags.AsOperationDays(),
             MeetingTrain = new()
@@ -26,5 +30,10 @@ public static class TrainMeetNoteExtensions {
                 OperatorSignature = e.MeetingTrainOperatorSignature,
                 OperationDays = e.MeetingTrainOperatingDaysFlags.AsOperationDays(),
             },
+            MeetingTrainCall = new ()
+            {
+                ArrivalTime = e.MeetingTrainArrivalTime,
+                DepartureTime = e.MeetingDepartureTime
+            }
         };
 }

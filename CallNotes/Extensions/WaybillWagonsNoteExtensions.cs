@@ -4,42 +4,43 @@ using TimetablePlanning.Models.CallNotes.Data;
 using TimetablePlanning.Models.Common;
 
 namespace TimetablePlanning.Models.CallNotes.Extensions;
-public static class BlockNoteExtensions {
+internal static class WaybillWagonsNoteExtensions {
 
     private const string DefaultDestinationForeColor = "#000000";
     private const string DefaultDestinationBackColor = "#C0C0C0";
 
-    public static IEnumerable<WaybillWagonsConnectNote> AsBlockConnectNotes(this IEnumerable<BlockConnectEvent> events) =>
-        events.GroupBy(b => b.CallId).Select(g => g.AsBlockConnectNote());
+    public static IEnumerable<WaybillWagonsConnectNote> AsWaybillWagonsConnectNotes(this IEnumerable<WaybillWagonsConnectEvent> events) =>
+        events.GroupBy(b => b.CallId).Select(g => g.AsWaybillWagonsConnectNote());
 
 
-    public static WaybillWagonsConnectNote AsBlockConnectNote(this IEnumerable<BlockConnectEvent> events) =>
+    public static WaybillWagonsConnectNote AsWaybillWagonsConnectNote(this IEnumerable<WaybillWagonsConnectEvent> events) =>
         new()
         {
             ForCallId = events.First().CallId,
             DutyOperationDays = events.First().DutyOperatingDaysFlags.AsOperationDays(),
             TrainOperationDays = events.First().TrainOperatingDaysFlags.AsOperationDays(),
-            Blocks = events.Select(d => d.AsBlockInfo()),
+            Wagons = events.Select(d => d.AsWaybillWagonInfo()),
         };
 
 
-    public static IEnumerable<WaybillWagonsDisconnectNote> AsBlockDisconnectNotes(this IEnumerable<BlockDisconnectEvent> events) =>
+    public static IEnumerable<WaybillWagonsDisconnectNote> AsWaybillWagonsDisconnectNotes(this IEnumerable<WaybillWagonsDisconnectEvent> events) =>
         events.GroupBy(b => b.CallId).Select(g => g.AsBlockDisconnectNote());
 
-    public static WaybillWagonsDisconnectNote AsBlockDisconnectNote(this IEnumerable<BlockDisconnectEvent> events) =>
+    public static WaybillWagonsDisconnectNote AsBlockDisconnectNote(this IEnumerable<WaybillWagonsDisconnectEvent> events) =>
         new()
         {
             ForCallId = events.First().CallId,
             DutyOperationDays = events.First().DutyOperatingDaysFlags.AsOperationDays(),
             TrainOperationDays = events.First().TrainOperatingDaysFlags.AsOperationDays(),
-            Blocks = events.Select(d => d.AsBlockInfo()),
+            Wagons = events.Select(d => d.AsWaybillWagonInfo()),
         };
 
-    private static WaybillWagonGroup AsBlockInfo(this BlockEvent e) =>
+    private static WaybillWagonsInfo AsWaybillWagonInfo(this WaybillWagonsEvent e) =>
         new()
         {
             PositionInTrain = e.PositionInTrain,
             MaxNumberOfWagons = e.MaxNumberOfWagons,
+            OperationDays = e.OperationDaysFlag.AsOperationDays(),
             Origin = new OriginInfo()
             {
                 FullName = e.OriginFullName

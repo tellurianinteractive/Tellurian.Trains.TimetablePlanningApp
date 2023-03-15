@@ -16,9 +16,6 @@ public static class StringExtensions
     public static string FirstItem(this string? me, string defaultValue = "") =>
         me is null || me.Length == 0 ? defaultValue : me.Split(',')[0] ?? defaultValue;
 
-    public static  string MarkupSpan(this string text, string cssClass = "text") =>
-        $"""
-        <span class="note-{cssClass}">{text} </span>
-        """;
+
 
 }

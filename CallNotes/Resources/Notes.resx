@@ -150,10 +150,16 @@
   <data name="Passes" xml:space="preserve">
     <value>Passes</value>
   </data>
-  <data name="Turn" xml:space="preserve">
-    <value>turn</value>
+  <data name="Turnus" xml:space="preserve">
+    <value>turnus</value>
   </data>
   <data name="TurnLoco" xml:space="preserve">
     <value>Turn loco.</value>
+  </data>
+  <data name="ConnectWagonGroups" xml:space="preserve">
+    <value>Connect wagon groups</value>
+  </data>
+  <data name="DisconnectWagonGroups" xml:space="preserve">
+    <value>Disconnect wagon groups</value>
   </data>
 </root>

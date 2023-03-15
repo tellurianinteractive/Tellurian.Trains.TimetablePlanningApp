@@ -88,6 +88,15 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connect wagon groups.
+        /// </summary>
+        internal static string ConnectWagonGroups {
+            get {
+                return ResourceManager.GetString("ConnectWagonGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connect wagons to.
         /// </summary>
         internal static string ConnectWagonsTo {
@@ -102,6 +111,15 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         internal static string DisconnectLoco {
             get {
                 return ResourceManager.GetString("DisconnectLoco", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnect wagon groups.
+        /// </summary>
+        internal static string DisconnectWagonGroups {
+            get {
+                return ResourceManager.GetString("DisconnectWagonGroups", resourceCulture);
             }
         }
         
@@ -160,20 +178,20 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to turn.
-        /// </summary>
-        internal static string Turn {
-            get {
-                return ResourceManager.GetString("Turn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Turn loco..
         /// </summary>
         internal static string TurnLoco {
             get {
                 return ResourceManager.GetString("TurnLoco", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to turnus.
+        /// </summary>
+        internal static string Turnus {
+            get {
+                return ResourceManager.GetString("Turnus", resourceCulture);
             }
         }
     }

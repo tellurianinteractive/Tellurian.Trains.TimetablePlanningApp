@@ -10,6 +10,9 @@
 	  <LangVersion>latest</LangVersion>
 	  <Nullable>enable</Nullable>
 	  <Version>0.0.2</Version>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <Title>Timetable Planning Call Notes</Title>
+	  <NeutralLanguage>en-GB</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>

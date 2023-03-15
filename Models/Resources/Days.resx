@@ -120,6 +120,12 @@
   <data name="And" xml:space="preserve">
     <value>and</value>
   </data>
+  <data name="Daily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="DailyShort" xml:space="preserve">
+    <value>Daily</value>
+  </data>
   <data name="DayNameCasing" xml:space="preserve">
     <value>LOWER</value>
     <comment>The languages casing day names.</comment>

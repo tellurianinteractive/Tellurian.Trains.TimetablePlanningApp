@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿  using Microsoft.AspNetCore.Components;
 using TimetablePlanning.Models.CallNotes.Extensions;
 using TimetablePlanning.Models.Common;
 
@@ -10,37 +10,40 @@ public abstract class LocoCallNote : TrainCallNote {
         IsToLocoDriver = true;
         IsToShunter = true;
         IsToDispatcher = true;
+        LocoOperationDays = OperationDayFlags.Daily.AsOperationDays();
     }
-
-    public required LocoInfo LocoInfo { get; init; }
-
-    protected string Text => LocalizedText.TextMarkup();
-    protected string Item => LocoInfo.ToString('.').ItemMarkup();
-    protected string Days => LocoInfo.OperationDays.IsAllOtherDays(ServiceOperationDays) ? string.Empty : NoteDays.ShortName.DaysMarkup();
-    protected virtual string Remark => string.Empty;
-    private OperationDays NoteDays => LocoInfo.OperationDays & ServiceOperationDays;
+    public OperationDays LocoOperationDays { get; init; }
+    protected abstract string Item { get; }
     protected abstract string LocalizedText { get; }
+    private string Text => LocalizedText.SpanText();
+    private string Days => LocoOperationDays.IsAllOtherDays(ServiceOperationDays) ? string.Empty : NoteDays.ShortName.SpanDays();
+    protected virtual string Remark => string.Empty;
+    private OperationDays NoteDays => LocoOperationDays & ServiceOperationDays;
     public override MarkupString AsMarkup() => new(string.Concat(Days, Text, Item, Remark));
 }
 
-public class LocoConnectNote : LocoCallNote {
+public sealed class LocoConnectNote : LocoCallNote {
     public LocoConnectNote()
     {
         IsForDeparture = true;
     }
+    public required LocoInfo LocoInfo { get; init; }
+    protected override string Item => LocoInfo.ToString('.').SpanValue();
     public bool CollectFromStagingArea { get; init; }
-    protected override string Remark => CollectFromStagingArea ? Resources.Notes.CollectLocoFromStagingArea.TextMarkup() : string.Empty;
+    protected override string Remark => CollectFromStagingArea ? Resources.Notes.CollectLocoFromStagingArea.SpanText() : string.Empty;
     protected override string LocalizedText => Resources.Notes.ConnectLoco;
 }
 
-public class LocoDisconnectNote : LocoCallNote {
+public sealed class LocoDisconnectNote : LocoCallNote {
     public LocoDisconnectNote()
     {
         IsForArrival = true;
     }
+    public required LocoInfo LocoInfo { get; init; }
     public bool CirculateLoco { get; init; }
     public bool TurnLoco { get; init; }
     public bool DriveToStagingArea { get; init; }
+    protected override string Item => LocoInfo.ToString('.').SpanValue();
     protected override string Remark =>
         LocoInfo.IsDoubleDirectionTrain && DriveToStagingArea ? DriveToStagingAreaText :
         LocoInfo.IsSingleDirectionTractionUnit ?
@@ -53,12 +56,21 @@ public class LocoDisconnectNote : LocoCallNote {
             string.Empty :
         string.Empty;
 
-    protected static string CirculateLocoText => Resources.Notes.CirculateLoco.TextMarkup();
-    private static string TurnLocoText => Resources.Notes.TurnLoco.TextMarkup();
-    private static string DriveToStagingAreaText => Resources.Notes.DriveToStagingArea.TextMarkup();
     protected override string LocalizedText => Resources.Notes.DisconnectLoco;
+    private static string CirculateLocoText => Resources.Notes.CirculateLoco.SpanText();
+    private static string TurnLocoText => Resources.Notes.TurnLoco.SpanText();
+    private static string DriveToStagingAreaText => Resources.Notes.DriveToStagingArea.SpanText();
 }
+public sealed class LocoExchangeNote : LocoCallNote {
+    public LocoExchangeNote()
+    {
+        IsForArrival = true;
+    }
+    public required OperationDays ReplacingLocoOperationDays { get; init; }
+    protected override string LocalizedText => throw new System.NotImplementedException();
 
+    protected override string Item => string.Empty;
+}
 
 
 

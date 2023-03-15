@@ -4,35 +4,36 @@ using TimetablePlanning.Models.CallNotes.Extensions;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using TimetablePlanning.Models.CallNotes.Services;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;
 
 [TestClass]
 public class WaybillWagonsDisconnectNoteTests
 {
-    private ICallEventsService? CallEventsService;
+    private CallNotesService? CallNotesService;
 
     [TestInitialize]
     public void TestInitialize()
     {
-        CallEventsService = new TestCallEventsService();
+        TestHelpers.SetTestLanguage();
+        CallNotesService = new CallNotesService(new TestCallEventsService());
     }
 
-    private async Task<IEnumerable<WaybillWagonsDisconnectNote>> Notes(int testCase)
-    {
-        var events = await CallEventsService!.GetBlockDisconnectEventsAsync(testCase).ConfigureAwait(false);
-        return events.AsBlockDisconnectNotes();
-    }
+    private async Task<IEnumerable<TrainCallNote>> Notes(int testCase) =>
+        await CallNotesService!.GetCallNotesAsync(testCase).ConfigureAwait(false);
+
+
 
 
     [TestMethod]
     public async Task SingleDestination()
     {
-        var notes = await Notes(1);
+        var notes = await Notes(91);
         var note = notes.First();
 
         const string expected = """
-            <span class="note-text">Disconnect wagons to </span> <span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Göteborg</span>
+            <span class="note-text">Disconnect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Göteborg</span> </span></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
@@ -48,10 +49,10 @@ public class WaybillWagonsDisconnectNoteTests
     [TestMethod]
     public async Task MultipleDestination()
     {
-        var notes = await Notes(2);
+        var notes = await Notes(92);
 
         const string expected = """
-            <span class="note-text">Disconnect wagons to </span> <span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby</span><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Göteborg</span>
+            <span class="note-text">Disconnect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby</span> </span></div><div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Göteborg</span> </span></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), notes.First().AsMarkup());
@@ -60,16 +61,16 @@ public class WaybillWagonsDisconnectNoteTests
     [TestMethod]
     public async Task TwoCallDestination()
     {
-        var notes = await Notes(3);
+        var notes = await Notes(93);
         var note1 = notes.First();
         var note2 = notes.Last();
 
         const string extected1 = """
-            <span class="note-text">Disconnect wagons to </span> <span class="note-destination" style="color: #FFFFFF;background-color: #009933;">Göteborg</span>
+            <span class="note-text">Disconnect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #FFFFFF;background-color: #009933;">Göteborg</span> </span></div>
             """; ;
 
         const string expected2 = """
-            <span class="note-text">Disconnect wagons to </span> <span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby</span>
+            <span class="note-text">Disconnect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby</span> </span></div>
             """;
 
         Assert.AreEqual(1, note1.ForCallId);

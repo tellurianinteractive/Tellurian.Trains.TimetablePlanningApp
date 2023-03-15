@@ -70,6 +70,24 @@ namespace TimetablePlanning.Models.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily.
+        /// </summary>
+        internal static string Daily {
+            get {
+                return ResourceManager.GetString("Daily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily.
+        /// </summary>
+        internal static string DailyShort {
+            get {
+                return ResourceManager.GetString("DailyShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LOWER.
         /// </summary>
         internal static string DayNameCasing {

@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TimetablePlanning.Models.CallNotes.Data;
-using TimetablePlanning.Models.CallNotes.Extensions;
 using TimetablePlanning.Models.CallNotes.Services;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;
 
 [TestClass]
-public class TrainMeetNoteTests {
+public class ScheduledWagonsConnectNoteTests {
 
     private CallNotesService? CallNotesService;
 
@@ -24,39 +22,29 @@ public class TrainMeetNoteTests {
         await CallNotesService!.GetCallNotesAsync(testCase).ConfigureAwait(false);
 
 
-
     [TestMethod]
-    public async Task MeetNote()
+    public async Task SingleWagonNote()
     {
-        var notes = await Notes(71);
+        var notes = await Notes(41);
         var note = notes.First();
 
-        const string expected =
-            """
-            <span class="note-text">Meets </span><span class="note-value">SJ Gt 4001 </span><span class="note-value">12:11-12:15 </span>
-            """;
-
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
-
-        Assert.IsTrue(note.IsForArrival);
-        Assert.IsFalse(note.IsForDeparture);
-        Assert.IsTrue(note.IsToDispatcher);
-        Assert.IsTrue(note.IsToLocoDriver);
-        Assert.IsFalse(note.IsToShunter);
-    }
-
-    [TestMethod]
-    public async Task PassingNote()
-    {
-        var notes = await Notes(72);
-        var note = notes.First();
-
-        const string expected =
-            """
-            <span class="note-days">Mo,We,Fr </span><span class="note-text">Passes </span><span class="note-value">SJ Gt 4001 </span><span class="note-value">12:11-12:15 </span>
+        const string expected = """
+            <span class="note-text">Connect wagon groups </span><div class="note-item"><span class="note-value">turnus 22 </span></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
     }
 
+    [TestMethod]
+    public async Task TwoWagonsAtSameCallNote()
+    {
+        var notes = await Notes(42);
+        var note = notes.First();
+
+        const string expected = """
+            <span class="note-text">Connect wagon groups </span><div class="note-item"><span class="note-days">Mo,We,Fr </span><span class="note-value">turnus 21 </span></div><div class="note-item"><span class="note-days">Daily </span><span class="note-value">turnus 22 </span></div>
+            """;
+
+        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+    }
 }

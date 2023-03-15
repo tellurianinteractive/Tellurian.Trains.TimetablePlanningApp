@@ -7,9 +7,10 @@ public class OperationDays
 {
     public required string FullName { get; init; }
     public required string ShortName { get; init; }
-    public bool IsDaily => Flags == Daily;
+
+    public bool IsDaily => Flags == OperationDayFlags.Daily;
     public bool IsSingleDay => NumberOfDays == 1;
-    public bool IsOnDemand => Flags == OnDemand;
+    public bool IsOnDemand => Flags == OperationDayFlags.OnDemand;
     public int NumberOfDays { get; init; }
     public required byte Flags;
 
@@ -17,17 +18,27 @@ public class OperationDays
     public override int GetHashCode() => ShortName.GetHashCode(StringComparison.OrdinalIgnoreCase);
     public override string ToString() => ShortName;
 
-    public const byte Daily = 0x7F;
-    private const byte OnDemand = 0x80;
+    public static OperationDays Daily => OperationDayFlags.Daily.AsOperationDays();
+    public static OperationDays OnDemand => OperationDayFlags.OnDemand.AsOperationDays();
+
 
     public static OperationDays operator &(OperationDays days1, OperationDays days2) => 
-        days1.IsOnDemand || days2.IsOnDemand ? OnDemand.AsOperationDays() : 
+        days1.IsOnDemand || days2.IsOnDemand ? OnDemand : 
         ((byte)(days1.Flags & days2.Flags)).AsOperationDays();
 
     public bool IsAllOtherDays(OperationDays operationDays) => And(Flags) == operationDays.Flags;
     public bool IsAnyOtherDays(OperationDays operationDays) => And(operationDays.Flags) > 0;
+    public bool IsNoneOtherDays(OperationDays operationDays) => And(operationDays.Flags) == 0;
     private byte And(byte otherFlags) => IsOnDemand ? Flags : (byte)(Flags & otherFlags);
     public int DisplayOrder => ~Flags;
+}
+
+public static class OperationDayFlags
+{
+    public const byte Daily = 0x7f;
+    public const byte MoWeFr = 0b00010101;
+    public const byte OnDemand = 0x80;
+    public const byte TuThSa = 0b00101010;
 }
 
 public static class OperationDaysExtensions

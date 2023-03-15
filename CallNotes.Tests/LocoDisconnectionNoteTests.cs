@@ -2,39 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TimetablePlanning.Models.CallNotes.Data;
-using TimetablePlanning.Models.CallNotes.Extensions;
+using TimetablePlanning.Models.CallNotes.Services;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;
 
 [TestClass]
 public class LocoDisconnectionNoteTests
 {
-    private ICallEventsService? CallEventsService;
-
+    private CallNotesService? CallNotesService;
 
     [TestInitialize]
     public void TestInitialize()
     {
         TestHelpers.SetTestLanguage();
-        CallEventsService = new TestCallEventsService();
+        CallNotesService = new CallNotesService(new TestCallEventsService());
     }
 
-    private async Task<IEnumerable<LocoDisconnectNote>> Notes(int testCase)
-    {
-        var events = await CallEventsService!.GetLocoDisconnectEventsAsync(testCase).ConfigureAwait(false);
-        return events.AsLocoDisconnectNotes();
-    }
+    private async Task<IEnumerable<TrainCallNote>> Notes(int testCase) =>
+        await CallNotesService!.GetCallNotesAsync(testCase).ConfigureAwait(false);
+
 
     [TestMethod]
     public async Task NoteWithDays()
     {
-        var notes = await Notes(1);
+        var notes = await Notes(21);
         var note = notes.First();
 
         const string expected =
             """
-            <span class="note-days">Tu,Th,Sa,Su </span><span class="note-text">Disconnect loco </span><span class="note-item">SJ Rc6 turn 2. </span>
+            <span class="note-days">Tu,Th,Sa,Su </span><span class="note-text">Disconnect loco </span><span class="note-value">SJ Rc6 turnus 2. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
 
@@ -49,12 +45,12 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public async Task NoteWithOtherDays()
     {
-        var notes = await Notes(2);
+        var notes = await Notes(22);
         var note = notes.First();
 
         const string expected =
             """
-            <span class="note-days">Mo,We,Fr </span><span class="note-text">Disconnect loco </span><span class="note-item">SJ Rc6 turn 1. </span>
+            <span class="note-days">Mo,We,Fr </span><span class="note-text">Disconnect loco </span><span class="note-value">SJ Rc6 turnus 1. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
     }
@@ -62,12 +58,12 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public async Task NoteWithLocoNumberAndDriveStoStagingAreaRemark()
     {
-        var notes = await Notes(3);
+        var notes = await Notes(23);
         var note = notes.First();
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-item">SJ T44 232 turn 3. </span><span class="note-text">Drive loco to staging area. </span>
+            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 232 turnus 3. </span><span class="note-text">Drive loco to staging area. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
     }
@@ -75,12 +71,12 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public async Task NoteWithLocoNumberAndTurnRemark()
     {
-        var notes = await Notes(4);
+        var notes = await Notes(24);
         var note = notes.First();
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-item">SJ T44 236 turn 8. </span><span class="note-text">Turn loco. </span>
+            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Turn loco. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
     }
@@ -88,12 +84,12 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public async Task NoteWithLocoNumberAndCirculateRemark()
     {
-        var notes = await Notes(5);
+        var notes = await Notes(25);
         var note = notes.First();
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-item">SJ T44 236 turn 8. </span><span class="note-text">Circulate loco. </span>
+            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Circulate loco. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
     }
@@ -101,12 +97,12 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public async Task NoteWithLocoNumberAndBothTurnAndCirculateRemark()
     {
-        var notes = await Notes(6);
+        var notes = await Notes(26);
         var note = notes.First();
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-item">SJ T44 236 turn 8. </span><span class="note-text">Turn loco. </span><span class="note-text">Circulate loco. </span>
+            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Turn loco. </span><span class="note-text">Circulate loco. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
     }
@@ -114,12 +110,12 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public async Task NoteWithLocoNumberAndBothDriveToStagingAreaAndTurnLocoRemarks()
     {
-        var notes = await Notes(7);
+        var notes = await Notes(27);
         var note = notes.First();
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-item">SJ T44 236 turn 8. </span><span class="note-text">Drive loco to staging area. </span><span class="note-text">Turn loco. </span>
+            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Drive loco to staging area. </span><span class="note-text">Turn loco. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
     }
@@ -127,12 +123,12 @@ public class LocoDisconnectionNoteTests
     [TestMethod]
     public async Task NoteWithDriveToStagingAreaAndTurnLocoAndCirculateIsError()
     {
-        var notes = await Notes(8);
+        var notes = await Notes(28);
         var note = notes.First();
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-item">SJ T44 236 turn 8. </span><span class="note-text">Drive loco to staging area. </span><span class="note-text">Turn loco. </span><span class="note-text">Circulate loco. </span>
+            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Drive loco to staging area. </span><span class="note-text">Turn loco. </span><span class="note-text">Circulate loco. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
     }

@@ -1,7 +1,8 @@
 ﻿namespace TimetablePlanning.Models.CallNotes.Data;
-public abstract class BlockEvent : NoteEvent
+public abstract class WaybillWagonsEvent : NoteEvent
 {
     public int PositionInTrain { get; init; }
+    public required byte OperationDaysFlag { get; init; }
     public int MaxNumberOfWagons { get; init; }
     public bool AlsoSwitch { get; init; }
     public bool OriginAndBefore { get; init; }
@@ -14,11 +15,11 @@ public abstract class BlockEvent : NoteEvent
     public string? DestinationBackColor { get; init; }
 }
 
-public sealed class BlockDisconnectEvent : BlockEvent
+public sealed class WaybillWagonsDisconnectEvent : WaybillWagonsEvent
 {
 }
 
-public sealed class BlockConnectEvent : BlockEvent
+public sealed class WaybillWagonsConnectEvent : WaybillWagonsEvent
 {
 }
 
