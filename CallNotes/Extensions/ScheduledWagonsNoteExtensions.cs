@@ -4,7 +4,8 @@ using TimetablePlanning.Models.CallNotes.Data;
 using TimetablePlanning.Models.Common;
 
 namespace TimetablePlanning.Models.CallNotes.Extensions;
-internal static class ScheduledWagonsNoteExtensions {
+internal static class ScheduledWagonsNoteExtensions
+{
     public static IEnumerable<ScheduledWagonsConnectNote> AsScheduledWagonsConnectNotes(this IEnumerable<ScheduledWagonsConnectEvent> events) =>
         events.GroupBy(e => e.CallId).Select(g => g.AsScheduledWagonsConnectNote());
 
@@ -14,14 +15,7 @@ internal static class ScheduledWagonsNoteExtensions {
             ForCallId = events.First().CallId,
             DutyOperationDays = events.First().DutyOperatingDaysFlags.AsOperationDays(),
             TrainOperationDays = events.First().TrainOperatingDaysFlags.AsOperationDays(),
-            Wagons = events.Select(e => new ScheduledWagonsInfo()
-            {
-                Description = e.Description,
-                PositionInTrain = e.PositionInTrain,
-                MaxNumberOfWagons = e.MaxNumberOfWagons,
-                TurnusNumber = e.TurnusNumber,
-                OperationDays = e.OperationDayFlags.AsOperationDays(),
-            }),
+            Wagons = events.Select(e => e.AsScheduledWagonsInfo()),
 
         };
 
@@ -34,6 +28,17 @@ internal static class ScheduledWagonsNoteExtensions {
             ForCallId = events.First().CallId,
             DutyOperationDays = events.First().DutyOperatingDaysFlags.AsOperationDays(),
             TrainOperationDays = events.First().TrainOperatingDaysFlags.AsOperationDays(),
+            Wagons = events.Select(e => e.AsScheduledWagonsInfo()),
+        };
+
+    private static ScheduledWagonsInfo AsScheduledWagonsInfo(this ScheduledWagonsEvent e) =>
+        new()
+        {
+            PositionInTrain = e.PositionInTrain,
+            Description = e.Description,
+            OperationDays = e.OperationDayFlags.AsOperationDays(),
+            TurnusNumber = e.TurnusNumber,
+            MaxNumberOfWagons = e.MaxNumberOfWagons,
         };
 }
 

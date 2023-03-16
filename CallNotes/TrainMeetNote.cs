@@ -18,8 +18,8 @@ public class TrainMeetNote : TrainCallNote
     public required TrainInfo MeetingTrain { get; init; }
     public required TrainCallInfo MeetingTrainCall { get; init; }
 
-    public override MarkupString AsMarkup() => new(Markup);
-    private string Markup => TrainCall.IsOverlapping(MeetingTrainCall) ?
+    public override MarkupString Markup() => new(MarkupText);
+    private string MarkupText => TrainCall.IsOverlapping(MeetingTrainCall) ?
             NoteDays.IsAnyOtherDays(ServiceOperationDays) ? string.Concat(Days,LocalizedText, MeetingTrain.Markup, Time) :
             string.Empty :
         string.Empty;

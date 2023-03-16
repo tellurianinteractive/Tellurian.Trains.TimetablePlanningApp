@@ -33,7 +33,7 @@ public class WaybillWagonsConnectNoteTests {
             <span class="note-text">Connect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #FFFFFF;background-color: #009933;">Göteborg</span> </span></div>
             """;
 
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 
     [TestMethod]
@@ -46,7 +46,7 @@ public class WaybillWagonsConnectNoteTests {
             <span class="note-text">Connect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby × 6</span> </span></div><div class="note-item"><span class="note-value"><span class="note-destination" style="color: #FFFFFF;background-color: #009933;">Göteborg</span> </span></div>
             """;
 
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 
     [TestMethod]
@@ -59,6 +59,6 @@ public class WaybillWagonsConnectNoteTests {
             <span class="note-text">Connect wagons to </span> <div class="note-item"><span class="note-days">Tu,Th,Sa </span><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby × 6</span> </span></div><div class="note-item"><span class="note-days">Mo,We,Fr </span><span class="note-value"><span class="note-destination" style="color: #FFFFFF;background-color: #009933;">Göteborg</span> </span></div>
             """;
 
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 }

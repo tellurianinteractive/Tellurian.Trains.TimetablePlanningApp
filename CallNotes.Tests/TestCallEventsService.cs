@@ -226,7 +226,25 @@ internal class TestCallEventsService : ICallEventsService {
         };
     }
 
-    public Task<IEnumerable<ScheduledWagonsDisconnectEvent>> GetScheduledWagonsDisconnectEventsAsync(int layoutId) => Task.FromResult(Enumerable.Empty<ScheduledWagonsDisconnectEvent>());
+    public Task<IEnumerable<ScheduledWagonsDisconnectEvent>> GetScheduledWagonsDisconnectEventsAsync(int layoutId)
+    {
+        return Task.FromResult(Data(layoutId));
+
+        static IEnumerable<ScheduledWagonsDisconnectEvent> Data(int layoutId) => layoutId switch
+        {
+            51 => new ScheduledWagonsDisconnectEvent() { 
+                CallId= 3,
+                DutyOperatingDaysFlags= OperationDayFlags.Daily,
+                TrainOperatingDaysFlags= OperationDayFlags.Daily,
+                OperationDayFlags= OperationDayFlags.MoWeFr,
+                TurnusNumber= 21,
+                MaxNumberOfWagons= 2,
+                PositionInTrain= 1,
+            }.AsEnumerable(),
+            _ => Enumerable.Empty<ScheduledWagonsDisconnectEvent>(),
+        };
+    }
+
     public Task<IEnumerable<TrainMeetEvent>> GetTrainMeetEventsAsync(int layoutId)
     {
 

@@ -21,8 +21,8 @@ public abstract class WaybillWagonsCallNote : TrainCallNote {
             _wagons = value;
         }
     }
-    public override MarkupString AsMarkup() => new(Markup);
-    private string Markup => HasWagons ? $"{LocalizedText.SpanText()} {string.Join("", Wagons.Select(d => d.Markup(ServiceOperationDays, ShowAllOperationDays)))}" : string.Empty;
+    public override MarkupString Markup() => new(MarkupText);
+    private string MarkupText => HasWagons ? $"{LocalizedText.SpanText()} {string.Join("", Wagons.Select(d => d.Markup(ServiceOperationDays, ShowAllOperationDays)))}" : string.Empty;
     private bool HasWagons => _wagons.Any();
     private bool ShowAllOperationDays => _wagons.Any(w => !w.OperationDays.IsAllOtherDays(ServiceOperationDays));
     protected abstract string LocalizedText { get; }

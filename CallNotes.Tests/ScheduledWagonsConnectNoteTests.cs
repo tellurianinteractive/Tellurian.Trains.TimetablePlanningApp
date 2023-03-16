@@ -32,7 +32,13 @@ public class ScheduledWagonsConnectNoteTests {
             <span class="note-text">Connect wagon groups </span><div class="note-item"><span class="note-value">turnus 22 </span></div>
             """;
 
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
+
+        Assert.IsFalse(note.IsForArrival);
+        Assert.IsTrue(note.IsForDeparture);
+        Assert.IsTrue(note.IsToDispatcher);
+        Assert.IsTrue(note.IsToLocoDriver);
+        Assert.IsTrue(note.IsToShunter);
     }
 
     [TestMethod]
@@ -45,6 +51,6 @@ public class ScheduledWagonsConnectNoteTests {
             <span class="note-text">Connect wagon groups </span><div class="note-item"><span class="note-days">Mo,We,Fr </span><span class="note-value">turnus 21 </span></div><div class="note-item"><span class="note-days">Daily </span><span class="note-value">turnus 22 </span></div>
             """;
 
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 }

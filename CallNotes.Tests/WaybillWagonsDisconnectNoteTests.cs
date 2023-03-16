@@ -36,7 +36,7 @@ public class WaybillWagonsDisconnectNoteTests
             <span class="note-text">Disconnect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Göteborg</span> </span></div>
             """;
 
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
 
         // Test only once
         Assert.IsTrue(note.IsForArrival);
@@ -55,7 +55,7 @@ public class WaybillWagonsDisconnectNoteTests
             <span class="note-text">Disconnect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby</span> </span></div><div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Göteborg</span> </span></div>
             """;
 
-        Assert.AreEqual(new MarkupString(expected), notes.First().AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), notes.First().Markup());
     }
 
     [TestMethod]
@@ -74,9 +74,9 @@ public class WaybillWagonsDisconnectNoteTests
             """;
 
         Assert.AreEqual(1, note1.ForCallId);
-        Assert.AreEqual(new MarkupString(extected1), note1.AsMarkup());
+        Assert.AreEqual(new MarkupString(extected1), note1.Markup());
         Assert.AreEqual(2, note2.ForCallId);
-        Assert.AreEqual(new MarkupString(expected2), note2.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected2), note2.Markup());
 
     }
 }

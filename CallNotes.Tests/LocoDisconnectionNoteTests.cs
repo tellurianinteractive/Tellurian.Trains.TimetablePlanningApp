@@ -32,7 +32,7 @@ public class LocoDisconnectionNoteTests
             """
             <span class="note-days">Tu,Th,Sa,Su </span><span class="note-text">Disconnect loco </span><span class="note-value">SJ Rc6 turnus 2. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
 
         // These need only to be tested once
         Assert.IsTrue(note.IsForArrival);
@@ -52,7 +52,7 @@ public class LocoDisconnectionNoteTests
             """
             <span class="note-days">Mo,We,Fr </span><span class="note-text">Disconnect loco </span><span class="note-value">SJ Rc6 turnus 1. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 
     [TestMethod]
@@ -65,7 +65,7 @@ public class LocoDisconnectionNoteTests
             """
             <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 232 turnus 3. </span><span class="note-text">Drive loco to staging area. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 
     [TestMethod]
@@ -78,7 +78,7 @@ public class LocoDisconnectionNoteTests
             """
             <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Turn loco. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 
     [TestMethod]
@@ -91,7 +91,7 @@ public class LocoDisconnectionNoteTests
             """
             <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Circulate loco. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 
     [TestMethod]
@@ -104,7 +104,7 @@ public class LocoDisconnectionNoteTests
             """
             <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Turn loco. </span><span class="note-text">Circulate loco. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 
     [TestMethod]
@@ -117,7 +117,7 @@ public class LocoDisconnectionNoteTests
             """
             <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Drive loco to staging area. </span><span class="note-text">Turn loco. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 
     [TestMethod]
@@ -130,6 +130,6 @@ public class LocoDisconnectionNoteTests
             """
             <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Drive loco to staging area. </span><span class="note-text">Turn loco. </span><span class="note-text">Circulate loco. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 }

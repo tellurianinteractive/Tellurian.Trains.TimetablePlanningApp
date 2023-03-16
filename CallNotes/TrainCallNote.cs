@@ -15,6 +15,6 @@ public abstract class TrainCallNote
     public required OperationDays DutyOperationDays { get; init; }
     protected OperationDays ServiceOperationDays => TrainOperationDays & DutyOperationDays;
 
-    public abstract MarkupString AsMarkup();
+    public abstract MarkupString Markup();
 }
 

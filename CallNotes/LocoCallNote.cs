@@ -19,7 +19,7 @@ public abstract class LocoCallNote : TrainCallNote {
     private string Days => LocoOperationDays.IsAllOtherDays(ServiceOperationDays) ? string.Empty : NoteDays.ShortName.SpanDays();
     protected virtual string Remark => string.Empty;
     private OperationDays NoteDays => LocoOperationDays & ServiceOperationDays;
-    public override MarkupString AsMarkup() => new(string.Concat(Days, Text, Item, Remark));
+    public override MarkupString Markup() => new(string.Concat(Days, Text, Item, Remark));
 }
 
 public sealed class LocoConnectNote : LocoCallNote {

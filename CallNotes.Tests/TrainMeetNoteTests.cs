@@ -36,7 +36,7 @@ public class TrainMeetNoteTests {
             <span class="note-text">Meets </span><span class="note-value">SJ Gt 4001 </span><span class="note-value">12:11-12:15 </span>
             """;
 
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
 
         Assert.IsTrue(note.IsForArrival);
         Assert.IsFalse(note.IsForDeparture);
@@ -56,7 +56,7 @@ public class TrainMeetNoteTests {
             <span class="note-days">Mo,We,Fr </span><span class="note-text">Passes </span><span class="note-value">SJ Gt 4001 </span><span class="note-value">12:11-12:15 </span>
             """;
 
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 
 }

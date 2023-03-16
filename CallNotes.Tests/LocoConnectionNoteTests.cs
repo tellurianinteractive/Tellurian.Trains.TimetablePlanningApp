@@ -32,7 +32,7 @@ public class LocoConnectionNoteTests
             """
             <span class="note-days">Tu,Th,Sa,Su </span><span class="note-text">Connect loco </span><span class="note-value">SJ Rc6 turnus 2. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
         
         // These need only to be tested once
         Assert.IsFalse(note.IsForArrival);
@@ -52,7 +52,7 @@ public class LocoConnectionNoteTests
             """
             <span class="note-days">Mo,We,Fr </span><span class="note-text">Connect loco </span><span class="note-value">SJ Rc6 turnus 1. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 
     [TestMethod]
@@ -65,6 +65,6 @@ public class LocoConnectionNoteTests
             """
             <span class="note-text">Connect loco </span><span class="note-value">SJ T44 232 turnus 2. </span><span class="note-text">Collect loco from staging area. </span>
             """;
-        Assert.AreEqual(new MarkupString(expected), note.AsMarkup());
+        Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
 }
