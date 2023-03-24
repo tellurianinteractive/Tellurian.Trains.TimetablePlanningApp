@@ -2,8 +2,8 @@
 
 #nullable disable
 
-namespace TimetablePlanning.App.Server.Data
-{
+namespace TimetablePlanning.App.Server.Data;
+
     public partial class Country
     {
         public Country()
@@ -20,4 +20,3 @@ namespace TimetablePlanning.App.Server.Data
         public virtual ICollection<Person> People { get; set; }
         public virtual ICollection<Region> Regions { get; set; }
     }
-}

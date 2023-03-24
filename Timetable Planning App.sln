@@ -3,31 +3,32 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD13AD96-DE12-4698-A1A1-2AACD4709FAC}"
+	ProjectSection(SolutionItems) = preProject
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE.md = LICENSE.md
+		nuget.config = nuget.config
+		README.md = README.md
+		RELEASENOTES.md = RELEASENOTES.md
+	EndProjectSection
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Server", "App\Server\App.Server.csproj", "{A7E70F23-9095-4BD5-BF7B-26516358287B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Client", "App\Client\App.Client.csproj", "{C74B1477-D88A-4FF6-B505-F4CEA2E538EA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Shared", "App\Shared\App.Shared.csproj", "{37968CF5-51F3-4AFA-9E85-4778CC592DC7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scheduling", "Scheduling\Scheduling.csproj", "{5E06DE08-3065-47C6-AAA9-CFAB80CDBF61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Components.Scheduling", "Components\Scheduling\Components.Scheduling.csproj", "{5E06DE08-3065-47C6-AAA9-CFAB80CDBF61}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scheduling.Tests", "Scheduling.Tests\Scheduling.Tests.csproj", "{40E0CFBB-7671-473C-BA4E-A5E417AB5F58}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD13AD96-DE12-4698-A1A1-2AACD4709FAC}"
-	ProjectSection(SolutionItems) = preProject
-		CONTRIBUTING.md = CONTRIBUTING.md
-		LICENSE.md = LICENSE.md
-		README.md = README.md
-		RELEASENOTES.md = RELEASENOTES.md
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.CallNotes", "CallNotes\Models.CallNotes.csproj", "{5BF81DAC-F55A-4FC1-8D90-F90179865FC1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.CallNotes.Tests", "CallNotes.Tests\Models.CallNotes.Tests.csproj", "{D3DE6B4F-C0A9-41D2-B364-A18FBF88CF18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Components.Scheduling.Tests", "Components\Scheduling.Tests\Components.Scheduling.Tests.csproj", "{40E0CFBB-7671-473C-BA4E-A5E417AB5F58}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.Common", "Models\Models.Common.csproj", "{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.CallNotes", "Models\CallNotes\Models.CallNotes.csproj", "{5BF81DAC-F55A-4FC1-8D90-F90179865FC1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.CallNotes.Tests", "Models\CallNotes.Tests\Models.CallNotes.Tests.csproj", "{D3DE6B4F-C0A9-41D2-B364-A18FBF88CF18}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.Common", "Models\Common\Models.Common.csproj", "{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +56,10 @@ Global
 		{40E0CFBB-7671-473C-BA4E-A5E417AB5F58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40E0CFBB-7671-473C-BA4E-A5E417AB5F58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40E0CFBB-7671-473C-BA4E-A5E417AB5F58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BF81DAC-F55A-4FC1-8D90-F90179865FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5BF81DAC-F55A-4FC1-8D90-F90179865FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BF81DAC-F55A-4FC1-8D90-F90179865FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,10 +68,6 @@ Global
 		{D3DE6B4F-C0A9-41D2-B364-A18FBF88CF18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3DE6B4F-C0A9-41D2-B364-A18FBF88CF18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3DE6B4F-C0A9-41D2-B364-A18FBF88CF18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49CBEEB1-473E-445D-A3FB-5621FD2D2F1B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}.Release|Any CPU.ActiveCfg = Release|Any CPU

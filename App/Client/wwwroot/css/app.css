@@ -48,3 +48,21 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.note-days {
+    color: red;
+    font-weight: bold;
+}
+
+.note-text {
+}
+
+.note-item {    
+    border: 1px solid gray;
+    display:inline-block;
+}
+
+.note-value {
+    font-weight: bold;
+    display: inline-block;
+}

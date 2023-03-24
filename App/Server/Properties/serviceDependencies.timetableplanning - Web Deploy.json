@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "mssql1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/telluriantrains/databases/Tellurian.Trains.Database",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/telluriantrains/databases/TimetablePlanning.Database",
       "type": "mssql.azure",
       "connectionId": "TimetablePlanningDatabase",
       "secretStore": "AzureAppSettings"

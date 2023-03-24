@@ -1,7 +1,7 @@
 ﻿#nullable disable
 
-namespace TimetablePlanning.App.Server.Data
-{
+namespace TimetablePlanning.App.Server.Data;
+
     public class Person
     {
         public int Id { get; set; }
@@ -14,4 +14,3 @@ namespace TimetablePlanning.App.Server.Data
         public virtual User User { get; set; }
         public virtual Country Country { get; set; }
     }
-}

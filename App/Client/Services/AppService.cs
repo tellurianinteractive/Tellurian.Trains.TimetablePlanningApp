@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
 
-namespace TimetablePlanning.App.Client.Services
-{
+namespace TimetablePlanning.App.Client.Services;
+
     public static class AppService
     {
         public static string AppVersion
@@ -16,4 +16,3 @@ namespace TimetablePlanning.App.Client.Services
         }
         private static Version? Version => Assembly.GetExecutingAssembly().GetName().Version;
     }
-}

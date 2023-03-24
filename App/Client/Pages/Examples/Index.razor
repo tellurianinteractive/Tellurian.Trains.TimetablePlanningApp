@@ -1,0 +1,56 @@
+﻿@page "/Examples"
+<h1>Examples</h1>
+
+<h2>Automatic train notes</h2>
+
+<div>
+    @locoConnectNote.Markup()
+</div>
+<div>
+    @scheduledWagonsConnectNote.Markup()
+</div>
+
+@code {
+    LocoConnectNote locoConnectNote => new()
+        {
+            ForCallId = 1,
+            DutyOperationDays = OperationDays.Daily,
+            TrainOperationDays = OperationDays.Daily,
+            LocoOperationDays = OperationDayFlags.MoWeFr.AsOperationDays(),
+            LocoInfo = new()
+            {
+                Class = "Rc6",
+                OperatorSignature = "SJ",
+                LocoNumber = "1351",
+                TurnusNumber = 51
+            },
+            CollectFromStagingArea = true
+        };
+
+    ScheduledWagonsConnectNote scheduledWagonsConnectNote = new()
+        {
+            ForCallId = 2,
+            DutyOperationDays = OperationDays.Daily,
+            TrainOperationDays = OperationDays.Daily,
+            Wagons = new ScheduledWagonsInfo[]
+            {
+                new ScheduledWagonsInfo
+                {
+                    PositionInTrain = 1,
+                    TurnusNumber=55,
+                    OperationDays = OperationDays.Daily,
+                    MaxNumberOfWagons = 5,
+                    Description = "Oil wagons"
+                },
+                new ScheduledWagonsInfo
+                {
+                    PositionInTrain = 2,
+                    TurnusNumber=45,
+                    OperationDays = OperationDayFlags.MoWeFr.AsOperationDays(),
+                    MaxNumberOfWagons = 3
+                },
+
+            }
+
+        };
+}

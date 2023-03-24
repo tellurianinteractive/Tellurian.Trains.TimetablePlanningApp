@@ -5,8 +5,8 @@ using System.Diagnostics;
 
 #pragma warning disable IDE0052 // Remove unread private members
 
-namespace TimetablePlanning.App.Server.Pages
-{
+namespace TimetablePlanning.App.Server.Pages;
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [IgnoreAntiforgeryToken]
     public class ErrorModel : PageModel
@@ -27,4 +27,3 @@ namespace TimetablePlanning.App.Server.Pages
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
         }
     }
-}

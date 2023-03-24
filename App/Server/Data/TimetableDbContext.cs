@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace TimetablePlanning.App.Server.Data
-{
+namespace TimetablePlanning.App.Server.Data;
+
     public class TimetablesDbContext : DbContext
     {
         public TimetablesDbContext(DbContextOptions<TimetablesDbContext> options) : base(options)
@@ -44,5 +44,4 @@ namespace TimetablePlanning.App.Server.Data
             base.OnModelCreating(modelBuilder);
         }
     }
-}
 

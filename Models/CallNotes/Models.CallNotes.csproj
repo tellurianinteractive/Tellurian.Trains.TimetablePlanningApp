@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net70</TargetFramework>
+	  <AssemblyName>TimetablePlanning.Models.CallNotes</AssemblyName>
+	  <RootNamespace>TimetablePlanning.Models.CallNotes</RootNamespace>
+	  <UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
+	  <Company>Tellurian Interactive AB</Company>
+	  <Authors>Stefan Fjällemark</Authors>
+	  <LangVersion>latest</LangVersion>
+	  <Nullable>enable</Nullable>
+	  <Version>0.0.2</Version>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+	  <Title>Timetable Planning Call Notes</Title>
+	  <NeutralLanguage>en-GB</NeutralLanguage>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <SignAssembly>False</SignAssembly>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+	  <IncludeSymbols>True</IncludeSymbols>
+	  <RepositoryUrl>https://github.com/tellurianinteractive/TimetablePlanning.TimetablePlanningApp</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.4" />
+	<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+	  <PrivateAssets>all</PrivateAssets>
+	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	</PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\Common\Models.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Compile Update="Resources\Notes.Designer.cs">
+	  <DesignTime>True</DesignTime>
+	  <AutoGen>True</AutoGen>
+	  <DependentUpon>Notes.resx</DependentUpon>
+	</Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+	<EmbeddedResource Update="Resources\Notes.resx">
+	  <Generator>ResXFileCodeGenerator</Generator>
+	  <LastGenOutput>Notes.Designer.cs</LastGenOutput>
+	</EmbeddedResource>
+  </ItemGroup>
+
+</Project>

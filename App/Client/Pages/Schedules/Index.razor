@@ -1,0 +1,17 @@
+﻿@page "/Schedules"
+@using TimetablePlanning.Components.Scheduling
+@using TimetablePlanning.Components.Scheduling.Components
+@using TimetablePlanning.Components.Scheduling.Services
+
+@inject ITimetableService TimetableService
+
+<GraphicalScheduleEditor TimetableStretches="TimetableStretches" />
+
+@code {
+	IEnumerable<TimetableStretch>? TimetableStretches;
+
+	protected override async Task OnParametersSetAsync()
+	{
+		TimetableStretches = await TimetableService.GetTimetableStretchesAsync();
+	}
+}

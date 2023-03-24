@@ -9,8 +9,8 @@ However, translations can be also submitted through e-mail.
 
 ## As Test User
 As a test user you use the application and report back with:
-* any functional problems you may find. This is reported as [issues](https://github.com/tellurianinteractive/Tellurian.Trains.TimetablePlanningApp/issues).
-* suggestions for new features. You can start a [discussion](https://github.com/tellurianinteractive/Tellurian.Trains.TimetablePlanningApp/discussions) and write a description of what you want.
+* any functional problems you may find. This is reported as [issues](https://github.com/tellurianinteractive/TimetablePlanning.TimetablePlanningApp/issues).
+* suggestions for new features. You can start a [discussion](https://github.com/tellurianinteractive/TimetablePlanning.TimetablePlanningApp/discussions) and write a description of what you want.
 
 ## As Translator
 If you want the application in yet another language, you can make a translation or improve an existing translation.

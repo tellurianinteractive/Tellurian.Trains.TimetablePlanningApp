@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <AssemblyName>TimetablePlanning.Models.Scheduling</AssemblyName>
+	  <RootNamespace>TimetablePlanning.Models.Scheduling</RootNamespace>
+	  <UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
+	  <Company>Tellurian Interactive AB</Company>
+	  <Authors>Stefan Fjällemark</Authors>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <ImplicitUsings>true</ImplicitUsings>
+	  <LangVersion>latest</LangVersion>
+	  <Nullable>enable</Nullable>
+	  <Version>0.0.2</Version>
+  </PropertyGroup>
+
+</Project>
