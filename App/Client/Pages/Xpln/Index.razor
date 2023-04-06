@@ -1,0 +1,29 @@
+﻿@page "/xpln"
+@using System.IO.MemoryMappedFiles;
+
+<h1>XPLN vaidation</h1>
+<p>In this page, you can upload an XPLN ODS-file, that will be validated.</p>
+<InputFile OnChange="OnChange"></InputFile>
+<div>@Result</div>
+
+@code {
+    string? Result;
+
+    void OnChange(InputFileChangeEventArgs e)
+    {
+        const int MaxFileSize = 2000000;
+        if (e.FileCount == 1)
+        {
+            if (e.File.Size > MaxFileSize) Result = $"File exceeds {MaxFileSize} bytes.";
+            MemoryMappedFile data = MemoryMappedFile.CreateNew("ODS", e.File.Size);
+            var s = e.File.OpenReadStream(MaxFileSize);
+            var f = data.CreateViewStream(0, e.File.Size, MemoryMappedFileAccess.ReadWrite);
+            s.CopyTo(f);
+            
+        }
+        else
+        {
+            Result = "Max one file to upload.";
+        }
+    }
+}

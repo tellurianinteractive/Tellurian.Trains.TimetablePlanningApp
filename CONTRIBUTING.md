@@ -1,6 +1,7 @@
 # Contributing Guidelines
 
 **Welcome to contribute to the development and documentation of the **Timetable Planning App** web application.**
+> NOTE: This is a very early stage in the development. Details will be added here as development progress.
 
 This page describes the ways you can contribute. 
 In general, contribution requires you to have a [GitHub account](https://github.com/).
@@ -15,4 +16,3 @@ As a test user you use the application and report back with:
 ## As Translator
 If you want the application in yet another language, you can make a translation or improve an existing translation.
 
-> NOTE: This is a very early stage in the development. Details will be added here as development progress.

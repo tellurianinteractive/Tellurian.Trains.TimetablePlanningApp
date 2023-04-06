@@ -32,10 +32,6 @@ If you have questions, comments or ideas, please file them at the GitHub discuss
 The Timetable Planning App will initially run locally in your browser, 
 and you save the schedule to the cloud.
 
-However, Microsoft will make it quite easy to create a standalone local app that runs on Windows and Mac. 
-Then you will have an option to save to cloud or locally. 
-This technology will also be finally released in November this year. 
-
 Note that the app will require a large screen and a mouse.
 It will not work well on small screens, like phones or some tablets.
 
