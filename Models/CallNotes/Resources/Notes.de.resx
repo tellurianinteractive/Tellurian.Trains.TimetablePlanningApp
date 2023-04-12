@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CirculateLoco" xml:space="preserve">
-    <value>Lokomotive zirkulieren</value>
+    <value>Lokomotive zirkulieren.</value>
   </data>
   <data name="CollectLocoFromStagingArea" xml:space="preserve">
     <value>Lokomotiv aus dem Bereitstellungsbereich holen.</value>
