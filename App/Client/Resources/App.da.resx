@@ -117,55 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CirculateLoco" xml:space="preserve">
-    <value>Gör rundgång.</value>
+  <data name="AppName" xml:space="preserve">
+    <value>Tidsplan planlægning</value>
   </data>
-  <data name="CollectLocoFromStagingArea" xml:space="preserve">
-    <value>Hämta lok från uppställningsplatsen.</value>
+  <data name="XPLN Validation" xml:space="preserve">
+    <value>XPLN-validering</value>
   </data>
-  <data name="ConnectLoco" xml:space="preserve">
-    <value>Koppla till lok</value>
+  <data name="In this page, you can upload an XPLN ODS-file, that will be validated." xml:space="preserve">
+    <value>På denne side kan du uploade en XPLN ODS-fil, som vil blive valideret.</value>
   </data>
-  <data name="ConnectWagonGroups" xml:space="preserve">
-    <value>Koppla till vagnsgrupper</value>
+  <data name="File exceeds {0} bytes." xml:space="preserve">
+    <value>Filen overstiger {0} bytes.</value>
   </data>
-  <data name="ConnectWagonsTo" xml:space="preserve">
-    <value>Koppla till vagnar till</value>
+  <data name="File is not an .ODS file." xml:space="preserve">
+    <value>Filen er ikke en .ODS-fil.</value>
   </data>
-  <data name="DisconnectLoco" xml:space="preserve">
-    <value>Koppla från lok</value>
+  <data name="Validation succeded" xml:space="preserve">
+    <value>Validering lykkedes</value>
   </data>
-  <data name="DisconnectWagonGroups" xml:space="preserve">
-    <value>Koppla från vagnsgrupper</value>
-  </data>
-  <data name="DisconnectWagonsTo" xml:space="preserve">
-    <value>Koppla från vagnar till</value>
-  </data>
-  <data name="DriveToStagingArea" xml:space="preserve">
-    <value>Kör lok till uppställningsplats.</value>
-  </data>
-  <data name="From" xml:space="preserve">
-    <value>från</value>
-  </data>
-  <data name="InvalidNoteConfiguration" xml:space="preserve">
-    <value>Ogiltig konfiguration för not:</value>
-  </data>
-  <data name="Max" xml:space="preserve">
-    <value>max</value>
-  </data>
-  <data name="Meets" xml:space="preserve">
-    <value>Möter</value>
-  </data>
-  <data name="Passes" xml:space="preserve">
-    <value>Passerar</value>
-  </data>
-  <data name="TurnLoco" xml:space="preserve">
-    <value>Vänd lok.</value>
-  </data>
-  <data name="Turnus" xml:space="preserve">
-    <value>omlopp</value>
-  </data>
-  <data name="Wagons" xml:space="preserve">
-    <value>vagnar</value>
+  <data name="Max one file may be uploaded." xml:space="preserve">
+    <value>Der må maksimalt uploades én fil.</value>
   </data>
 </root>

@@ -1,13 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net70</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<AssemblyName>TimetablePlanning.Scheduling.Tests</AssemblyName>
 		<RootNamespace>TimetablePlanning.Scheduling.Tests</RootNamespace>
-		<LangVersion>latest</LangVersion>
-		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
-		<Version>0.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

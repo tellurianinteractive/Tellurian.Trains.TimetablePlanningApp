@@ -2,9 +2,13 @@
 Web application for working with scheduling of model railway operation at module meetings.
 The application will be integrated with the [Module Registry](https://moduleregistry.azurewebsites.net).
 
+The application will be based on the experiences with [the timetable prototype application](https://github.com/fjallemark/TimetablePlanningApp).
+The prototype has been gradually refined since 2016 and is used to plan schedules for many module meetings. 
+
 ## Goal
-To build a web and cloud based scheduling system for multiuse and multi tenancy, and
-to make all source code and other assets open source.
+To build a web and cloud based scheduling system for multiuse and multi language support,
+including all reports to print the reqiored documentation.
+All source code and other assets is open source.
 
 ## Plan as of March 2023
 The development of the Timetable Planning App is started.

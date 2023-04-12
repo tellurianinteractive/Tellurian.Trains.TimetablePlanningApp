@@ -118,54 +118,54 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CirculateLoco" xml:space="preserve">
-    <value>Gör rundgång.</value>
+    <value>Lokomotive zirkulieren</value>
   </data>
   <data name="CollectLocoFromStagingArea" xml:space="preserve">
-    <value>Hämta lok från uppställningsplatsen.</value>
+    <value>Lokomotiv aus dem Bereitstellungsbereich holen.</value>
   </data>
   <data name="ConnectLoco" xml:space="preserve">
-    <value>Koppla till lok</value>
+    <value>Lokomotiv anschließen</value>
   </data>
   <data name="ConnectWagonGroups" xml:space="preserve">
-    <value>Koppla till vagnsgrupper</value>
+    <value>Wagengruppen anschließen</value>
   </data>
   <data name="ConnectWagonsTo" xml:space="preserve">
-    <value>Koppla till vagnar till</value>
+    <value>Wagen anschließen nach</value>
   </data>
   <data name="DisconnectLoco" xml:space="preserve">
-    <value>Koppla från lok</value>
+    <value>Lokomotiv trennen</value>
   </data>
   <data name="DisconnectWagonGroups" xml:space="preserve">
-    <value>Koppla från vagnsgrupper</value>
+    <value>Wagengruppen trennen</value>
   </data>
   <data name="DisconnectWagonsTo" xml:space="preserve">
-    <value>Koppla från vagnar till</value>
+    <value>Wagen trennen nach</value>
   </data>
   <data name="DriveToStagingArea" xml:space="preserve">
-    <value>Kör lok till uppställningsplats.</value>
+    <value>Lokomotive zum Bereitstellungsbereich fahren.</value>
   </data>
   <data name="From" xml:space="preserve">
-    <value>från</value>
+    <value>aus</value>
   </data>
   <data name="InvalidNoteConfiguration" xml:space="preserve">
-    <value>Ogiltig konfiguration för not:</value>
+    <value>Ungültige Notenkonfiguration:</value>
   </data>
   <data name="Max" xml:space="preserve">
     <value>max</value>
   </data>
   <data name="Meets" xml:space="preserve">
-    <value>Möter</value>
+    <value>Trifft</value>
   </data>
   <data name="Passes" xml:space="preserve">
-    <value>Passerar</value>
+    <value>Überholt</value>
   </data>
   <data name="TurnLoco" xml:space="preserve">
-    <value>Vänd lok.</value>
+    <value>Lok drehen.</value>
   </data>
   <data name="Turnus" xml:space="preserve">
-    <value>omlopp</value>
+    <value>Turnus</value>
   </data>
   <data name="Wagons" xml:space="preserve">
-    <value>vagnar</value>
+    <value>Wagen</value>
   </data>
 </root>

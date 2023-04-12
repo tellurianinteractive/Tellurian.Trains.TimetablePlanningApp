@@ -117,55 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CirculateLoco" xml:space="preserve">
-    <value>Gör rundgång.</value>
+  <data name="And" xml:space="preserve">
+    <value>och</value>
   </data>
-  <data name="CollectLocoFromStagingArea" xml:space="preserve">
-    <value>Hämta lok från uppställningsplatsen.</value>
+  <data name="Daily" xml:space="preserve">
+    <value>Täglich</value>
   </data>
-  <data name="ConnectLoco" xml:space="preserve">
-    <value>Koppla till lok</value>
+  <data name="DailyShort" xml:space="preserve">
+    <value>Tägl</value>
   </data>
-  <data name="ConnectWagonGroups" xml:space="preserve">
-    <value>Koppla till vagnsgrupper</value>
+  <data name="DayNameCasing" xml:space="preserve">
+    <value>UPPER</value>
+    <comment>The languages casing day names.</comment>
   </data>
-  <data name="ConnectWagonsTo" xml:space="preserve">
-    <value>Koppla till vagnar till</value>
+  <data name="FridayShort" xml:space="preserve">
+    <value>Fr</value>
   </data>
-  <data name="DisconnectLoco" xml:space="preserve">
-    <value>Koppla från lok</value>
+  <data name="MondayShort" xml:space="preserve">
+    <value>Mo</value>
   </data>
-  <data name="DisconnectWagonGroups" xml:space="preserve">
-    <value>Koppla från vagnsgrupper</value>
+  <data name="SaturdayShort" xml:space="preserve">
+    <value>Sa</value>
   </data>
-  <data name="DisconnectWagonsTo" xml:space="preserve">
-    <value>Koppla från vagnar till</value>
+  <data name="SundayShort" xml:space="preserve">
+    <value>So</value>
   </data>
-  <data name="DriveToStagingArea" xml:space="preserve">
-    <value>Kör lok till uppställningsplats.</value>
+  <data name="ThursdayShort" xml:space="preserve">
+    <value>Do</value>
   </data>
-  <data name="From" xml:space="preserve">
-    <value>från</value>
+  <data name="To" xml:space="preserve">
+    <value>bis</value>
   </data>
-  <data name="InvalidNoteConfiguration" xml:space="preserve">
-    <value>Ogiltig konfiguration för not:</value>
+  <data name="TuesdayShort" xml:space="preserve">
+    <value>Di</value>
   </data>
-  <data name="Max" xml:space="preserve">
-    <value>max</value>
-  </data>
-  <data name="Meets" xml:space="preserve">
-    <value>Möter</value>
-  </data>
-  <data name="Passes" xml:space="preserve">
-    <value>Passerar</value>
-  </data>
-  <data name="TurnLoco" xml:space="preserve">
-    <value>Vänd lok.</value>
-  </data>
-  <data name="Turnus" xml:space="preserve">
-    <value>omlopp</value>
-  </data>
-  <data name="Wagons" xml:space="preserve">
-    <value>vagnar</value>
+  <data name="WednesdayShort" xml:space="preserve">
+    <value>Mi</value>
   </data>
 </root>

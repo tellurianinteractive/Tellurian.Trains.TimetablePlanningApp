@@ -1,0 +1,29 @@
+﻿namespace TimetablePlanning.App.Client.Components
+@using Markdig
+@inject HttpClient Http
+
+@((MarkupString)Html)
+
+@code {
+    [Parameter] public string? Href { get; set; }
+    string Html = string.Empty;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Href?.Length > 7)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, Href);
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                var markdown = await response.Content.ReadAsStringAsync();
+                if (markdown is not null)
+                {
+                    Html = Markdig.Markdown.ToHtml(markdown, Pipeline);
+                }
+            }
+        }
+    }
+
+    static MarkdownPipeline Pipeline = new MarkdownPipelineBuilder().UseAdvancedExtensions().Build();
+}

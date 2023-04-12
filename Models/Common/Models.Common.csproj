@@ -1,17 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net70</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<AssemblyName>TimetablePlanning.Models.Common</AssemblyName>
 		<RootNamespace>TimetablePlanning.Models.Common</RootNamespace>
 		<UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
-		<Company>Tellurian Interactive AB</Company>
-		<Authors>Stefan Fjällemark</Authors>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<ImplicitUsings>true</ImplicitUsings>
-		<LangVersion>latest</LangVersion>
-		<Nullable>enable</Nullable>
-		<Version>0.0.2</Version>
 	</PropertyGroup>
 
 	<ItemGroup>

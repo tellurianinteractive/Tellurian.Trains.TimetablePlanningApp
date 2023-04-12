@@ -1,29 +1,74 @@
 ﻿@page "/xpln"
 @using System.IO.MemoryMappedFiles;
+@using Microsoft.Extensions.Logging;
+@using System.Text;
+@using System.IO;
+@using System.Net.Http.Headers;
+@using System.Text.Json;
+@using System.Globalization;
+@using System.Diagnostics;
+@using TimetablePlanning.Components.Scheduling;
+@using TimetablePlanning.Importers.Interfaces;
+@using TimetablePlanning.Importers.Model;
 
-<h1>XPLN vaidation</h1>
-<p>In this page, you can upload an XPLN ODS-file, that will be validated.</p>
-<InputFile OnChange="OnChange"></InputFile>
+@inject IStringLocalizer<App> Localizer
+
+@inject HttpClient Http
+
+<h1>@Localizer["XPLN Validation"]</h1>
+<p>@Localizer["In this page, you can upload an XPLN ODS-file, that will be validated."]</p>
+
+<InputFile OnChange="OnChangeAsync"></InputFile>
 <div>@Result</div>
 
 @code {
-    string? Result;
+    MarkupString? Result;
 
-    void OnChange(InputFileChangeEventArgs e)
+    async Task OnChangeAsync(InputFileChangeEventArgs e)
     {
+        Result = new MarkupString("");
         const int MaxFileSize = 2000000;
         if (e.FileCount == 1)
         {
-            if (e.File.Size > MaxFileSize) Result = $"File exceeds {MaxFileSize} bytes.";
-            MemoryMappedFile data = MemoryMappedFile.CreateNew("ODS", e.File.Size);
-            var s = e.File.OpenReadStream(MaxFileSize);
-            var f = data.CreateViewStream(0, e.File.Size, MemoryMappedFileAccess.ReadWrite);
-            s.CopyTo(f);
-            
+            if (e.File.Size > MaxFileSize)
+            {
+                Result = new MarkupString(string.Format(CultureInfo.CurrentCulture,Localizer["File exceeds {0} bytes."], MaxFileSize));
+            }
+            else if (!Path.GetExtension(e.File.Name).Equals(".ods", StringComparison.OrdinalIgnoreCase))
+            {
+                Result = new MarkupString(Localizer["File is not an .ODS file."]);
+            }
+            else
+            {
+                try
+                {
+                    var content = new MultipartFormDataContent();
+                    var fileContent = new StreamContent(e.File.OpenReadStream(MaxFileSize));
+                    fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse(e.File.ContentType);
+                    content.Add(fileContent, "files", Path.GetFileName(e.File.Name));
+                    var response = await Http.PostAsync("api/xpln/validate", content);
+                    var json = await response.Content.ReadAsStringAsync();
+                    var result = JsonSerializer.Deserialize<ImportResult<TimetablePlanning.Importers.Model.Schedule>>(json, new JsonSerializerOptions{ PropertyNameCaseInsensitive=true});
+                    var html = new StringBuilder(1000);
+                    html.Append("<div>");
+                    foreach(var message in result.Messages)
+                    {
+                        html.Append($"""<div><span class="{message.Icon()}" style="color: {message.Color()}" aria-hidden="true"></span> {message.Text}</div>""");
+                    }
+                    html.Append("</div>");
+                    if (result.IsSuccess) html.Append($"<p>{Localizer["Validation succeded"]}</p>");
+                    Result = new MarkupString(html.ToString());
+
+                }
+                catch (IOException ex)
+                {
+                    Result = new MarkupString($"<p>{ex.Message}</p>");            
+                }
+           }
         }
         else
         {
-            Result = "Max one file to upload.";
+            Result = new MarkupString($"<p>{Localizer["Max one file may be uploaded."]}</p>");
         }
     }
 }

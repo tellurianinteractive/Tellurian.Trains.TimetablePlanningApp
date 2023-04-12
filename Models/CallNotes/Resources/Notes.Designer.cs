@@ -70,7 +70,7 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Collect loco from staging area..
+        ///   Looks up a localized string similar to Pick up locomotives from the staging area..
         /// </summary>
         internal static string CollectLocoFromStagingArea {
             get {

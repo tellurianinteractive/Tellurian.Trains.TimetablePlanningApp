@@ -120,4 +120,22 @@
   <data name="AppName" xml:space="preserve">
     <value>Timetable Planning</value>
   </data>
+  <data name="XPLN Validation" xml:space="preserve">
+    <value>XPLN Validation</value>
+  </data>
+  <data name="In this page, you can upload an XPLN ODS-file, that will be validated." xml:space="preserve">
+    <value>In this page, you can upload an XPLN ODS-file, that will be validated.</value>
+  </data>
+  <data name="File exceeds {0} bytes." xml:space="preserve">
+    <value>File exceeds {0} bytes.</value>
+  </data>
+  <data name="File is not an .ODS file." xml:space="preserve">
+    <value>File is not an .ODS file.</value>
+  </data>
+  <data name="Validation succeded" xml:space="preserve">
+    <value>Validation succeded</value>
+  </data>
+  <data name="Max one file may be uploaded." xml:space="preserve">
+    <value>Max one file may be uploaded.</value>
+  </data>
 </root>

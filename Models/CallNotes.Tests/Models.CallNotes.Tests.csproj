@@ -1,13 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net70</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<AssemblyName>TimetablePlanning.Models.CallNotes.Tests</AssemblyName>
 		<RootNamespace>TimetablePlanning.Models.CallNotes.Tests</RootNamespace>
 		<UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
-		<LangVersion>latest</LangVersion>
-		<Nullable>enable</Nullable>
-		<Version>0.0.2</Version>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 

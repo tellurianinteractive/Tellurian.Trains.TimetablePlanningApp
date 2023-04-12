@@ -1,0 +1,21 @@
+<Project>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Version>0.0.3</Version>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<NeutralLanguage>en-GB</NeutralLanguage>
+
+	</PropertyGroup>
+	<PropertyGroup>
+		<Copyright>Tellurian Interactive AB</Copyright>
+		<Authors>Stefan Fjällemark</Authors>
+		<RepositoryUrl>https://github.com/tellurianinteractive/TimetablePlanning.TimetablePlanningApp</RepositoryUrl>
+		<RepositoryType>GitHub</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+
+	</PropertyGroup>
+
+</Project>

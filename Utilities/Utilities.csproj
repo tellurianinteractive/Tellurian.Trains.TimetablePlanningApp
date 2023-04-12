@@ -1,13 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+	  <TargetFramework>net7.0</TargetFramework>
 	  <AssemblyName>TimetablePlanning.Utilities</AssemblyName>
 	  <RootNamespace>TimetablePlanning.Utilities</RootNamespace>
 	  <UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
-	  <ImplicitUsings>enable</ImplicitUsings>
-	  <LangVersion>latest</LangVersion>
-	  <Nullable>enable</Nullable>
   </PropertyGroup>
 
 </Project>

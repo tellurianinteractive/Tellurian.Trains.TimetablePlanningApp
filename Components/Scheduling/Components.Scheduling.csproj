@@ -1,41 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net70</TargetFramework>
-    <AssemblyName>TimetablePlanning.Components.Scheduling</AssemblyName>
-    <RootNamespace>TimetablePlanning.Components.Scheduling</RootNamespace>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Copyright>Tellurian Interactive AB</Copyright>
-    <Description>Razor components and data contracts for train scheduling.</Description>
-    <RepositoryUrl>https://github.com/tellurianinteractive/TimetablePlanning.TimetablePlanningApp</RepositoryUrl>
-    <RepositoryType>GitHub</RepositoryType>
-    <Version>0.0.1</Version>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageTags></PackageTags>
-    <LangVersion>latest</LangVersion>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<AssemblyName>TimetablePlanning.Components.Scheduling</AssemblyName>
+		<RootNamespace>TimetablePlanning.Components.Scheduling</RootNamespace>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Description>Razor components and data contracts for train scheduling.</Description>
+		<IncludeSymbols>True</IncludeSymbols>
+		<PackageTags></PackageTags>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Components\GraphicalScheduleEditor.razor.css" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Components\GraphicalScheduleEditor.razor.css" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Components\GraphicalScheduleEditor.razor.css" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="Components\GraphicalScheduleEditor.razor.css" />
+	</ItemGroup>
 
-  
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.4" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.5" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
 </Project>

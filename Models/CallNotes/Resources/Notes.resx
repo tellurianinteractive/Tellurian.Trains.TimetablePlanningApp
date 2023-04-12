@@ -121,7 +121,7 @@
     <value>Circulate loco.</value>
   </data>
   <data name="CollectLocoFromStagingArea" xml:space="preserve">
-    <value>Collect loco from staging area.</value>
+    <value>Pick up locomotives from the staging area.</value>
   </data>
   <data name="ConnectLoco" xml:space="preserve">
     <value>Connect loco</value>
