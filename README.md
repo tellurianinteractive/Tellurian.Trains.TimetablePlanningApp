@@ -10,12 +10,12 @@ To build a web and cloud based scheduling system for multiuse and multi language
 including all reports to print the reqiored documentation.
 All source code and other assets is open source.
 
-## Plan as of March 2023
+## Plan as of April 2023
 The development of the Timetable Planning App is started.
 It is in its initial phase and the preview will be updated when new features are available.
 Other projects will be in my focus during 2023, so we'll see when I can make progress.
 
-The printing functionality will be based on earlier development. Take a look at [the examples](Examples).
+It is now possible to validate XPLN-plans online. It's a first stage to import XPLN into the database.
 
 If you have questions, comments or ideas, please file them at the GitHub discussion page.
 

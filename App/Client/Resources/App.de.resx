@@ -138,4 +138,16 @@
   <data name="Max one file may be uploaded." xml:space="preserve">
     <value>Es darf maximal eine Datei hochgeladen werden.</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Heim</value>
+  </data>
+  <data name="Examples" xml:space="preserve">
+    <value>Beispiele</value>
+  </data>
+  <data name="Schedules" xml:space="preserve">
+    <value>Fahrpläne</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Um</value>
+  </data>
 </root>

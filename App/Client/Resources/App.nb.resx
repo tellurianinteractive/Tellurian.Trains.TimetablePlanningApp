@@ -138,4 +138,16 @@
   <data name="Max one file may be uploaded." xml:space="preserve">
     <value>Maks én fil kan lastes opp.</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Hjem</value>
+  </data>
+  <data name="Examples" xml:space="preserve">
+    <value>Eksempler</value>
+  </data>
+  <data name="Schedules" xml:space="preserve">
+    <value>Kjøreplaner</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Om</value>
+  </data>
 </root>
