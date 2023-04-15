@@ -150,4 +150,7 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="Validating" xml:space="preserve">
+    <value>Validation in progress...</value>
+  </data>
 </root>

@@ -24,10 +24,15 @@
 @code {
     MarkupString? Result;
 
-    async Task OnChangeAsync(InputFileChangeEventArgs e)
+    protected override void OnInitialized()
     {
         Result = new MarkupString("");
-        const int MaxFileSize = 2000000;
+    }
+
+    async Task OnChangeAsync(InputFileChangeEventArgs e)
+    {
+        Result = new MarkupString(Localizer["Validating"]);
+        const int MaxFileSize = 3000000;
         if (e.FileCount == 1)
         {
             if (e.File.Size > MaxFileSize)

@@ -150,4 +150,7 @@
   <data name="About" xml:space="preserve">
     <value>Om</value>
   </data>
+  <data name="Validating" xml:space="preserve">
+    <value>Validering i gang...</value>
+  </data>
 </root>
