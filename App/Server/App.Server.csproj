@@ -13,7 +13,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="TimetablePlanning.Importers.Xpln" Version="1.0.5" />
+		<PackageReference Include="TimetablePlanning.Importers.Xpln" Version="1.0.6" />
 	</ItemGroup>
 
 	<ItemGroup>
