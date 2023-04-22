@@ -17,7 +17,10 @@ Other projects will be in my focus during 2023, so we'll see when I can make pro
 
 It is now possible to validate XPLN-plans online. 
 It's a first stage to import XPLN into the database.
-XPLN-files will be a good source for easily getting a lot of test data into the database.
+Import of XPLN-files will be a good source for easily getting a lot of test data into the database.
+
+Using the test data from XPLN-files, 
+the reports to print documentation can be tested.
 
 If you have questions, comments or ideas, please file them at the GitHub discussion page.
 
