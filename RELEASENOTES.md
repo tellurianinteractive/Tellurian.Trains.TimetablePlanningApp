@@ -1,4 +1,6 @@
 # Release Notes
+## Release 0.0.6
+- **XPLN Validation** now also checks scheduling comflicts.
 
 ## Release 0.0.5
 Release date 2023-04-22

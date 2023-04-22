@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TimetablePlanning.Importers.Interfaces;
+using TimetablePlanning.Importers.Model;
 using TimetablePlanning.Importers.Xpln;
 using TimetablePlanning.Importers.Xpln.DataSetProviders;
 
@@ -28,11 +30,28 @@ public class XplnController : ControllerBase
         if (Path.GetExtension(file.Name).Equals(".ods", StringComparison.OrdinalIgnoreCase)) return BadRequest("Not an .ODS file.");
         using var stream = file.OpenReadStream();
         var memoryStream = new MemoryStream();
-        stream.CopyTo(memoryStream);
+        while(memoryStream.Length < file.Length) stream.CopyTo(memoryStream);
         memoryStream.Position = 0;
         var provider = new OdsDataSetProvider(DatasetLogger);
         using var importer = new XplnDataImporter(memoryStream, provider, ImporterLogger);
         var importResult = importer.ImportSchedule(Path.GetFileNameWithoutExtension(file.Name));
-        return Ok(importResult);
+        if (importResult.IsFailure) return Ok(importResult);
+        var validationErrors = importResult.Item.GetValidationErrors(ValidationOptions);
+        return Ok(ImportResult<Schedule>.Success(importResult.Item, validationErrors));
     }
+
+    private readonly ValidationOptions ValidationOptions = new()
+    {
+        MaxTrainSpeedMetersPerClockMinute = 8.0,
+        MinTrainSpeedMetersPerClockMinute = 0.3,
+        ValidateDriverDuties = true,
+        ValidateLocoSchedules = true,
+        ValidateStationCalls = true,
+        ValidateStationTracks = true,
+        ValidateStretches = true,
+        ValidateTrainsetSchedules = true,
+        ValidateTrainSpeed = true,
+        ValidateTrainNumbers = true,
+
+    };
 }
