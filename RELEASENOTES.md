@@ -3,6 +3,7 @@
 ## Release 0.0.5
 Release date 2023-04-22
 - **XPLN Validation** improved error messages. Thanks to Søren Bendtsen for the ODS-file.
+
 ## Release 0.0.4
 Release date 2023-04-15
 - **XPLN Validation** corrections. Thanks to Marc Jaeger for reporting this.

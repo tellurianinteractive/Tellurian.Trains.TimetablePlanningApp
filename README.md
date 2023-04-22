@@ -15,7 +15,9 @@ The development of the Timetable Planning App is started.
 It is in its initial phase and the preview will be updated when new features are available.
 Other projects will be in my focus during 2023, so we'll see when I can make progress.
 
-It is now possible to validate XPLN-plans online. It's a first stage to import XPLN into the database.
+It is now possible to validate XPLN-plans online. 
+It's a first stage to import XPLN into the database.
+XPLN-files will be a good source for easily getting a lot of test data into the database.
 
 If you have questions, comments or ideas, please file them at the GitHub discussion page.
 
@@ -30,7 +32,6 @@ If you have questions, comments or ideas, please file them at the GitHub discuss
 8. Automatic creation of instructions for train dispatcher and shunting staff.
 9. Option for manually writing driver instructions in several languages.
 10. User authorization.
-
 
 ## Environment
 The Timetable Planning App will initially run locally in your browser, 
@@ -52,7 +53,7 @@ I you are interested of scheduling of model trains, especially for module meetin
 3. Engage in design of functionality.
 4. Help with translations; add new or improve existing ones.
 5. Submit issues and suggestions.
-6. Contribute with pull requests.
+6. Contribute with pull requests for documentation and/or code improvements.
 
 All interaction takes place on GitHub and we use en English only.
 So you will need a GitHub account and apply for membership in the project.
