@@ -1,4 +1,6 @@
-﻿namespace TimetablePlanning.Components.Scheduling.Services;
+﻿using TimetablePlanning.Models.Common;
+
+namespace TimetablePlanning.Components.Scheduling.Services;
 
 public interface ITimetableService
     {

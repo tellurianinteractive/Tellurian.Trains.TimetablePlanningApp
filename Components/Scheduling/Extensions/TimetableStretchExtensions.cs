@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using TimetablePlanning.Models.Common;
 
 [assembly: InternalsVisibleTo("TimetablePlanning.Scheduling.Tests")]
 namespace TimetablePlanning.Components.Scheduling.Extensions;

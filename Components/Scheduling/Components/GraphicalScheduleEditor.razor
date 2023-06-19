@@ -60,6 +60,7 @@ else
 @code
 {
     [Parameter] public IEnumerable<TimetableStretch>? TimetableStretches { get; set; }
+    [Parameter] public Settings Settings { get; set; } = Settings.Default;
 
     TimetableStretch? Current;
     bool ShowVertical;
