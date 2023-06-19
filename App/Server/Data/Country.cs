@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
-#nullable disable
+﻿#nullable disable
 
 namespace TimetablePlanning.App.Server.Data;
 
-    public partial class Country
+public partial class Country
     {
         public Country()
         {

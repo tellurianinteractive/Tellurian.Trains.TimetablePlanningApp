@@ -1,9 +1,5 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Net.Http;
 using TimetablePlanning.App.Client;
-using TimetablePlanning.App.Client.Extensions;
 using TimetablePlanning.Components.Scheduling.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);

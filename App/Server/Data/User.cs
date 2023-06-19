@@ -1,10 +1,8 @@
-﻿using System;
-
-#nullable disable
+﻿#nullable disable
 
 namespace TimetablePlanning.App.Server.Data;
 
-    public class User
+public class User
     {
         public int Id { get; set; }
         public Guid ObjectId { get; set; }

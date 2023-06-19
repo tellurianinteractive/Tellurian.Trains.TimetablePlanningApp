@@ -1,5 +1,4 @@
-﻿using System;
-using TimetablePlanning.Utilities.Extensions;
+﻿using TimetablePlanning.Utilities.Extensions;
 
 namespace TimetablePlanning.Models.CallNotes.Extensions;
 

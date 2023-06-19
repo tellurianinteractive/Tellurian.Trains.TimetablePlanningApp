@@ -1,9 +1,8 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace TimetablePlanning.App.Client.Services;
 
-    public static class AppService
+public static class AppService
     {
         public static string AppVersion
         {

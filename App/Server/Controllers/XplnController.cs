@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TimetablePlanning.Importers.Interfaces;
 using TimetablePlanning.Importers.Model;
 using TimetablePlanning.Importers.Xpln;

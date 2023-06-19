@@ -1,190 +1,209 @@
-﻿using System;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("TimetablePlanning.Scheduling.Tests")]
 namespace TimetablePlanning.Components.Scheduling.Extensions;
 
-    public static class TimetableStretchExtensions
+public static class TimetableStretchExtensions
+{
+    public static string OrientationCss(this TimeAxisDirection axisDirection, string classes) =>
+        axisDirection == TimeAxisDirection.Horisontal ? $"{classes} horizontal".TrimStart() :
+        axisDirection == TimeAxisDirection.Vertical? $"{classes} vertical".TrimStart() :
+        string.Empty;
+
+
+    public static (Offset Start, Offset End) TrackLine(this TimetableStretch me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex)
     {
-        public static string OrientationCss(this TimetableStretch me, string classes) =>
-            me.HasHorizontalTimeAxis ? $"{classes} horizontal".TrimStart() :
-            me.HasVerticalTimeAxis ? $"{classes} vertical".TrimStart() :
-            string.Empty;
-
-        public static (Offset Start, Offset End) TrackLine(this TimetableStretch me, int stationIndex, int trackIndex)
+        if (axisDirection == TimeAxisDirection.Horisontal)
         {
-            if (me.HasHorizontalTimeAxis)
-            {
-                var y = me.Y(stationIndex, trackIndex);
-                return (new(me.Settings.KilometerAxisSpacing.X, y), new(me.MaxTimeOffset.X, y));
-            }
-            else if (me.HasVerticalTimeAxis)
-            {
-                var x = me.X(stationIndex, trackIndex);
-                return (new(x, me.Settings.KilometerAxisSpacing.Y), new(x, me.MaxTimeOffset.Y));
-            }
-            throw new NotSupportedException();
+            var y = me.Y(axisDirection, stationIndex, trackIndex);
+            return (new(me.Settings.KilometerAxisSpacing.X, y), new(me.MaxTimeOffset(axisDirection).X, y));
         }
-
-        public static (Offset Start, Offset End) TimeLine(this TimetableStretch me, TimeSpan time)
+        else if (axisDirection == TimeAxisDirection.Vertical)
         {
-            if (me.HasHorizontalTimeAxis)
-            {
-                var x = me.TimeOffset(time).X;
-                return (new(x, me.Settings.TimeAxisSpacing.Y), new(x, me.MaxTrackOffset.Y));
-            }
-            else if (me.HasVerticalTimeAxis)
-            {
-                var y = me.TimeOffset(time).Y;
-                return (new(me.Settings.TimeAxisSpacing.X, y), new(me.MaxTrackOffset.X, y));
-            }
-            throw new NotSupportedException();
+            var x = me.X(axisDirection, stationIndex, trackIndex);
+            return (new(x, me.Settings.KilometerAxisSpacing.Y), new(x, me.MaxTimeOffset(axisDirection).Y));
         }
+        throw new NotSupportedException(axisDirection.ToString());
+    }
 
-        public static Offset TimeAxisLabelOffset(this TimetableStretch me, TimeSpan time) =>
-            me.TimeAxisDirection switch
-            {
-                TimeAxisDirection.Horisontal => me.TimeLine(time).Start - new Offset(5, 5),
-                TimeAxisDirection.Vertical => me.TimeLine(time).Start - new Offset(me.Settings.TimeAxisSpacing.X - 5, 0),
-                _ => throw new NotSupportedException()
-            };
-
-        public static Offset StationLabelOffset(this TimetableStretch me, int stationIndex)
+    public static (Offset Start, Offset End) TimeLine(this TimetableStretch me, TimeAxisDirection axisDirection, TimeSpan time)
+    {
+        if (axisDirection == TimeAxisDirection.Horisontal)
         {
-            var offset = me.Stations[stationIndex].Tracks.Length / 2 * me.Settings.TrackSpacing;
-            return me.TimeAxisDirection switch
-            {
-                TimeAxisDirection.Horisontal => new(5, me.Y(stationIndex, 0) + offset),
-                TimeAxisDirection.Vertical => new(me.X(stationIndex, 0) + offset, 25),
-                _ => Offset.Invalid
-            };
+            var x = me.TimeOffset(axisDirection, time).X;
+            return (new(x, me.Settings.TimeAxisSpacing.Y), new(x, me.MaxTrackOffset(axisDirection).Y));
         }
-
-        public static Offset KmLabelOffset(this TimetableStretch me, int stationIndex)
+        else if (axisDirection == TimeAxisDirection.Vertical)
         {
-            var offset = me.Stations[stationIndex].Tracks.Length / 2 * me.Settings.TrackSpacing;
-            return me.TimeAxisDirection switch
-            {
-                TimeAxisDirection.Horisontal => new(me.Settings.KilometerAxisSpacing.X - 15, me.Y(stationIndex, 0) + offset),
-                TimeAxisDirection.Vertical => new(me.X(stationIndex, 0) + offset, me.Settings.KilometerAxisSpacing.Y - 15),
-                _ => Offset.Invalid
-            };
+            var y = me.TimeOffset(axisDirection, time).Y;
+            return (new(me.Settings.TimeAxisSpacing.X, y), new(me.MaxTrackOffset(axisDirection).X, y));
         }
+        throw new NotSupportedException(axisDirection.ToString());
+    }
 
-        public static Offset TrackNumberOffset(this TimetableStretch me, int stationIndex, int trackIndex)
+    public static int Height(this TimetableStretch me, TimeAxisDirection axisDirection) =>
+        axisDirection switch
         {
-            return me.TimeAxisDirection switch
-            {
-                TimeAxisDirection.Horisontal => new(me.Settings.KilometerAxisSpacing.X - 2, me.Y(stationIndex, trackIndex) + 3),
-                TimeAxisDirection.Vertical => new(me.X(stationIndex, trackIndex) + 0, me.Settings.KilometerAxisSpacing.Y - 2),
-                _ => Offset.Invalid
-            };
+            TimeAxisDirection.Horisontal => me.MaxTrackOffset(axisDirection).Y + me.Settings.EndMargin,
+            TimeAxisDirection.Vertical => me.MaxTimeOffset(axisDirection).Y + me.Settings.EndMargin,
+            _ => 0
+        };
 
+    public static int Width(this TimetableStretch me, TimeAxisDirection axisDirection) =>
+        axisDirection switch
+        {
+            TimeAxisDirection.Horisontal => me.MaxTimeOffset(axisDirection).X + me.Settings.EndMargin,
+            TimeAxisDirection.Vertical => me.MaxTrackOffset(axisDirection).X + me.Settings.EndMargin,
+            _ => 0
+        };
+
+    public static Offset TimeAxisLabelOffset(this TimetableStretch me, TimeAxisDirection axisDirection, TimeSpan time) =>
+       axisDirection switch
+       {
+           TimeAxisDirection.Horisontal => me.TimeLine(axisDirection, time).Start - new Offset(5, 5),
+           TimeAxisDirection.Vertical => me.TimeLine(axisDirection, time).Start - new Offset(me.Settings.TimeAxisSpacing.X - 5, 0),
+           _ => throw new NotSupportedException()
+       };
+
+    public static Offset StationLabelOffset(this TimetableStretch me, TimeAxisDirection axisDirection, int stationIndex)
+    {
+        var offset = me.Stations[stationIndex].Tracks.Length / 2 * me.Settings.TrackSpacing;
+        return axisDirection switch
+        {
+            TimeAxisDirection.Horisontal => new(5, me.Y(axisDirection, stationIndex, 0) + offset),
+            TimeAxisDirection.Vertical => new(me.X(axisDirection, stationIndex, 0) + offset, 25),
+            _ => Offset.Invalid
+        };
+    }
+
+    public static Offset KmLabelOffset(this TimetableStretch me, TimeAxisDirection axisDirection, int stationIndex)
+    {
+        var offset = me.Stations[stationIndex].Tracks.Length / 2 * me.Settings.TrackSpacing;
+        return axisDirection switch
+        {
+            TimeAxisDirection.Horisontal => new(me.Settings.KilometerAxisSpacing.X - 15, me.Y(axisDirection, stationIndex, 0) + offset),
+            TimeAxisDirection.Vertical => new(me.X(axisDirection, stationIndex, 0) + offset, me.Settings.KilometerAxisSpacing.Y - 15),
+            _ => Offset.Invalid
+        };
+    }
+
+    public static Offset TrackNumberOffset(this TimetableStretch me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex)
+    {
+        return axisDirection switch
+        {
+            TimeAxisDirection.Horisontal => new(me.Settings.KilometerAxisSpacing.X - 2, me.Y(axisDirection, stationIndex, trackIndex) + 3),
+            TimeAxisDirection.Vertical => new(me.X(axisDirection, stationIndex, trackIndex) + 0, me.Settings.KilometerAxisSpacing.Y - 2),
+            _ => Offset.Invalid
+        };
+
+    }
+
+    public static TimeSpan? Time(this TimetableStretch me, TimeAxisDirection axisDirection, int xOffset, int yOffset)
+    {
+        if (axisDirection == TimeAxisDirection.Horisontal)
+        {
+            var x = xOffset - me.Settings.KilometerAxisSpacing.X;
+            var time = TimeSpan.FromMinutes(x / me.Settings.MinuteSpacing).Add(me.StartTime);
+            return time >= me.StartTime && time <= me.EndTime ? time : null;
         }
-
-        public static TimeSpan? Time(this TimetableStretch me, int xOffset, int yOffset)
+        else if (axisDirection == TimeAxisDirection.Vertical)
         {
-            if (me.HasHorizontalTimeAxis)
-            {
-                var x = xOffset - me.Settings.KilometerAxisSpacing.X;
-                var time = TimeSpan.FromMinutes(x / me.Settings.MinuteSpacing).Add(me.StartTime);
-                return time >= me.StartTime && time <= me.EndTime ? time : null;
-            }
-            else if (me.HasVerticalTimeAxis)
-            {
-                var y = yOffset - me.Settings.KilometerAxisSpacing.Y;
-                var time = TimeSpan.FromMinutes(y / me.Settings.MinuteSpacing).Add(me.StartTime);
-                return time >= me.StartTime && time <= me.EndTime ? time : null;
-            }
-            throw new NotSupportedException(me.TimeAxisDirection.ToString());
+            var y = yOffset - me.Settings.KilometerAxisSpacing.Y;
+            var time = TimeSpan.FromMinutes(y / me.Settings.MinuteSpacing).Add(me.StartTime);
+            return time >= me.StartTime && time <= me.EndTime ? time : null;
         }
+        throw new NotSupportedException(axisDirection.ToString());
+    }
 
 
-        public static Offset TimeOffset(this TimetableStretch me, TimeSpan time)
+    public static Offset TimeOffset(this TimetableStretch me, TimeAxisDirection axisDirection, TimeSpan time)
+    {
+        if (time < me.StartTime || time > me.EndTime) return Offset.Invalid;
+        if (axisDirection == TimeAxisDirection.Horisontal)
         {
-            if (time < me.StartTime || time > me.EndTime) return Offset.Invalid;
-            if (me.HasHorizontalTimeAxis)
-            {
-                var x = me.Settings.KilometerAxisSpacing.X + (me.Settings.MinuteSpacing * (int)(time - me.StartTime).TotalMinutes);
-                return new(x, 0);
-            }
-            else if (me.HasVerticalTimeAxis)
-            {
-                var y = me.Settings.KilometerAxisSpacing.Y + (me.Settings.MinuteSpacing * (int)(time - me.StartTime).TotalMinutes);
-                return new(0, y);
-            }
-            throw new NotSupportedException(me.TimeAxisDirection.ToString());
+            var x = me.Settings.KilometerAxisSpacing.X + (me.Settings.MinuteSpacing * (int)(time - me.StartTime).TotalMinutes);
+            return new(x, 0);
         }
-
-        public static int X(this TimetableStretch me, int stationIndex, int trackIndex) =>
-            me.TimeAxisDirection switch
-            {
-                TimeAxisDirection.Horisontal => TrackOffset(me, stationIndex, trackIndex).Y,
-                TimeAxisDirection.Vertical => TrackOffset(me, stationIndex, trackIndex).X,
-                _ => 0
-            };
-
-        public static int Y(this TimetableStretch me, int stationIndex, int trackIndex) =>
-             me.TimeAxisDirection switch
-             {
-                 TimeAxisDirection.Horisontal => TrackOffset(me, stationIndex, trackIndex).Y,
-                 TimeAxisDirection.Vertical => TrackOffset(me, stationIndex, trackIndex).X,
-                 _ => 0
-             };
-
-        public static Offset TrackStartLocation(this TimetableStretch me, int stationIndex, int trackIndex) =>
-              me.TrackOffset(stationIndex, trackIndex) + me.TimeOffset(me.StartTime);
-
-        public static Offset TrackEndLocation(this TimetableStretch me, int stationIndex, int trackIndex) =>
-             me.TrackOffset(stationIndex, trackIndex) + me.TimeOffset(me.EndTime);
-
-        public static Offset TrackOffset(this TimetableStretch me, int stationIndex, int trackIndex)
+        else if (axisDirection == TimeAxisDirection.Vertical)
         {
-            var x = me.Settings.TimeAxisSpacing.X;
-            var y = me.Settings.TimeAxisSpacing.Y;
-            if (stationIndex == 0)
-            {
-                y += me.Settings.TrackSpacing * trackIndex;
-                x += me.Settings.TrackSpacing * trackIndex;
-            }
-            else
-            {
-                for (var i = 0; i < stationIndex; i++)
-                {
-                    var stretch = me.TrackStreches[i];
-                    var Δ1 = Math.Max(me.Settings.MinStationSpacing, ((stretch.From.Tracks.Length - 1) * me.Settings.TrackSpacing) + (me.Settings.KilometerSpacing * stretch.Km));
-                    x += Δ1;
-                    y += Δ1;
-                }
-                var Δ2 = trackIndex * me.Settings.TrackSpacing;
-                x += Δ2;
-                y += Δ2;
-            }
-            return me.TimeAxisDirection switch
-            {
-                TimeAxisDirection.Horisontal => new(0, y),
-                TimeAxisDirection.Vertical => new(x, 0),
-                _ => Offset.Invalid
-            };
+            var y = me.Settings.KilometerAxisSpacing.Y + (me.Settings.MinuteSpacing * (int)(time - me.StartTime).TotalMinutes);
+            return new(0, y);
         }
+        throw new NotSupportedException(axisDirection.ToString());
+    }
 
-        public static Offset MaxTrackOffset(this TimetableStretch me)
+    public static Offset MaxTimeOffset(this TimetableStretch me, TimeAxisDirection axisDirection) =>
+        TimeOffset(me, axisDirection, me.EndTime);
+
+    public static int X(this TimetableStretch me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex) =>
+        axisDirection switch
         {
-            var x = me.Settings.TimeAxisSpacing.X + ((me.TrackStreches[0].From.Tracks.Length - 1) * me.Settings.TrackSpacing);
-            var y = me.Settings.TimeAxisSpacing.Y + ((me.TrackStreches[0].From.Tracks.Length - 1) * me.Settings.TrackSpacing);
-            for (var i = 0; i < me.TrackStreches.Length; i++)
+            TimeAxisDirection.Horisontal => TrackOffset(me, axisDirection, stationIndex, trackIndex).Y,
+            TimeAxisDirection.Vertical => TrackOffset(me, axisDirection, stationIndex, trackIndex).X,
+            _ => 0
+        };
+
+    public static int Y(this TimetableStretch me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex) =>
+         axisDirection switch
+         {
+             TimeAxisDirection.Horisontal => TrackOffset(me, axisDirection, stationIndex, trackIndex).Y,
+             TimeAxisDirection.Vertical => TrackOffset(me, axisDirection, stationIndex, trackIndex).X,
+             _ => 0
+         };
+
+    public static Offset TrackStartLocation(this TimetableStretch me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex) =>
+          me.TrackOffset(axisDirection, stationIndex, trackIndex) + me.TimeOffset(axisDirection, me.StartTime);
+
+    public static Offset TrackEndLocation(this TimetableStretch me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex) =>
+         me.TrackOffset(axisDirection, stationIndex, trackIndex) + me.TimeOffset(axisDirection, me.EndTime);
+
+    public static Offset TrackOffset(this TimetableStretch me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex)
+    {
+        var x = me.Settings.TimeAxisSpacing.X;
+        var y = me.Settings.TimeAxisSpacing.Y;
+        if (stationIndex == 0)
+        {
+            y += me.Settings.TrackSpacing * trackIndex;
+            x += me.Settings.TrackSpacing * trackIndex;
+        }
+        else
+        {
+            for (var i = 0; i < stationIndex; i++)
             {
                 var stretch = me.TrackStreches[i];
-                var Δ = Math.Max(me.Settings.MinStationSpacing, (me.Settings.KilometerSpacing * stretch.Km) + ((stretch.To.Tracks.Length - 1) * me.Settings.TrackSpacing));
-                x += Δ;
-                y += Δ;
+                var Δ1 = Math.Max(me.Settings.MinStationSpacing, ((stretch.From.Tracks.Length - 1) * me.Settings.TrackSpacing) + (me.Settings.KilometerSpacing * stretch.Km));
+                x += Δ1;
+                y += Δ1;
             }
-
-            return me.TimeAxisDirection switch
-            {
-                TimeAxisDirection.Horisontal => new(0, y),
-                TimeAxisDirection.Vertical => new(x, 0),
-                _ => Offset.Invalid
-            };
+            var Δ2 = trackIndex * me.Settings.TrackSpacing;
+            x += Δ2;
+            y += Δ2;
         }
+        return axisDirection switch
+        {
+            TimeAxisDirection.Horisontal => new(0, y),
+            TimeAxisDirection.Vertical => new(x, 0),
+            _ => Offset.Invalid
+        };
     }
+
+    public static Offset MaxTrackOffset(this TimetableStretch me, TimeAxisDirection axisDirection)
+    {
+        var x = me.Settings.TimeAxisSpacing.X + ((me.TrackStreches[0].From.Tracks.Length - 1) * me.Settings.TrackSpacing);
+        var y = me.Settings.TimeAxisSpacing.Y + ((me.TrackStreches[0].From.Tracks.Length - 1) * me.Settings.TrackSpacing);
+        for (var i = 0; i < me.TrackStreches.Length; i++)
+        {
+            var stretch = me.TrackStreches[i];
+            var Δ = Math.Max(me.Settings.MinStationSpacing, (me.Settings.KilometerSpacing * stretch.Km) + ((stretch.To.Tracks.Length - 1) * me.Settings.TrackSpacing));
+            x += Δ;
+            y += Δ;
+        }
+
+        return axisDirection switch
+        {
+            TimeAxisDirection.Horisontal => new(0, y),
+            TimeAxisDirection.Vertical => new(x, 0),
+            _ => Offset.Invalid
+        };
+    }
+}

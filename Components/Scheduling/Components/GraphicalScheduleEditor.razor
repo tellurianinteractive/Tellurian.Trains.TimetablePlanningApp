@@ -11,25 +11,25 @@ else
         <label for="toggleAxis">Check to vertical time axis</label>
     </div>
     <div>
-        <svg style="border: 1pt solid black " height="@Current.Height" width="@Current.Width" @onclick="OnClick" @onmousedown="OnMouseDown">
+        <svg style="border: 1pt solid black " height="@Current.Height(AxisDirection)" width="@Current.Width(AxisDirection)" @onclick="OnClick" @onmousedown="OnMouseDown">
             @for (var time = Current.StartTime; time <= Current.EndTime; time += TimeSpan.FromHours(1))
             {
-                var hourOffset = Current.TimeAxisLabelOffset(time);
+                var hourOffset = Current.TimeAxisLabelOffset(AxisDirection, time);
                 <text>
-                    <text class="@Current.OrientationCss("time")" x="@hourOffset.X" y="@hourOffset.Y">@time.Hours</text>
+                    <text class="@AxisDirection.OrientationCss("time")" x="@hourOffset.X" y="@hourOffset.Y">@time.Hours</text>
                 </text>
-                var timeLine = Current.TimeLine(time);
+                var timeLine = Current.TimeLine(AxisDirection, time);
                 <line class="timeline" x1="@timeLine.Start.X" y1="@timeLine.Start.Y" x2="@timeLine.End.X" y2="@timeLine.End.Y"></line>
             }
 
             @for (var s = 0; s < Current.Stations.Length; s++)
             {
-                var stationOffset = Current.StationLabelOffset(s);
-                var kmOffset = Current.KmLabelOffset(s);
+                var stationOffset = Current.StationLabelOffset(AxisDirection, s);
+                var kmOffset = Current.KmLabelOffset(AxisDirection, s);
                 <text>
                     <text>
-                        <tspan x="@stationOffset.X" y="@stationOffset.Y" class="@Current.OrientationCss("stationname")">@Current.Stations[s].NameLabel()</tspan>
-                        <tspan x="@kmOffset.X" y="@kmOffset.Y" class="@Current.OrientationCss("stationkm")">@Current.Stations[s].KmLabel()</tspan>
+                        <tspan x="@stationOffset.X" y="@stationOffset.Y" class="@AxisDirection.OrientationCss( "stationname")">@Current.Stations[s].NameLabel()</tspan>
+                        <tspan x="@kmOffset.X" y="@kmOffset.Y" class="@AxisDirection.OrientationCss( "stationkm")">@Current.Stations[s].KmLabel()</tspan>
                     </text>
                 </text>
 
@@ -37,11 +37,11 @@ else
                 @for (var t = 0; t < Current.Stations[s].Tracks.Length; t++)
                 {
                     var track = Current.Stations[s].Tracks[t];
-                    var trackNumber = Current.TrackNumberOffset(s, t);
+                    var trackNumber = Current.TrackNumberOffset(AxisDirection, s, t);
                     <text>
-                        <text class="@Current.OrientationCss("number")" x="@trackNumber.X" y="@trackNumber.Y">@track.Number</text>
+                        <text class="@AxisDirection.OrientationCss("number")" x="@trackNumber.X" y="@trackNumber.Y">@track.Number</text>
                     </text>
-                    var trackLine = Current.TrackLine(s, t);
+                    var trackLine = Current.TrackLine(AxisDirection, s, t);
                     <line stroke="@TrackColor(track)" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
                 }
             }
@@ -69,15 +69,15 @@ else
     void ToggleAxis()
     {
         ShowVertical = !ShowVertical;
-        if (Current is not null) Current = Current with { TimeAxisDirection = ShowVertical ? TimeAxisDirection.Vertical : TimeAxisDirection.Horisontal };
     }
+
+    TimeAxisDirection AxisDirection => ShowVertical ? TimeAxisDirection.Vertical : TimeAxisDirection.Horisontal;
 
     List<(MouseEventArgs Args, string Type)> Events = new List<(MouseEventArgs, string)>();
 
     protected override void OnParametersSet()
     {
         Current = TimetableStretches?.FirstOrDefault();
-        if (Current is not null) Current = Current with { TimeAxisDirection = ShowVertical ? TimeAxisDirection.Vertical : TimeAxisDirection.Horisontal };
     }
 
     void OnClick(MouseEventArgs e)

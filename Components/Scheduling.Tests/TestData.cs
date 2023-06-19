@@ -1,4 +1,6 @@
-﻿namespace TimetablePlanning.Components.Scheduling.Tests;
+﻿using TimetablePlanning.Models.Common;
+
+namespace TimetablePlanning.Components.Scheduling.Tests;
 
 public static class TestData
     {

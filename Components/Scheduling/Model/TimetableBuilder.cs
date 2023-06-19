@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using TimetablePlanning.Models.Common;
 
 namespace TimetablePlanning.Components.Scheduling;
 
-    public static class TimetableBuilder
+public static class TimetableBuilder
     {
         public static TimetableStretch Bohusbanan => new("Södra Bohusbanan") { TrackStreches = Stations.Stretches().ToArray() };
 

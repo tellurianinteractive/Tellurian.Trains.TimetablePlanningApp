@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TimetablePlanning.Models.CallNotes.Data;
+﻿namespace TimetablePlanning.Models.CallNotes.Data;
 public class TrainMeetEvent : NoteEvent {
     public required int TrainNumber { get; set; }
     public required TimeSpan TrainArrivalTime { get; init; }

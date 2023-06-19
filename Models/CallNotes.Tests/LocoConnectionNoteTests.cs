@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TimetablePlanning.Models.CallNotes.Services;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;
@@ -63,7 +60,7 @@ public class LocoConnectionNoteTests
 
         const string expected =
             """
-            <span class="note-text">Connect loco </span><span class="note-value">SJ T44 232 turnus 2. </span><span class="note-text">Collect loco from staging area. </span>
+            <span class="note-text">Connect loco </span><span class="note-value">SJ T44 232 turnus 2. </span><span class="note-text">Pick up locomotives from the staging area. </span>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
     }

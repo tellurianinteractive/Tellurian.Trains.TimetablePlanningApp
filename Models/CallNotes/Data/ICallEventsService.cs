@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace TimetablePlanning.Models.CallNotes.Data;
+﻿namespace TimetablePlanning.Models.CallNotes.Data;
 
 /// <summary>
 /// This service is used to get raw call event data from a data source.

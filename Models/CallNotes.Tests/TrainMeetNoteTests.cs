@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TimetablePlanning.Models.CallNotes.Data;
-using TimetablePlanning.Models.CallNotes.Extensions;
 using TimetablePlanning.Models.CallNotes.Services;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;

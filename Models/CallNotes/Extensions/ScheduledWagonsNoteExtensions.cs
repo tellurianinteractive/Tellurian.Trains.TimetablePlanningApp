@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using TimetablePlanning.Models.CallNotes.Data;
+﻿using TimetablePlanning.Models.CallNotes.Data;
 using TimetablePlanning.Models.Common;
 
 namespace TimetablePlanning.Models.CallNotes.Extensions;

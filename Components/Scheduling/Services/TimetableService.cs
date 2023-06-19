@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿namespace TimetablePlanning.Components.Scheduling.Services;
 
-namespace TimetablePlanning.Components.Scheduling.Services;
-
-    public interface ITimetableService
+public interface ITimetableService
     {
         Task<IEnumerable<TimetableStretch>> GetTimetableStretchesAsync();
     }
@@ -12,6 +9,6 @@ namespace TimetablePlanning.Components.Scheduling.Services;
     {
         public async Task<IEnumerable<TimetableStretch>> GetTimetableStretchesAsync()
         {
-            return await Task.FromResult(new[] { TimetableBuilder.Bohusbanan with { TimeAxisDirection = TimeAxisDirection.Vertical } }).ConfigureAwait(false);
+            return await Task.FromResult(new[] { TimetableBuilder.Bohusbanan  }).ConfigureAwait(false);
         }
     }

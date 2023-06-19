@@ -1,8 +1,6 @@
-﻿using System;
+﻿namespace TimetablePlanning.Components.Scheduling;
 
-namespace TimetablePlanning.Components.Scheduling;
-
-    public record Settings
+public record Settings
     {
         public TimeSpan StartTime { get; init; } = TimeSpan.FromHours(6);
         public TimeSpan EndTime { get; init; } = TimeSpan.FromHours(20);
