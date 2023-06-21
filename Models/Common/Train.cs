@@ -1,21 +1,12 @@
 ﻿namespace TimetablePlanning.Models.Common;
 
-public record Timetable()
-{
-    public List<Train> Trains { get; } = new List<Train>();
-}
-
 public record Train(string Number)
 {
+    public string Colour { get; set; } = "black";
+    public StationCall[] Calls => _Calls.ToArray();
+    private readonly List<StationCall> _Calls = new();
 
-}
+    public void Add(StationCall call) => _Calls.Add(call);
+    public void Add(IEnumerable<StationCall> calls) => _Calls.AddRange(calls);  
 
-public record TrainLink(StationCall Arrival, StationCall Departure)
-{
-    public bool IsStop { get; init; } = true;
-}
-
-public record StationCall(StationTrack Track, TimeSpan Time)
-{
-    public bool IsHidden { get; init; }
 }

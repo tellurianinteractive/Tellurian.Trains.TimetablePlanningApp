@@ -1,8 +1,15 @@
 ﻿namespace TimetablePlanning.Components.Scheduling;
 
-public record Settings
+public record SchedlingSettings
 {
-    public static Settings Default => new ();
+    public static SchedlingSettings Default => new ();
+    public TimeSpan DefaultLeadInTime = TimeSpan.FromMinutes(10);
+    public TimeSpan DefaultLeadOutTime = TimeSpan.FromMinutes(20);
+}
+
+public record GraphSettings
+{
+    public static GraphSettings Default => new ();
     public TimeAxisDirection AxisDirection { get; set; }
     public TimeSpan StartTime { get; set; } = TimeSpan.FromHours(6);
     public TimeSpan EndTime { get; set; } = TimeSpan.FromHours(20);

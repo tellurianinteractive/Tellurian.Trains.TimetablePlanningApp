@@ -8,10 +8,10 @@ public static class TestData
 
         private static StationTrack[] StationTracks => new[]
         {
-            new StationTrack("1b" ) { HasPlatform=true },
-            new StationTrack("1a" ) { HasPlatform=true },
-            new StationTrack("2" ) { HasPlatform=true },
-            new StationTrack("3" ) { HasPlatform=false },
-            new StationTrack("4" ) { HasPlatform=false },
+            new StationTrack("1b" ) {PlatformLength = 2},
+            new StationTrack("1a" ) {PlatformLength = 2 },
+            new StationTrack("2" ) { PlatformLength = 2 },
+            new StationTrack("3" ),
+            new StationTrack("4" ) ,
        };
     }

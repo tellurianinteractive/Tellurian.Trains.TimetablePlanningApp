@@ -1,5 +1,4 @@
-﻿
-@if (Current is null)
+﻿@if (Current is null)
 {
 
 }
@@ -12,6 +11,7 @@ else
     </div>
     <div>
         <svg style="border: 1pt solid black " height="@Current.Height(AxisDirection)" width="@Current.Width(AxisDirection)" @onclick="OnClick" @onmousedown="OnMouseDown">
+            @* Draw hours *@
             @for (var time = Current.StartTime; time <= Current.EndTime; time += TimeSpan.FromHours(1))
             {
                 var hourOffset = Current.TimeAxisLabelOffset(AxisDirection, time);
@@ -22,6 +22,7 @@ else
                 <line class="timeline" x1="@timeLine.Start.X" y1="@timeLine.Start.Y" x2="@timeLine.End.X" y2="@timeLine.End.Y"></line>
             }
 
+            @* Draw stations*@
             @for (var s = 0; s < Current.Stations.Length; s++)
             {
                 var stationOffset = Current.StationLabelOffset(AxisDirection, s);
@@ -32,8 +33,7 @@ else
                         <tspan x="@kmOffset.X" y="@kmOffset.Y" class="@AxisDirection.OrientationCss( "stationkm")">@Current.Stations[s].KmLabel()</tspan>
                     </text>
                 </text>
-
-
+                @* Draw station tracks*@
                 @for (var t = 0; t < Current.Stations[s].Tracks.Length; t++)
                 {
                     var track = Current.Stations[s].Tracks[t];
@@ -42,9 +42,73 @@ else
                         <text class="@AxisDirection.OrientationCss("number")" x="@trackNumber.X" y="@trackNumber.Y">@track.Number</text>
                     </text>
                     var trackLine = Current.TrackLine(AxisDirection, s, t);
-                    <line stroke="@TrackColor(track)" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
+                    <line stroke="@TrackStroke(track)" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
                 }
             }
+
+            @* Draw trains *@
+            @for (var s = 0; s < Current.Stations.Length; s++)
+            {
+                var station = Current.Stations[s];
+                @for (var t = 0; t < Current.Stations[s].Tracks.Length; t++)
+                {
+                    var track = station.Tracks[t];
+                    @foreach (var stationCall in Current.Trains.SelectMany(t => t.Calls.Where(c => track.Equals(c.Track) && station.Equals(c.Track.Station))))
+                    {
+                        var trackLine = Current.TrainAtStationLine(AxisDirection, s, t, stationCall);
+                        <line stroke="red" stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
+                    }
+                }
+            }
+
+
+            @for (var s = 1; s < Current.Stations.Length; s++)
+            {
+                var fromStationIndex = s - 1;
+                var toStationIndex = s;
+                var fromStation = Current.Stations[fromStationIndex];
+                var toStation = Current.Stations[toStationIndex];
+
+                @for (var t1 = 0; t1 < Current.Stations[fromStationIndex].Tracks.Length; t1++)
+                {
+                    var fromTrack = Current.Stations[fromStationIndex].Tracks[t1];
+                    for (var t2 = 0; t2 < Current.Stations[toStationIndex].Tracks.Length; t2++)
+                    {
+                        var toTrack = Current.Stations[toStationIndex].Tracks[t2];
+
+                        @foreach (var stretch in Current.Trains.SelectMany(t => t.StretchUses().Where(c => fromStation.Equals(c.From.Track.Station) && c.From.Track.Equals(fromTrack) && toStation.Equals(c.To.Track.Station) && c.To.Track.Equals(toTrack))))
+                        {
+                            var trackLine = Current.TrainBetweenStationsLine(AxisDirection, s - 1, t1, s, t2, stretch.From.Departure, stretch.To.Arrival);
+                            <line stroke="red" stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
+                        }
+                    }
+                }
+            }
+
+            @for (var s = Current.Stations.Length-1; s> 0 ; s--)
+            {
+                var fromStationIndex = s;
+                var toStationIndex = s-1;
+                var fromStation = Current.Stations[fromStationIndex];
+                var toStation = Current.Stations[toStationIndex];
+
+                @for (var t1 = 0; t1 < fromStation.Tracks.Length; t1++)
+                {
+                    var fromTrack = fromStation.Tracks[t1];
+                    for (var t2 = 0; t2 < toStation.Tracks.Length; t2++)
+                    {
+                        var toTrack = toStation.Tracks[t2];
+
+                        @foreach (var stretch in Current.Trains.SelectMany(t => t.StretchUses().Where(c => fromStation.Equals(c.From.Track.Station) && c.From.Track.Equals(fromTrack) && toStation.Equals(c.To.Track.Station) && c.To.Track.Equals(toTrack))))
+                        {
+                            var trackLine = Current.TrainBetweenStationsLine(AxisDirection, s, t1, s-1, t2, stretch.From.Departure, stretch.To.Arrival);
+                            <line stroke="red" stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
+                        }
+                    }
+                }
+            }
+
+
         </svg>
     </div>
 }
@@ -59,13 +123,16 @@ else
 
 @code
 {
-    [Parameter] public IEnumerable<TimetableStretch>? TimetableStretches { get; set; }
-    [Parameter] public Settings Settings { get; set; } = Settings.Default;
+    [Parameter] public IEnumerable<Schedule>? TimetableStretches { get; set; }
+    [Parameter] public GraphSettings Settings { get; set; } = GraphSettings.Default;
 
-    TimetableStretch? Current;
+    Schedule? Current;
     bool ShowVertical;
 
-    string TrackColor(StationTrack t) => t.HasPlatform ? "#404040" : t.IsScheduled ? "#bfbfbf" : "#ff8080";
+    string TrackStroke(StationTrack t) => t.HasPlatform ? "#404040" : t.IsScheduled ? "#bfbfbf" : "#ff8080";
+    string TrainStroke(Train t) => t.Colour;
+    string TrainStrokeWidth => "2";
+
 
     void ToggleAxis()
     {

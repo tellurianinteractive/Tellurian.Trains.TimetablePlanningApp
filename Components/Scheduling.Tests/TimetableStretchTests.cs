@@ -7,17 +7,17 @@ namespace TimetablePlanning.Scheduling.Tests;
 [TestClass]
     public class TimetableStretchTests
     {
-        private static TimetableStretch Target =>
-            TimetableBuilder.Bohusbanan;
+        private static Schedule Target =>
+            ScheduleBuilder.Bohusbanan;
 
         [TestMethod]
         public void TimeLineOffsetsAreCorrect()
         {
             var (Start, End) = Target.TimeLine(TimeAxisDirection.Horisontal, Target.StartTime);
-            Assert.AreEqual(Target.Settings.TimeAxisSpacing.Y, Start.Y);
-            Assert.AreEqual(Target.Settings.KilometerAxisSpacing.X, Start.X);
+            Assert.AreEqual(Target.GraphSettings.TimeAxisSpacing.Y, Start.Y);
+            Assert.AreEqual(Target.GraphSettings.KilometerAxisSpacing.X, Start.X);
             Assert.AreEqual(Target.MaxTrackOffset(TimeAxisDirection.Horisontal).Y, End.Y);
-            Assert.AreEqual(Target.Settings.KilometerAxisSpacing.X, End.X);
+            Assert.AreEqual(Target.GraphSettings.KilometerAxisSpacing.X, End.X);
         }
 
         [TestMethod]
@@ -30,14 +30,14 @@ namespace TimetablePlanning.Scheduling.Tests;
         [TestMethod]
         public void HorisontalTimeIsStartHourAtStartOfTimeScale()
         {
-            var time = Target.Time(TimeAxisDirection.Horisontal, Target.Settings.KilometerAxisSpacing.X, 0);
+            var time = Target.Time(TimeAxisDirection.Horisontal, Target.GraphSettings.KilometerAxisSpacing.X, 0);
             Assert.AreEqual(Target.StartTime, time);
         }
 
         [TestMethod]
         public void HorisontalTimeIsEndHourAtEndOfTimeScale()
         {
-            var x = (int)((Target.EndTime - Target.StartTime).TotalMinutes * Target.Settings.MinuteSpacing) + Target.Settings.KilometerAxisSpacing.X;
+            var x = (int)((Target.EndTime - Target.StartTime).TotalMinutes * Target.GraphSettings.MinuteSpacing) + Target.GraphSettings.KilometerAxisSpacing.X;
             var time = Target.Time(TimeAxisDirection.Horisontal, x, 0);
             Assert.AreEqual(Target.EndTime, time);
         }
@@ -45,7 +45,7 @@ namespace TimetablePlanning.Scheduling.Tests;
         [TestMethod]
         public void HorisontalTimeAfterTimeScaleIsNull()
         {
-            var x = (int)((Target.EndTime - Target.StartTime).TotalMinutes * Target.Settings.MinuteSpacing) + Target.Settings.KilometerAxisSpacing.X + Target.Settings.MinuteSpacing;
+            var x = (int)((Target.EndTime - Target.StartTime).TotalMinutes * Target.GraphSettings.MinuteSpacing) + Target.GraphSettings.KilometerAxisSpacing.X + Target.GraphSettings.MinuteSpacing;
             var time = Target.Time(TimeAxisDirection.Horisontal, x    , 0);
             Assert.IsNull(time);
         }
@@ -59,14 +59,14 @@ namespace TimetablePlanning.Scheduling.Tests;
         [TestMethod]
         public void VerticalTimeIsStartHourAtStartOfTimeScale()
         {
-            var time = Target.Time(TimeAxisDirection.Vertical, 0, Target.Settings.KilometerAxisSpacing.Y);
+            var time = Target.Time(TimeAxisDirection.Vertical, 0, Target.GraphSettings.KilometerAxisSpacing.Y);
             Assert.AreEqual(Target.StartTime, time);
         }
 
         [TestMethod]
         public void VerticalTimeIsEndHourAtEndOfTimeScale()
         {
-            var y = (int)((Target.EndTime - Target.StartTime).TotalMinutes * Target.Settings.MinuteSpacing) + Target.Settings.KilometerAxisSpacing.Y;
+            var y = (int)((Target.EndTime - Target.StartTime).TotalMinutes * Target.GraphSettings.MinuteSpacing) + Target.GraphSettings.KilometerAxisSpacing.Y;
             var time = Target.Time(TimeAxisDirection.Vertical, 0, y);
             Assert.AreEqual(Target.EndTime, time);
         }
@@ -74,7 +74,7 @@ namespace TimetablePlanning.Scheduling.Tests;
         [TestMethod]
         public void VerticalTimeAfterTimeScaleIsNull()
         {
-            var y = (int)((Target.EndTime - Target.StartTime).TotalMinutes * Target.Settings.MinuteSpacing) + Target.Settings.KilometerAxisSpacing.Y + Target.Settings.MinuteSpacing;
+            var y = (int)((Target.EndTime - Target.StartTime).TotalMinutes * Target.GraphSettings.MinuteSpacing) + Target.GraphSettings.KilometerAxisSpacing.Y + Target.GraphSettings.MinuteSpacing;
             var time = Target.Time(TimeAxisDirection.Vertical ,0, y);
             Assert.IsNull(time);
         }
@@ -90,14 +90,14 @@ namespace TimetablePlanning.Scheduling.Tests;
         public void XOffsetAtStartOfTimeScale()
         {
             var offset = Target.TimeOffset(TimeAxisDirection.Horisontal, Target.StartTime);
-            Assert.AreEqual(Target.Settings.KilometerAxisSpacing.X, offset.X);
+            Assert.AreEqual(Target.GraphSettings.KilometerAxisSpacing.X, offset.X);
         }
 
         [TestMethod]
         public void XOffsetAtEndOfTimeScale()
         {
             var offset = Target.TimeOffset(TimeAxisDirection.Horisontal, Target.EndTime);
-            var expected = Target.Settings.KilometerAxisSpacing.X + (Target.Settings.MinuteSpacing * (int)(Target.EndTime - Target.StartTime).TotalMinutes);
+            var expected = Target.GraphSettings.KilometerAxisSpacing.X + (Target.GraphSettings.MinuteSpacing * (int)(Target.EndTime - Target.StartTime).TotalMinutes);
             Assert.AreEqual(expected, offset.X);
         }
 
@@ -119,14 +119,14 @@ namespace TimetablePlanning.Scheduling.Tests;
         public void YOffsetAtStartOfTimeScale()
         {
             var offset = Target.TimeOffset(TimeAxisDirection.Vertical, Target.StartTime);
-            Assert.AreEqual(Target.Settings.KilometerAxisSpacing.Y, offset.Y);
+            Assert.AreEqual(Target.GraphSettings.KilometerAxisSpacing.Y, offset.Y);
         }
 
         [TestMethod]
         public void YOffsetAtEndOfTimeScale()
         {
             var offset = Target.TimeOffset(TimeAxisDirection.Vertical, Target.EndTime);
-            var expected = Target.Settings.KilometerAxisSpacing.Y + (Target.Settings.MinuteSpacing * (int)(Target.EndTime - Target.StartTime).TotalMinutes);
+            var expected = Target.GraphSettings.KilometerAxisSpacing.Y + (Target.GraphSettings.MinuteSpacing * (int)(Target.EndTime - Target.StartTime).TotalMinutes);
             Assert.AreEqual(expected, offset.Y);
         }
 

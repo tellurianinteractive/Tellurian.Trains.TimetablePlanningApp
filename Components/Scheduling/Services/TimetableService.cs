@@ -1,16 +1,14 @@
-﻿using TimetablePlanning.Models.Common;
-
-namespace TimetablePlanning.Components.Scheduling.Services;
+﻿namespace TimetablePlanning.Components.Scheduling.Services;
 
 public interface ITimetableService
-    {
-        Task<IEnumerable<TimetableStretch>> GetTimetableStretchesAsync();
-    }
+{
+    Task<IEnumerable<Schedule>> GetTimetableStretchesAsync();
+}
 
-    public class ExampleTimetableService : ITimetableService
+public class ExampleTimetableService : ITimetableService
+{
+    public async Task<IEnumerable<Schedule>> GetTimetableStretchesAsync()
     {
-        public async Task<IEnumerable<TimetableStretch>> GetTimetableStretchesAsync()
-        {
-            return await Task.FromResult(new[] { TimetableBuilder.Bohusbanan  }).ConfigureAwait(false);
-        }
+        return await Task.FromResult(new[] { ScheduleBuilder.Bohusbanan }).ConfigureAwait(false);
     }
+}

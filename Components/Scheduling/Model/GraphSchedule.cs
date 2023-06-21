@@ -1,4 +1,6 @@
-﻿using TimetablePlanning.Components.Scheduling.Extensions;
+﻿// Not used. 
+
+using TimetablePlanning.Components.Scheduling.Extensions;
 using TimetablePlanning.Models.Common;
 
 namespace TimetablePlanning.Components.Scheduling;
@@ -19,7 +21,7 @@ public record GraphInputArea(Offset Min, Offset Max)
 
 public static class GraphScheduleModelExtensions
 {
-    public static GraphSchedule AsGraphScheduleModel(this TimetableStretch me, TimeAxisDirection axisDirection)
+    public static GraphSchedule AsGraphScheduleModel(this Schedule me, TimeAxisDirection axisDirection)
     {
         var stations = new List<GraphStation>(20);
         for (var s = 0; s < me.Stations.Length; s++)
@@ -31,7 +33,7 @@ public static class GraphScheduleModelExtensions
                 var track = station.Tracks[t];
                 var start = me.TrackStartLocation(axisDirection, s, t);
                 var end = me.TrackEndLocation(axisDirection, s, t);
-                var graphicalTrack = new GraphTrack(start, end, station, track, AsInputArea(start, end, (me.Settings.TrackSpacing / 2) - 1));
+                var graphicalTrack = new GraphTrack(start, end, station, track, AsInputArea(start, end, (me.GraphSettings.TrackSpacing / 2) - 1));
                 tracks.Add(graphicalTrack);
             }
             stations.Add(new GraphStation(me.StationLabelOffset(axisDirection, s), me.StationLabelOffset(axisDirection, s), station, tracks.ToArray()));
@@ -39,7 +41,7 @@ public static class GraphScheduleModelExtensions
         return new GraphSchedule(stations.ToArray(), Times(me, axisDirection));
     }
 
-    static GraphTime[] Times(TimetableStretch me, TimeAxisDirection axisDirection)
+    static GraphTime[] Times(Schedule me, TimeAxisDirection axisDirection)
     {
         var times = new List<GraphTime>(24);
         int start = me.StartTime.Hours;
