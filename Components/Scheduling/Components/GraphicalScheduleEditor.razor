@@ -83,19 +83,19 @@ else
                             <text>
                                 <text class="@AxisDirection.OrientationCss("minute")" x="@departure.X" y="@departure.Y">@stretch.From.Departure.Minutes()</text>
                             </text>
- @*                            var arrival = Current.ArrivalMinuteOver(AxisDirection, toStationIndex, stretch.To);
-                           <text>
-                                <text class="@AxisDirection.OrientationCss("minute")" x="@arrival.X" y="@arrival.Y">@stretch.From.Arrival.Minutes()</text>
+                            var arrival = Current.ArrivalMinuteOver(AxisDirection, toStationIndex, stretch.To);
+                            <text>
+                                <text class="@AxisDirection.OrientationCss("minute")" x="@arrival.X" y="@arrival.Y">@stretch.To.Arrival.Minutes()</text>
                             </text>
- *@                        }
+                        }
                     }
                 }
             }
 
-            @for (var s = Current.Stations.Length-1; s> 0 ; s--)
+            @for (var s = Current.Stations.Length - 1; s > 0; s--)
             {
                 var fromStationIndex = s;
-                var toStationIndex = s-1;
+                var toStationIndex = s - 1;
                 var fromStation = Current.Stations[fromStationIndex];
                 var toStation = Current.Stations[toStationIndex];
 
@@ -108,17 +108,17 @@ else
 
                         @foreach (var stretch in Current.Trains.SelectMany(t => t.StretchUses().Where(c => fromStation.Equals(c.From.Track.Station) && c.From.Track.Equals(fromTrack) && toStation.Equals(c.To.Track.Station) && c.To.Track.Equals(toTrack))))
                         {
-                            var trackLine = Current.TrainBetweenStationsLine(AxisDirection, s, t1, s-1, t2, stretch.From.Departure, stretch.To.Arrival);
+                            var trackLine = Current.TrainBetweenStationsLine(AxisDirection, s, t1, s - 1, t2, stretch.From.Departure, stretch.To.Arrival);
                             <line stroke=@stretch.Train.Colour stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
-@*                             var departure = Current.DepartureMinuteOver(AxisDirection, fromStationIndex, stretch.From);
+                            var departure = Current.DepartureMinuteOver(AxisDirection, fromStationIndex, stretch.From);
                             <text>
                                 <text class="@AxisDirection.OrientationCss("minute")" x="@departure.X" y="@departure.Y">@stretch.From.Departure.Minutes()</text>
                             </text>
-                            var arrival = Current.ArrivalMinuteUnder(AxisDirection, toStationIndex, stretch.To);
+                            var arrival = Current.ArrivalMinuteUnder(AxisDirection, toStationIndex, t2, stretch.To);
                             <text>
-                                <text class="@AxisDirection.OrientationCss("minute")" x="@arrival.X" y="@arrival.Y">@stretch.From.Arrival.Minutes()</text>
+                                <text class="@AxisDirection.OrientationCss("minute")" x="@arrival.X" y="@arrival.Y">@stretch.To.Arrival.Minutes()</text>
                             </text>
- *@                        }
+                        }
                     }
                 }
             }

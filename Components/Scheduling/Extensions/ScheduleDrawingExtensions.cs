@@ -54,7 +54,7 @@ public static class ScheduleDrawingExtensions
         var offset = me.MinuteOver(axisDirection, stationIndex, stationCall.Arrival);
         return axisDirection switch
         {
-            TimeAxisDirection.Horisontal => new Offset(offset.X, offset.Y),
+            TimeAxisDirection.Horisontal => new Offset(offset.X-13, offset.Y-2),
             TimeAxisDirection.Vertical => new Offset(offset.X, offset.Y),
             _ =>throw new NotSupportedException(axisDirection.ToString())
         };       
@@ -65,7 +65,7 @@ public static class ScheduleDrawingExtensions
         var offset = me.MinuteUnder(axisDirection, stationIndex, trackIndex, stationCall.Arrival);
         return axisDirection switch
         {
-            TimeAxisDirection.Horisontal => new Offset(offset.X, offset.Y),
+            TimeAxisDirection.Horisontal => new Offset(offset.X-16, offset.Y+7),
             TimeAxisDirection.Vertical => new Offset(offset.X, offset.Y),
             _ => throw new NotSupportedException(axisDirection.ToString())
         };
@@ -75,7 +75,7 @@ public static class ScheduleDrawingExtensions
         var offset = me.MinuteOver(axisDirection, stationIndex, stationCall.Departure);
         return axisDirection switch
         {
-            TimeAxisDirection.Horisontal => new Offset(offset.X, offset.Y),
+            TimeAxisDirection.Horisontal => new Offset(offset.X+4, offset.Y-2),
             TimeAxisDirection.Vertical => new Offset(offset.X, offset.Y),
             _ => throw new NotSupportedException(axisDirection.ToString())
         };
@@ -113,18 +113,17 @@ public static class ScheduleDrawingExtensions
 
     private static Offset MinuteOver(this Schedule me, TimeAxisDirection axisDirection, int stationIndex, CallAction callAction)
     {
-        var station = me.Stations[stationIndex];
-        var trackIndex = station.Tracks.Length - 1;
+        var trackIndex = 0;
         if (axisDirection == TimeAxisDirection.Horisontal)
         {
             var x = me.TimeOffset(axisDirection, callAction.Time).X;
-            var y = me.Y(axisDirection, stationIndex, trackIndex) + 8;
+            var y = me.Y(axisDirection, stationIndex, trackIndex);
             return new Offset(x, y);
         }
         else if (axisDirection == TimeAxisDirection.Vertical)
         {
             var x = me.X(axisDirection, stationIndex, trackIndex);
-            var y = me.TimeOffset(axisDirection, callAction.Time).Y - 8;
+            var y = me.TimeOffset(axisDirection, callAction.Time).Y;
             return new Offset(x, y);
 
         }
