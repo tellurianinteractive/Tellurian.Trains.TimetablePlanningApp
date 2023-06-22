@@ -16,7 +16,7 @@ else
             {
                 var hourOffset = Current.TimeAxisLabelOffset(AxisDirection, time);
                 <text>
-                    <text class="@AxisDirection.OrientationCss("time")" x="@hourOffset.X" y="@hourOffset.Y">@time.Hours</text>
+                    <text class="@AxisDirection.OrientationCss("hour")" x="@hourOffset.X" y="@hourOffset.Y">@time.Hours</text>
                 </text>
                 var timeLine = Current.TimeLine(AxisDirection, time);
                 <line class="timeline" x1="@timeLine.Start.X" y1="@timeLine.Start.Y" x2="@timeLine.End.X" y2="@timeLine.End.Y"></line>
@@ -56,11 +56,10 @@ else
                     @foreach (var stationCall in Current.Trains.SelectMany(t => t.Calls.Where(c => track.Equals(c.Track) && station.Equals(c.Track.Station))))
                     {
                         var trackLine = Current.TrainAtStationLine(AxisDirection, s, t, stationCall);
-                        <line stroke="red" stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
+                        <line stroke=@stationCall.Train?.Colour stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
                     }
                 }
             }
-
 
             @for (var s = 1; s < Current.Stations.Length; s++)
             {
@@ -69,18 +68,26 @@ else
                 var fromStation = Current.Stations[fromStationIndex];
                 var toStation = Current.Stations[toStationIndex];
 
-                @for (var t1 = 0; t1 < Current.Stations[fromStationIndex].Tracks.Length; t1++)
+                @for (var fromTrackIndex = 0; fromTrackIndex < Current.Stations[fromStationIndex].Tracks.Length; fromTrackIndex++)
                 {
-                    var fromTrack = Current.Stations[fromStationIndex].Tracks[t1];
-                    for (var t2 = 0; t2 < Current.Stations[toStationIndex].Tracks.Length; t2++)
+                    var fromTrack = Current.Stations[fromStationIndex].Tracks[fromTrackIndex];
+                    for (var toTrackIndex = 0; toTrackIndex < Current.Stations[toStationIndex].Tracks.Length; toTrackIndex++)
                     {
-                        var toTrack = Current.Stations[toStationIndex].Tracks[t2];
+                        var toTrack = Current.Stations[toStationIndex].Tracks[toTrackIndex];
 
                         @foreach (var stretch in Current.Trains.SelectMany(t => t.StretchUses().Where(c => fromStation.Equals(c.From.Track.Station) && c.From.Track.Equals(fromTrack) && toStation.Equals(c.To.Track.Station) && c.To.Track.Equals(toTrack))))
                         {
-                            var trackLine = Current.TrainBetweenStationsLine(AxisDirection, s - 1, t1, s, t2, stretch.From.Departure, stretch.To.Arrival);
-                            <line stroke="red" stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
-                        }
+                            var trackLine = Current.TrainBetweenStationsLine(AxisDirection, fromStationIndex, fromTrackIndex, toStationIndex, toTrackIndex, stretch.From.Departure, stretch.To.Arrival);
+                            <line stroke=@stretch.Train.Colour stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
+                            var departure = Current.DepartureMinuteUnder(AxisDirection, fromStationIndex, fromTrackIndex, stretch.From);
+                            <text>
+                                <text class="@AxisDirection.OrientationCss("minute")" x="@departure.X" y="@departure.Y">@stretch.From.Departure.Minutes()</text>
+                            </text>
+ @*                            var arrival = Current.ArrivalMinuteOver(AxisDirection, toStationIndex, stretch.To);
+                           <text>
+                                <text class="@AxisDirection.OrientationCss("minute")" x="@arrival.X" y="@arrival.Y">@stretch.From.Arrival.Minutes()</text>
+                            </text>
+ *@                        }
                     }
                 }
             }
@@ -102,8 +109,16 @@ else
                         @foreach (var stretch in Current.Trains.SelectMany(t => t.StretchUses().Where(c => fromStation.Equals(c.From.Track.Station) && c.From.Track.Equals(fromTrack) && toStation.Equals(c.To.Track.Station) && c.To.Track.Equals(toTrack))))
                         {
                             var trackLine = Current.TrainBetweenStationsLine(AxisDirection, s, t1, s-1, t2, stretch.From.Departure, stretch.To.Arrival);
-                            <line stroke="red" stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
-                        }
+                            <line stroke=@stretch.Train.Colour stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
+@*                             var departure = Current.DepartureMinuteOver(AxisDirection, fromStationIndex, stretch.From);
+                            <text>
+                                <text class="@AxisDirection.OrientationCss("minute")" x="@departure.X" y="@departure.Y">@stretch.From.Departure.Minutes()</text>
+                            </text>
+                            var arrival = Current.ArrivalMinuteUnder(AxisDirection, toStationIndex, stretch.To);
+                            <text>
+                                <text class="@AxisDirection.OrientationCss("minute")" x="@arrival.X" y="@arrival.Y">@stretch.From.Arrival.Minutes()</text>
+                            </text>
+ *@                        }
                     }
                 }
             }
@@ -131,7 +146,8 @@ else
 
     string TrackStroke(StationTrack t) => t.HasPlatform ? "#404040" : t.IsScheduled ? "#bfbfbf" : "#ff8080";
     string TrainStroke(Train t) => t.Colour;
-    string TrainStrokeWidth => "2";
+    string TrainStrokeWidth => "4";
+    string Time(CallAction callAction) => $"{callAction.Time:HH:mm}";
 
 
     void ToggleAxis()

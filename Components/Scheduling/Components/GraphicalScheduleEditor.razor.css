@@ -1,14 +1,26 @@
-﻿.time {
+﻿.hour {
     font-weight: bold;
     font-size: 16pt;
 }
 
-    .time.horizontal {
+    .hour.horizontal {
         text-anchor: middle;
     }
 
-    .time.vertical {
+    .hour.vertical {
         text-anchor: start;
+    }
+
+.minute {
+    font-size: 6pt;
+    font-weight: bold;
+    color: black;
+}
+
+    .minute.horizontal {
+    }
+
+    .minute.vertical {
     }
 
 .timeline {
@@ -30,6 +42,7 @@
     .number.horizontal {
         text-anchor: end;
     }
+
     .number.vertical {
         text-anchor: middle;
     }

@@ -29,7 +29,7 @@ public static class ScheduleBuilder
         {
             new StationCall(BohusbananStations[0].Tracks[0], CallAction(-10), CallAction(0)),
             new StationCall(BohusbananStations[1].Tracks[0], CallAction(3), CallAction(3)),
-            new StationCall(BohusbananStations[2].Tracks[1], CallAction(7),CallAction(8)),
+            new StationCall(BohusbananStations[2].Tracks[1], CallAction(6),CallAction(7)),
             new StationCall(BohusbananStations[3].Tracks[0], CallAction(5),CallAction(6)),
             new StationCall(BohusbananStations[4].Tracks[1], CallAction(6),CallAction(7)),
             new StationCall(BohusbananStations[5].Tracks[0], CallAction(8),CallAction(9)),
@@ -65,25 +65,27 @@ public static class ScheduleBuilder
         }
     };
 
-    private static TrainPattern Göteborg_Stenungsund => Göteborg_Uddevalla.SubSection("G-Snu", 0, 8);
-    private static TrainPattern Stenungsund_Göteborg => Uddevalla_Göteborg.SubSection("Snu-G", 5, 8);
+    private static TrainPattern Göteborg_Stenungsund => Göteborg_Uddevalla.SubSection("G-Snu", "blue", 0, 8);
+    private static TrainPattern Stenungsund_Göteborg => Uddevalla_Göteborg.SubSection("Snu-G", "blue", 5);
 
     private static IEnumerable<Train> Trains_Uddevalla_Göteborg =>
                  Uddevalla_Göteborg.CreateTrains(3721, "06:07", 19, 1)
-        .Concat(Uddevalla_Göteborg.CreateTrains(3761, "05:37", 2, 1))
+        .Concat(Uddevalla_Göteborg.CreateTrains("blue",3761, "05:37", 2, 1))
         .Concat(Stenungsund_Göteborg.CreateTrains(3251, "06:54", 1, 1))
         .Concat(Stenungsund_Göteborg.CreateTrains(3251, "08:09", 1, 1))
         .Concat(Stenungsund_Göteborg.CreateTrains(3255, "15:09", 3, 1))
-        .Concat(Göteborg_Uddevalla.CreateTrains(3220, "06:10", 1, 1))
+        .Concat(Göteborg_Uddevalla.CreateTrains("blue", 3220, "06:10", 1, 1))
         .Concat(Göteborg_Uddevalla.CreateTrains(3220, "06:40", 19, 1))
         .Concat(Göteborg_Stenungsund.CreateTrains(3250, "07:10", 1, 1))
         .Concat(Göteborg_Stenungsund.CreateTrains(3272, "05:40", 1, 1))
         .Concat(Göteborg_Stenungsund.CreateTrains(3260, "14:10", 3, 1))
-        .Concat(Göteborg_Uddevalla.CreateTrains(3270, "17:10", 1, 1));
+        .Concat(Göteborg_Uddevalla.CreateTrains("blue",3270, "17:10", 1, 1));
 
 
     private static TimeSpan AsMinutes(this int minutes) => TimeSpan.FromMinutes(minutes);
     private static CallAction CallAction(this int minutes) => new(minutes.AsMinutes());
     public static TimeSpan AsTime(this string time) => TimeSpan.Parse(time);
+
+    public static string Minutes(this CallAction callAction) => callAction.Time.Minutes.ToString("00");
 
 }

@@ -8,7 +8,7 @@ public static class ScheduleDrawingExtensions
 {
     public static string OrientationCss(this TimeAxisDirection axisDirection, string classes) =>
         axisDirection == TimeAxisDirection.Horisontal ? $"{classes} horizontal".TrimStart() :
-        axisDirection == TimeAxisDirection.Vertical? $"{classes} vertical".TrimStart() :
+        axisDirection == TimeAxisDirection.Vertical ? $"{classes} vertical".TrimStart() :
         string.Empty;
 
 
@@ -37,7 +37,7 @@ public static class ScheduleDrawingExtensions
         if (axisDirection == TimeAxisDirection.Horisontal)
         {
             var y = me.Y(axisDirection, stationIndex, trackIndex);
-            return (new (me.TimeOffset(axisDirection, stationCall.Arrival.Time).X,y), new (me.TimeOffset(axisDirection, stationCall.Departure.Time).X,y));
+            return (new(me.TimeOffset(axisDirection, stationCall.Arrival.Time).X, y), new(me.TimeOffset(axisDirection, stationCall.Departure.Time).X, y));
 
         }
         else if (axisDirection == TimeAxisDirection.Vertical)
@@ -48,6 +48,89 @@ public static class ScheduleDrawingExtensions
         }
         throw new NotSupportedException(axisDirection.ToString());
     }
+
+    public static Offset ArrivalMinuteOver(this Schedule me, TimeAxisDirection axisDirection, int stationIndex, StationCall stationCall)
+    {
+        var offset = me.MinuteOver(axisDirection, stationIndex, stationCall.Arrival);
+        return axisDirection switch
+        {
+            TimeAxisDirection.Horisontal => new Offset(offset.X, offset.Y),
+            TimeAxisDirection.Vertical => new Offset(offset.X, offset.Y),
+            _ =>throw new NotSupportedException(axisDirection.ToString())
+        };       
+    }
+
+    public static Offset ArrivalMinuteUnder(this Schedule me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex,  StationCall stationCall)
+    {
+        var offset = me.MinuteUnder(axisDirection, stationIndex, trackIndex, stationCall.Arrival);
+        return axisDirection switch
+        {
+            TimeAxisDirection.Horisontal => new Offset(offset.X, offset.Y),
+            TimeAxisDirection.Vertical => new Offset(offset.X, offset.Y),
+            _ => throw new NotSupportedException(axisDirection.ToString())
+        };
+    }
+    public static Offset DepartureMinuteOver(this Schedule me, TimeAxisDirection axisDirection, int stationIndex, StationCall stationCall)
+    {
+        var offset = me.MinuteOver(axisDirection, stationIndex, stationCall.Departure);
+        return axisDirection switch
+        {
+            TimeAxisDirection.Horisontal => new Offset(offset.X, offset.Y),
+            TimeAxisDirection.Vertical => new Offset(offset.X, offset.Y),
+            _ => throw new NotSupportedException(axisDirection.ToString())
+        };
+    }
+    public static Offset DepartureMinuteUnder(this Schedule me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex, StationCall stationCall)
+    {
+        var offset = me.MinuteUnder(axisDirection, stationIndex, trackIndex, stationCall.Departure);
+        return axisDirection switch
+        {
+            TimeAxisDirection.Horisontal => new Offset(offset.X+4, offset.Y+8),
+            TimeAxisDirection.Vertical => new Offset(offset.X, offset.Y),
+            _ => throw new NotSupportedException(axisDirection.ToString())
+        };
+    }
+
+    private static Offset MinuteUnder(this Schedule me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex, CallAction callAction)
+    {
+        var station = me.Stations[stationIndex];
+        var lastTrackIndex = station.Tracks.Length - 1;
+        if (axisDirection == TimeAxisDirection.Horisontal)
+        {
+            var x = me.TimeOffset(axisDirection, callAction.Time).X + (lastTrackIndex-trackIndex);
+            var y = me.Y(axisDirection, stationIndex, lastTrackIndex);
+            return new Offset(x, y);
+        }
+        else if (axisDirection == TimeAxisDirection.Vertical)
+        {
+            var x = me.X(axisDirection, stationIndex, lastTrackIndex);
+            var y = me.TimeOffset(axisDirection, callAction.Time).Y + (lastTrackIndex - trackIndex);
+            return new Offset(x, y);
+
+        }
+        throw new NotSupportedException(axisDirection.ToString());
+    }
+
+    private static Offset MinuteOver(this Schedule me, TimeAxisDirection axisDirection, int stationIndex, CallAction callAction)
+    {
+        var station = me.Stations[stationIndex];
+        var trackIndex = station.Tracks.Length - 1;
+        if (axisDirection == TimeAxisDirection.Horisontal)
+        {
+            var x = me.TimeOffset(axisDirection, callAction.Time).X;
+            var y = me.Y(axisDirection, stationIndex, trackIndex) + 8;
+            return new Offset(x, y);
+        }
+        else if (axisDirection == TimeAxisDirection.Vertical)
+        {
+            var x = me.X(axisDirection, stationIndex, trackIndex);
+            var y = me.TimeOffset(axisDirection, callAction.Time).Y - 8;
+            return new Offset(x, y);
+
+        }
+        throw new NotSupportedException(axisDirection.ToString());
+    }
+
 
 
     public static (Offset Start, Offset End) TrackLine(this Schedule me, TimeAxisDirection axisDirection, int stationIndex, int trackIndex)
