@@ -2,12 +2,18 @@
 <h1>Examples</h1>
 
 <h2>Automatic train notes</h2>
+<p>Automatic train notes are generated from data.
+    The idea is that anything that can be deducted from data should not be entered manually.
+    Automatic notes also has the advantage to easily be translated to any of the supported languages.
+</p>
 
-<div>
+<div style="padding-top: 3mm">
+    <h4>Example of a loco pick-up note:</h4>
     @locoConnectNote.Markup()
 </div>
-<div>
-    @scheduledWagonsConnectNote.Markup()
+<div style="padding-top: 3mm">
+    <h4>Example of a scheduled wagon group pick-up note:</h4>
+    <p>@scheduledWagonsConnectNote.Markup()</p>
 </div>
 
 @code {

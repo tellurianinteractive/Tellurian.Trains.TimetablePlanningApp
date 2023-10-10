@@ -22,6 +22,7 @@ public class Schedule
         EndTime = GetEndTime();
     }
     public GraphSettings GraphSettings { get; }
+    public TimeAxisDirection AxisDirection => GraphSettings.AxisDirection;
     public string Description { get; }
     public Station[] Stations { get; }
     public TrackStretch[] Streches { get; }
@@ -46,7 +47,7 @@ public class Schedule
         }
 
         else
-            return GraphSettings.StartTime;
+            return GraphSettings.DefaultStartTime;
     }
 
     public TimeSpan EndTime { get; private set; }
@@ -58,7 +59,7 @@ public class Schedule
             return new TimeSpan(time.Days, time.Hours + 1, 0, 0);
         }
         else 
-            return GraphSettings.EndTime;
+            return GraphSettings.DefaultEndTime;
     }
 
 

@@ -21,7 +21,7 @@ public record GraphInputArea(Offset Min, Offset Max)
 
 public static class GraphScheduleModelExtensions
 {
-    public static GraphSchedule AsGraphScheduleModel(this Schedule me, TimeAxisDirection axisDirection)
+    public static GraphSchedule AsGraphScheduleModel(this Schedule me)
     {
         var stations = new List<GraphStation>(20);
         for (var s = 0; s < me.Stations.Length; s++)
@@ -31,24 +31,24 @@ public static class GraphScheduleModelExtensions
             for (var t = 0; t < station.Tracks.Length; t++)
             {
                 var track = station.Tracks[t];
-                var start = me.TrackStartLocation(axisDirection, s, t);
-                var end = me.TrackEndLocation(axisDirection, s, t);
+                var start = me.TrackStartLocation( s, t);
+                var end = me.TrackEndLocation( s, t);
                 var graphicalTrack = new GraphTrack(start, end, station, track, AsInputArea(start, end, (me.GraphSettings.TrackSpacing / 2) - 1));
                 tracks.Add(graphicalTrack);
             }
-            stations.Add(new GraphStation(me.StationLabelOffset(axisDirection, s), me.StationLabelOffset(axisDirection, s), station, tracks.ToArray()));
+            stations.Add(new GraphStation(me.StationLabelOffset(s), me.StationLabelOffset(s), station, tracks.ToArray()));
         }
-        return new GraphSchedule(stations.ToArray(), Times(me, axisDirection));
+        return new GraphSchedule(stations.ToArray(), Times(me));
     }
 
-    static GraphTime[] Times(Schedule me, TimeAxisDirection axisDirection)
+    static GraphTime[] Times(Schedule me)
     {
         var times = new List<GraphTime>(24);
         int start = me.StartTime.Hours;
         int end = me.EndTime.Minutes > 0 || me.EndTime.Seconds > 0 ? me.EndTime.Hours + 1 : me.EndTime.Hours;
         for (var hour = start; hour <= end; hour++)
         {
-            var (Start, End) = me.TimeLine(axisDirection, TimeSpan.FromHours(hour));
+            var (Start, End) = me.TimeLine(TimeSpan.FromHours(hour));
             times.Add(new GraphTime(Start, End, hour));
         }
         return times.ToArray();

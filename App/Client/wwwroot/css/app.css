@@ -58,7 +58,7 @@ a, .btn-link {
 }
 
 .note-item {    
-    border: 1px solid gray;
+    padding-left: 2mm;
     display:inline-block;
 }
 

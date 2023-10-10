@@ -5,13 +5,22 @@
 
 @inject ITimetableService TimetableService
 
+<h1>Graphich schedule example</h1>
+<p>
+    Try out by checking or unchecking the boxes.
+</p>
+<p>
+    I addition (but not available in this demo), the graph can also be scaled both on time and station axis, colorisation of trains can be customized. Start and end hour is determined automatically by train times.
+
+</p>
+
 <GraphicalScheduleEditor TimetableStretches="TimetableStretches" />
 
 @code {
-	IEnumerable<Schedule>? TimetableStretches;
+    IEnumerable<Schedule>? TimetableStretches;
 
-	protected override async Task OnParametersSetAsync()
-	{
-		TimetableStretches = await TimetableService.GetTimetableStretchesAsync();
-	}
+    protected override async Task OnParametersSetAsync()
+    {
+        TimetableStretches = await TimetableService.GetTimetableStretchesAsync();
+    }
 }

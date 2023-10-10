@@ -11,8 +11,8 @@ public record GraphSettings
 {
     public static GraphSettings Default => new ();
     public TimeAxisDirection AxisDirection { get; set; }
-    public TimeSpan StartTime { get; set; } = TimeSpan.FromHours(6);
-    public TimeSpan EndTime { get; set; } = TimeSpan.FromHours(20);
+    public TimeSpan DefaultStartTime { get; set; } = TimeSpan.FromHours(6);
+    public TimeSpan DefaultEndTime { get; set; } = TimeSpan.FromHours(20);
     public Offset TimeAxisSpacing { get; set; } = new(30, 30);
     public Offset KilometerAxisSpacing { get; set; } = new(100, 60);
     public int EndMargin { get; set; } = 20;
@@ -20,6 +20,8 @@ public record GraphSettings
     public int MinStationSpacing { get; set; } = 40;
     public int MinuteSpacing { get; set; } = 2;
     public int KilometerSpacing { get; set; } = 10;
+    public bool ShowArrivalMinutes { get; set; }
+    public bool ShowDepartureMinutes { get; set; } = true;
 }
 
 public record EventAt(EventType Event, int Minute, int Kilometer)

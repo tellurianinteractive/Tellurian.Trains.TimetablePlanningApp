@@ -8,40 +8,53 @@ else
         <h3>@Current.Description</h3>
         <input id="toggleAxis" type="checkbox" @onchange="ToggleAxis" />
         <label for="toggleAxis">Check to vertical time axis</label>
+        <input id="toggleDepartureMinutes" type="checkbox" @onchange="ToggleDepartureMinutes" />
+        <label for="toggleDepartureMinutes">Check to show departure minutes</label>
+        <input id="toggleArrivalMinutes" type="checkbox" @onchange="ToggleArrivalMinutes" />
+        <label for="toggleArrivalMinutes">Check to show arrival minutes</label>
     </div>
     <div>
-        <svg style="border: 1pt solid black " height="@Current.Height(AxisDirection)" width="@Current.Width(AxisDirection)" @onclick="OnClick" @onmousedown="OnMouseDown">
+        <svg style="border: 1pt solid black " height="@Current.Height()" width="@Current.Width()" @onclick="OnClick" @onmousedown="OnMouseDown">
+            <defs>
+                <filter x="0" y="0" width="1" height="1" id="solid">
+                    <feFlood flood-color="white" result="bg" />
+                    <feMerge>
+                        <feMergeNode in="bg" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
             @* Draw hours *@
             @for (var time = Current.StartTime; time <= Current.EndTime; time += TimeSpan.FromHours(1))
             {
-                var hourOffset = Current.TimeAxisLabelOffset(AxisDirection, time);
+                var hourOffset = Current.TimeAxisLabelOffset(time);
                 <text>
-                    <text class="@AxisDirection.OrientationCss("hour")" x="@hourOffset.X" y="@hourOffset.Y">@time.Hours</text>
+                    <text class="@Current.AxisDirection.OrientationCss("hour")" x="@hourOffset.X" y="@hourOffset.Y">@time.Hours</text>
                 </text>
-                var timeLine = Current.TimeLine(AxisDirection, time);
+                var timeLine = Current.TimeLine(time);
                 <line class="timeline" x1="@timeLine.Start.X" y1="@timeLine.Start.Y" x2="@timeLine.End.X" y2="@timeLine.End.Y"></line>
             }
 
             @* Draw stations*@
             @for (var s = 0; s < Current.Stations.Length; s++)
             {
-                var stationOffset = Current.StationLabelOffset(AxisDirection, s);
-                var kmOffset = Current.KmLabelOffset(AxisDirection, s);
+                var stationOffset = Current.StationLabelOffset(s);
+                var kmOffset = Current.KmLabelOffset(s);
                 <text>
                     <text>
-                        <tspan x="@stationOffset.X" y="@stationOffset.Y" class="@AxisDirection.OrientationCss( "stationname")">@Current.Stations[s].NameLabel()</tspan>
-                        <tspan x="@kmOffset.X" y="@kmOffset.Y" class="@AxisDirection.OrientationCss( "stationkm")">@Current.Stations[s].KmLabel()</tspan>
+                        <tspan x="@stationOffset.X" y="@stationOffset.Y" class="@Current.AxisDirection.OrientationCss( "stationname")">@Current.Stations[s].NameLabel()</tspan>
+                        <tspan x="@kmOffset.X" y="@kmOffset.Y" class="@Current.AxisDirection.OrientationCss( "stationkm")">@Current.Stations[s].KmLabel()</tspan>
                     </text>
                 </text>
                 @* Draw station tracks*@
                 @for (var t = 0; t < Current.Stations[s].Tracks.Length; t++)
                 {
                     var track = Current.Stations[s].Tracks[t];
-                    var trackNumber = Current.TrackNumberOffset(AxisDirection, s, t);
+                    var trackNumber = Current.TrackNumberOffset(s, t);
                     <text>
-                        <text class="@AxisDirection.OrientationCss("number")" x="@trackNumber.X" y="@trackNumber.Y">@track.Number</text>
+                        <text class="@Current.AxisDirection.OrientationCss("number")" x="@trackNumber.X" y="@trackNumber.Y">@track.Number</text>
                     </text>
-                    var trackLine = Current.TrackLine(AxisDirection, s, t);
+                    var trackLine = Current.TrackLine(s, t);
                     <line stroke="@TrackStroke(track)" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
                 }
             }
@@ -55,16 +68,15 @@ else
                     var track = station.Tracks[t];
                     @foreach (var stationCall in Current.Trains.SelectMany(t => t.Calls.Where(c => track.Equals(c.Track) && station.Equals(c.Track.Station))))
                     {
-                        var trackLine = Current.TrainAtStationLine(AxisDirection, s, t, stationCall);
+                        var trackLine = Current.TrainAtStationLine(s, t, stationCall);
                         <line stroke=@stationCall.Train?.Colour stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
                     }
                 }
             }
 
-            @for (var s = 1; s < Current.Stations.Length; s++)
+            @for (var toStationIndex = 1; toStationIndex < Current.Stations.Length; toStationIndex++)
             {
-                var fromStationIndex = s - 1;
-                var toStationIndex = s;
+                var fromStationIndex = toStationIndex - 1;
                 var fromStation = Current.Stations[fromStationIndex];
                 var toStation = Current.Stations[toStationIndex];
 
@@ -77,47 +89,77 @@ else
 
                         @foreach (var stretch in Current.Trains.SelectMany(t => t.StretchUses().Where(c => fromStation.Equals(c.From.Track.Station) && c.From.Track.Equals(fromTrack) && toStation.Equals(c.To.Track.Station) && c.To.Track.Equals(toTrack))))
                         {
-                            var trackLine = Current.TrainBetweenStationsLine(AxisDirection, fromStationIndex, fromTrackIndex, toStationIndex, toTrackIndex, stretch.From.Departure, stretch.To.Arrival);
+                            var trackLine = Current.TrainBetweenStationsLine(fromStationIndex, fromTrackIndex, toStationIndex, toTrackIndex, stretch.From.Departure, stretch.To.Arrival);
                             <line stroke=@stretch.Train.Colour stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
-                            var departure = Current.DepartureMinuteUnder(AxisDirection, fromStationIndex, fromTrackIndex, stretch.From);
-                            <text>
-                                <text class="@AxisDirection.OrientationCss("minute")" x="@departure.X" y="@departure.Y">@stretch.From.Departure.Minutes()</text>
-                            </text>
-                            var arrival = Current.ArrivalMinuteOver(AxisDirection, toStationIndex, stretch.To);
-                            <text>
-                                <text class="@AxisDirection.OrientationCss("minute")" x="@arrival.X" y="@arrival.Y">@stretch.To.Arrival.Minutes()</text>
-                            </text>
                         }
                     }
                 }
             }
 
-            @for (var s = Current.Stations.Length - 1; s > 0; s--)
+            @for (var fromStationIndex = Current.Stations.Length - 1; fromStationIndex > 0; fromStationIndex--)
             {
-                var fromStationIndex = s;
-                var toStationIndex = s - 1;
+                var toStationIndex = fromStationIndex - 1;
                 var fromStation = Current.Stations[fromStationIndex];
                 var toStation = Current.Stations[toStationIndex];
 
-                @for (var t1 = 0; t1 < fromStation.Tracks.Length; t1++)
+                @for (var fromTrackIndex = 0; fromTrackIndex < fromStation.Tracks.Length; fromTrackIndex++)
                 {
-                    var fromTrack = fromStation.Tracks[t1];
-                    for (var t2 = 0; t2 < toStation.Tracks.Length; t2++)
+                    var fromTrack = fromStation.Tracks[fromTrackIndex];
+                    for (var toTrackIndex = 0; toTrackIndex < toStation.Tracks.Length; toTrackIndex++)
                     {
-                        var toTrack = toStation.Tracks[t2];
+                        var toTrack = toStation.Tracks[toTrackIndex];
 
                         @foreach (var stretch in Current.Trains.SelectMany(t => t.StretchUses().Where(c => fromStation.Equals(c.From.Track.Station) && c.From.Track.Equals(fromTrack) && toStation.Equals(c.To.Track.Station) && c.To.Track.Equals(toTrack))))
                         {
-                            var trackLine = Current.TrainBetweenStationsLine(AxisDirection, s, t1, s - 1, t2, stretch.From.Departure, stretch.To.Arrival);
+                            var trackLine = Current.TrainBetweenStationsLine(fromStationIndex, fromTrackIndex, toStationIndex, toTrackIndex, stretch.From.Departure, stretch.To.Arrival);
                             <line stroke=@stretch.Train.Colour stroke-width="@TrainStrokeWidth" x1="@trackLine.Start.X" y1="@trackLine.Start.Y" x2="@trackLine.End.X" y2="@trackLine.End.Y"></line>
-                            var departure = Current.DepartureMinuteOver(AxisDirection, fromStationIndex, stretch.From);
-                            <text>
-                                <text class="@AxisDirection.OrientationCss("minute")" x="@departure.X" y="@departure.Y">@stretch.From.Departure.Minutes()</text>
-                            </text>
-                            var arrival = Current.ArrivalMinuteUnder(AxisDirection, toStationIndex, t2, stretch.To);
-                            <text>
-                                <text class="@AxisDirection.OrientationCss("minute")" x="@arrival.X" y="@arrival.Y">@stretch.To.Arrival.Minutes()</text>
-                            </text>
+                            var departure = Current.DepartureMinuteOver(fromStationIndex, stretch.From);
+                            @if (Current.GraphSettings.ShowDepartureMinutes)
+                            {
+                                <text>
+                                    <text filter="url(#solid)" class="@Current.AxisDirection.OrientationCss("minute")" x="@departure.X" y="@departure.Y">@stretch.From.Departure.Minutes()</text>
+                                </text>
+                            }
+                            @if (Current.GraphSettings.ShowArrivalMinutes)
+                            {
+                                var arrival = Current.ArrivalMinuteUnder(toStationIndex, toTrackIndex, stretch.To);
+                                <text>
+                                    <text filter="url(#solid)" class="@Current.AxisDirection.OrientationCss("minute")" x="@arrival.X" y="@arrival.Y">@stretch.To.Arrival.Minutes()</text>
+                                </text>
+                            }
+                        }
+                    }
+                }
+            }
+            @for (var toStationIndex = 1; toStationIndex < Current.Stations.Length; toStationIndex++)
+            {
+                var fromStationIndex = toStationIndex - 1;
+                var fromStation = Current.Stations[fromStationIndex];
+                var toStation = Current.Stations[toStationIndex];
+
+                @for (var fromTrackIndex = 0; fromTrackIndex < Current.Stations[fromStationIndex].Tracks.Length; fromTrackIndex++)
+                {
+                    var fromTrack = Current.Stations[fromStationIndex].Tracks[fromTrackIndex];
+                    for (var toTrackIndex = 0; toTrackIndex < Current.Stations[toStationIndex].Tracks.Length; toTrackIndex++)
+                    {
+                        var toTrack = Current.Stations[toStationIndex].Tracks[toTrackIndex];
+
+                        @foreach (var stretch in Current.Trains.SelectMany(t => t.StretchUses().Where(c => fromStation.Equals(c.From.Track.Station) && c.From.Track.Equals(fromTrack) && toStation.Equals(c.To.Track.Station) && c.To.Track.Equals(toTrack))))
+                        {
+                            var departure = Current.DepartureMinuteUnder(fromStationIndex, fromTrackIndex, stretch.From);
+                            @if (Current.GraphSettings.ShowDepartureMinutes)
+                            {
+                                <text>
+                                    <text filter="url(#solid)" class="@Current.AxisDirection.OrientationCss("minute")" x="@departure.X" y="@departure.Y">@stretch.From.Departure.Minutes()</text>
+                                </text>
+                            }
+                            @if (Current.GraphSettings.ShowArrivalMinutes)
+                            {
+                                var arrival = Current.ArrivalMinuteOver(toStationIndex, stretch.To);
+                                <text>
+                                    <text filter="url(#solid)" class="@Current.AxisDirection.OrientationCss("minute")" x="@arrival.X" y="@arrival.Y">@stretch.To.Arrival.Minutes()</text>
+                                </text>
+                            }
                         }
                     }
                 }
@@ -153,15 +195,25 @@ else
     void ToggleAxis()
     {
         ShowVertical = !ShowVertical;
+        if (Current is not null) Current.GraphSettings.AxisDirection = ShowVertical ? TimeAxisDirection.Vertical : TimeAxisDirection.Horisontal;
     }
 
-    TimeAxisDirection AxisDirection => ShowVertical ? TimeAxisDirection.Vertical : TimeAxisDirection.Horisontal;
+    void ToggleDepartureMinutes()
+    {
+        if (Current is not null) Current.GraphSettings.ShowDepartureMinutes = !Current.GraphSettings.ShowDepartureMinutes;
+    }
+    void ToggleArrivalMinutes()
+    {
+        if (Current is not null) Current.GraphSettings.ShowArrivalMinutes = !Current.GraphSettings.ShowArrivalMinutes;
+    }
 
     List<(MouseEventArgs Args, string Type)> Events = new List<(MouseEventArgs, string)>();
 
     protected override void OnParametersSet()
     {
         Current = TimetableStretches?.FirstOrDefault();
+        Current.GraphSettings.ShowArrivalMinutes = false;
+        Current.GraphSettings.ShowDepartureMinutes = false;
     }
 
     void OnClick(MouseEventArgs e)

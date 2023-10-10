@@ -1,4 +1,9 @@
 # Release Notes
+## Release 0.0.8
+- **XPLN Import** bugfix of error messages.
+## Release 0.0.7
+- **Graphical timetable** now shows trains, and options to show arrival and/or departure minutes.
+
 ## Release 0.0.6
 - **XPLN Validation** now also checks scheduling comflicts.
 
