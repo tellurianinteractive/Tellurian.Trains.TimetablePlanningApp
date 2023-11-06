@@ -1,24 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using TimetablePlanning.Models.CallNotes.Services;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;
 
 [TestClass]
-public class ScheduledWagonsConnectNoteTests {
-
-    private CallNotesService? CallNotesService;
-
-    [TestInitialize]
-    public void TestInitialize()
-    {
-        TestHelpers.SetTestLanguage();
-        CallNotesService = new CallNotesService(new TestCallEventsService());
-    }
-
-    private async Task<IEnumerable<TrainCallNote>> Notes(int testCase) =>
-        await CallNotesService!.GetCallNotesAsync(testCase).ConfigureAwait(false);
-
-
+public class ScheduledWagonsConnectNoteTests : NoteTestsBase
+{
     [TestMethod]
     public async Task SingleWagonNote()
     {

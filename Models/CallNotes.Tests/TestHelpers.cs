@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;
-internal class TestHelpers
+internal static class TestHelpers
 {
-    public static void SetTestLanguage(string language = "en-GB")
+    public static void IsTestLanguage(this string language)
     {
         var culture = new CultureInfo(language);
         Thread.CurrentThread.CurrentCulture = culture;

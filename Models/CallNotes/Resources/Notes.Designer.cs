@@ -187,6 +187,15 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Turn and circulate loco..
+        /// </summary>
+        internal static string TurnAndReverseLoco {
+            get {
+                return ResourceManager.GetString("TurnAndReverseLoco", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Turn loco..
         /// </summary>
         internal static string TurnLoco {

@@ -8,7 +8,7 @@ namespace TimetablePlanning.Models.CallNotes.Tests;
 /// This service creates test data for the tests in this assembly.
 /// The layoutId corresponds to a test case.
 /// </summary>
-internal class TestCallEventsService : ICallNoteRecordsService
+internal class TestCallNoteRecordsService : ICallNoteRecordsService
 {
 
     public Task<IEnumerable<LocoConnectRecord>> GetLocoConnectRecordsAsync(int layoutId)
@@ -91,74 +91,63 @@ internal class TestCallEventsService : ICallNoteRecordsService
                 LocoOperatingDaysFlags = 0b00010101,
                 TrainOperatingDaysFlags = OperationDayFlags.Daily,
                 DutyOperatingDaysFlags = 0b00010101,
-                DriveToStagingArea = true
-            }.AsEnumerable(),
-            24 => new LocoDisconnectRecord()
-            {
-                LocoOperatorSignature = "SJ",
-                CallId = 25,
-                LocoClass = "T44",
-                LocoNumber = "236",
-                TurnusNumber = 8,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                TurnLoco = true
-            }.AsEnumerable(),
-            25 => new LocoDisconnectRecord()
-            {
-                LocoOperatorSignature = "SJ",
-                CallId = 25,
-                LocoClass = "T44",
-                LocoNumber = "236",
-                TurnusNumber = 8,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                CirculateLoco = true
-            }.AsEnumerable(),
-            26 => new LocoDisconnectRecord()
-            {
-                LocoOperatorSignature = "SJ",
-                CallId = 25,
-                LocoClass = "T44",
-                LocoNumber = "236",
-                TurnusNumber = 8,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                CirculateLoco = true,
-                TurnLoco = true,
-            }.AsEnumerable(),
-            27 => new LocoDisconnectRecord()
-            {
-                LocoOperatorSignature = "SJ",
-                CallId = 25,
-                LocoClass = "T44",
-                LocoNumber = "236",
-                TurnusNumber = 8,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                DriveToStagingArea = true,
-                TurnLoco = true,
-            }.AsEnumerable(),
-            28 => new LocoDisconnectRecord()
-            {
-                LocoOperatorSignature = "SJ",
-                CallId = 25,
-                LocoClass = "T44",
-                LocoNumber = "236",
-                TurnusNumber = 8,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                DriveToStagingArea = true,
-                TurnLoco = true,
-                CirculateLoco = true,
             }.AsEnumerable(),
             _ => Enumerable.Empty<LocoDisconnectRecord>(),
         };
+    }
+
+    public Task<IEnumerable<LocoTurnOrCirculateRecord>> GetLocoTurnOrCirculateRecordsAsync(int layoutId)
+    {
+        return Task.FromResult(Data(layoutId));
+
+        static IEnumerable<LocoTurnOrCirculateRecord> Data(int layoutId) => layoutId switch
+        {
+            24 => new LocoTurnOrCirculateRecord()
+            {
+                CallId = 25,
+                LocoOperatingDaysFlags = OperationDayFlags.Daily,
+                TrainOperatingDaysFlags = OperationDayFlags.Daily,
+                DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                CirculateLoco = true,
+            }.AsEnumerable(),
+            25 => new LocoTurnOrCirculateRecord()
+            {
+                CallId = 25,
+                LocoOperatingDaysFlags = OperationDayFlags.Daily,
+                TrainOperatingDaysFlags = OperationDayFlags.Daily,
+                DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                TurnLoco = true,
+            }.AsEnumerable(),
+            26 => new LocoTurnOrCirculateRecord()
+            {
+                CallId = 25,
+                LocoOperatingDaysFlags = OperationDayFlags.Daily,
+                TrainOperatingDaysFlags = OperationDayFlags.Daily,
+                DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                TurnLoco = true,
+                CirculateLoco = true,
+            }.AsEnumerable(),
+            27 => new LocoTurnOrCirculateRecord()
+            {
+                CallId = 25,
+                LocoOperatingDaysFlags = OperationDayFlags.Daily,
+                TrainOperatingDaysFlags = OperationDayFlags.Daily,
+                DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                CirculateLoco = true,
+                IsDoubleDirection = true
+            }.AsEnumerable(),
+            28 => new LocoTurnOrCirculateRecord()
+            {
+                CallId = 25,
+                LocoOperatingDaysFlags = OperationDayFlags.Daily,
+                TrainOperatingDaysFlags = OperationDayFlags.Daily,
+                DutyOperatingDaysFlags = OperationDayFlags.MoWeFr,
+                TurnLoco = true,
+                CirculateLoco= true,
+            }.AsEnumerable(),
+            _ => Enumerable.Empty<LocoTurnOrCirculateRecord>(),
+        };
+
     }
     public Task<IEnumerable<LocoExchangeRecord>> GetLocoExchangeRecordsAsync(int layoutId)
     {
@@ -240,6 +229,53 @@ internal class TestCallEventsService : ICallNoteRecordsService
                 PositionInTrain = 1,
             }.AsEnumerable(),
             _ => Enumerable.Empty<ScheduledWagonsDisconnectRecord>(),
+        };
+    }
+
+    public Task<IEnumerable<ManualNoteRecord>> GetManualNoteRecordsAsync(int layoutId)
+    {
+        return Task.FromResult(Data(layoutId));
+
+        static IEnumerable<ManualNoteRecord> Data(int layoutId) => layoutId switch
+        {
+            61 => new ManualNoteRecord()
+            {
+                CallId = 1,
+                DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                TrainOperatingDaysFlags = OperationDayFlags.Daily,
+                DisplayedDaysFlag = OperationDayFlags.Daily,
+                TwoLetterIsoLanguageName = "sv",
+                Text = "Manuell not på svenska.",
+                IsForDeparture = true,
+                IsToLocoDriver = true,
+
+            }.AsEnumerable(),
+            62 => new ManualNoteRecord[]
+            {
+                new ()
+                {
+                    CallId = 2,
+                    DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                    TrainOperatingDaysFlags = OperationDayFlags.Daily,
+                    DisplayedDaysFlag = OperationDayFlags.Daily,
+                    TwoLetterIsoLanguageName = "en",
+                    Text = "Manual note in english.",
+                    IsForDeparture = true,
+                    IsToLocoDriver = true,
+                },
+                new ()
+                {
+                    CallId = 2,
+                    DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                    TrainOperatingDaysFlags = OperationDayFlags.Daily,
+                    DisplayedDaysFlag = OperationDayFlags.Daily,
+                    TwoLetterIsoLanguageName = "sv",
+                    Text = "Manuell not på svenska.",
+                    IsForDeparture = true,
+                    IsToLocoDriver = true,
+                }
+            },
+            _ => Enumerable.Empty<ManualNoteRecord>(),
         };
     }
 

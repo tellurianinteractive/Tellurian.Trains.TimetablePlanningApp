@@ -168,4 +168,7 @@
   <data name="Wagons" xml:space="preserve">
     <value>vogner</value>
   </data>
+  <data name="TurnAndReverseLoco" xml:space="preserve">
+    <value>Snu og omløp lok.</value>
+  </data>
 </root>

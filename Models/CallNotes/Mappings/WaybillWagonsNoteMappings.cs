@@ -4,11 +4,7 @@ using TimetablePlanning.Models.Common;
 namespace TimetablePlanning.Models.CallNotes.Mappings;
 
 internal static class WaybillWagonsNoteMappings
-{
-
-    //private const string DefaultDestinationBackColor = "#C0C0C0";
-
-    public static IEnumerable<WagonGroupConnectNote> ToWagonGroupsConnectNotes(this IEnumerable<WagonGroupConnectRecord> records) =>
+{    public static IEnumerable<WagonGroupConnectNote> ToWagonGroupsConnectNotes(this IEnumerable<WagonGroupConnectRecord> records) =>
         records.GroupBy(e => e.CallId).Select(g => g.ToWagonGroupConnectNote());
 
 
@@ -33,7 +29,4 @@ internal static class WaybillWagonsNoteMappings
             GroupsDestinations = records.Select(r => r.ToGroupDestination()),
 
         };
-
-
-
 }

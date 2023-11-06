@@ -5,58 +5,69 @@ namespace TimetablePlanning.Models.CallNotes.Mappings;
 
 internal static class LocoCallNoteMappings
 {
-    public static IEnumerable<LocoConnectNote> ToLocoConnectNotes(this IEnumerable<LocoConnectRecord> events) =>
-        events.Select(e => e.ToLocoConnectioNote());
+    public static IEnumerable<LocoConnectNote> ToLocoConnectNotes(this IEnumerable<LocoConnectRecord> records) =>
+        records.Select(e => e.ToLocoConnectioNote());
 
-    public static LocoConnectNote ToLocoConnectioNote(this LocoConnectRecord e) =>
+    public static LocoConnectNote ToLocoConnectioNote(this LocoConnectRecord record) =>
         new()
         {
-            ForCallId = e.CallId,
-            LocoInfo = e.ToLocoInfo(),
-            TrainOperationDays = e.TrainOperatingDaysFlags.ToOperationDays(),
-            DutyOperationDays = e.DutyOperatingDaysFlags.ToOperationDays(),
-            LocoOperationDays = e.LocoOperatingDaysFlags.ToOperationDays(),
-            CollectFromStagingArea = e.CollectFromStagingArea,
+            ForCallId = record.CallId,
+            LocoInfo = record.ToLocoInfo(),
+            TrainOperationDays = record.TrainOperatingDaysFlags.ToOperationDays(),
+            DutyOperationDays = record.DutyOperatingDaysFlags.ToOperationDays(),
+            LocoOperationDays = record.LocoOperatingDaysFlags.ToOperationDays(),
+            CollectFromStagingArea = record.CollectFromStagingArea,
         };
 
-    public static IEnumerable<LocoDisconnectNote> ToLocoDisconnectNotes(this IEnumerable<LocoDisconnectRecord> events) =>
-        events.Select(ld => ld.ToLocoDisconnectNote());
+    public static IEnumerable<LocoDisconnectNote> ToLocoDisconnectNotes(this IEnumerable<LocoDisconnectRecord> records) =>
+        records.Select(ld => ld.ToLocoDisconnectNote());
 
-    public static LocoDisconnectNote ToLocoDisconnectNote(this LocoDisconnectRecord e) =>
+    public static LocoDisconnectNote ToLocoDisconnectNote(this LocoDisconnectRecord record) =>
          new()
          {
-             ForCallId = e.CallId,
-             LocoInfo = e.ToLocoInfo(),
-             TrainOperationDays = e.TrainOperatingDaysFlags.ToOperationDays(),
-             DutyOperationDays = e.DutyOperatingDaysFlags.ToOperationDays(),
-             LocoOperationDays = e.LocoOperatingDaysFlags.ToOperationDays(),
-             DriveToStagingArea = e.DriveToStagingArea,
-             CirculateLoco = e.CirculateLoco,
-             TurnLoco = e.TurnLoco,
+             ForCallId = record.CallId,
+             LocoInfo = record.ToLocoInfo(),
+             TrainOperationDays = record.TrainOperatingDaysFlags.ToOperationDays(),
+             DutyOperationDays = record.DutyOperatingDaysFlags.ToOperationDays(),
+             LocoOperationDays = record.LocoOperatingDaysFlags.ToOperationDays(),
+             DriveToStagingArea = record.DriveToStagingArea,
          };
-    public static IEnumerable<LocoExchangeNote> ToLocoExchangeNotes(this IEnumerable<LocoExchangeRecord> events) =>
-        events.Select(e => e.ToLocoExchangeNote());
+    public static IEnumerable<LocoExchangeNote> ToLocoExchangeNotes(this IEnumerable<LocoExchangeRecord> records) =>
+        records.Select(e => e.ToLocoExchangeNote());
 
-    public static LocoExchangeNote ToLocoExchangeNote(this LocoExchangeRecord e)
+    public static LocoExchangeNote ToLocoExchangeNote(this LocoExchangeRecord record)
     {
         return new()
         {
-            ForCallId = e.CallId,
-            DutyOperationDays = e.DutyOperatingDaysFlags.ToOperationDays(),
-            TrainOperationDays = e.TrainOperatingDaysFlags.ToOperationDays(),
-            LocoOperationDays = e.LocoOperatingDaysFlags.ToOperationDays(),
-            ReplacingLocoOperationDays = e.ReplacingLocoOperatingDaysFlags.ToOperationDays(),
+            ForCallId = record.CallId,
+            DutyOperationDays = record.DutyOperatingDaysFlags.ToOperationDays(),
+            TrainOperationDays = record.TrainOperatingDaysFlags.ToOperationDays(),
+            LocoOperationDays = record.LocoOperatingDaysFlags.ToOperationDays(),
+            ReplacingLocoOperationDays = record.ReplacingLocoOperatingDaysFlags.ToOperationDays(),
         };
     }
 
-    private static LocoInfo ToLocoInfo(this LocoRecord e) =>
+    public static IEnumerable<LocoTurnOrCirculateCallNote> ToLocoTurnOrCirculateCallNotes(this IEnumerable<LocoTurnOrCirculateRecord> records) =>
+        records.Where(r => !r.IsDoubleDirection).Select(r => r.ToLocoTurnOrCirculateCallNote());
+    public static LocoTurnOrCirculateCallNote ToLocoTurnOrCirculateCallNote(this LocoTurnOrCirculateRecord record) =>
         new()
         {
-            Class = e.LocoClass,
-            OperatorSignature = e.LocoOperatorSignature,
-            LocoNumber = e.LocoNumber ?? string.Empty,
-            TurnusNumber = e.TurnusNumber,
-            IsDoubleDirectionTrain = e.IsDoubleDirectionTrain
+            ForCallId = record.CallId,
+            DutyOperationDays = record.DutyOperatingDaysFlags.ToOperationDays(),
+            TrainOperationDays = record.TrainOperatingDaysFlags.ToOperationDays(),
+            LocoOperationDays = record.LocoOperatingDaysFlags.ToOperationDays(),
+            CirculateLoco = record.CirculateLoco,
+            TurnLoco = record.TurnLoco,
+        };
+
+    private static LocoInfo ToLocoInfo(this LocoRecord record) =>
+        new()
+        {
+            Class = record.LocoClass,
+            OperatorSignature = record.LocoOperatorSignature,
+            LocoNumber = record.LocoNumber ?? string.Empty,
+            TurnusNumber = record.TurnusNumber,
+            IsDoubleDirectionTrain = record.IsDoubleDirectionTrain
         };
 }
 

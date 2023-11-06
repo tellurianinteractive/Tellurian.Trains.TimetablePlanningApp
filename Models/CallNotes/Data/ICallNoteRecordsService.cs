@@ -9,10 +9,12 @@ public interface ICallNoteRecordsService {
     Task<IEnumerable<LocoConnectRecord>> GetLocoConnectRecordsAsync(int layoutId);
     Task<IEnumerable<LocoDisconnectRecord>> GetLocoDisconnectRecordsAsync(int layoutId);
     Task<IEnumerable<LocoExchangeRecord>> GetLocoExchangeRecordsAsync(int layoutId);
+    Task<IEnumerable<ManualNoteRecord>> GetManualNoteRecordsAsync(int layoutId);
     Task<IEnumerable<ScheduledWagonsConnectRecord>> GetScheduledWagonsConnectRecordsAsync(int layoutId);
     Task<IEnumerable<ScheduledWagonsDisconnectRecord>> GetScheduledWagonsDisconnectRecordsAsync(int layoutId);
     Task<IEnumerable<TrainMeetRecord>> GetTrainMeetRecordsAsync(int layoutId);
     Task<IEnumerable<WagonGroupConnectRecord>> GetWagonGroupsConnectRecordsAsync(int layoutId);
     Task<IEnumerable<WagonGroupDisconnectRecord>> GetWagonGroupsDisconnectRecordsAsync(int layoutId);
+    Task<IEnumerable<LocoTurnOrCirculateRecord>> GetLocoTurnOrCirculateRecordsAsync(int layoutId);
 
 }

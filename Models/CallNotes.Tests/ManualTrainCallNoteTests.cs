@@ -1,21 +1,58 @@
-﻿using TimetablePlanning.Models.Common;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;
 
 [TestClass]
-public class ManualTrainCallNoteTests
+public class ManualTrainCallNoteTests : NoteTestsBase
 {
     [TestMethod]
-    public void WhenNoTextAddedReturnsEnptyString()
+    public async Task SingleTextNote()
     {
-        var target = new ManualTrainCallNote()
-        {
-            DutyOperationDays = OperationDays.Daily,
-            TrainOperationDays = OperationDays.Daily,
-            IsForArrival = true,
-            IsToLocoDriver = true,
-        };
+        var notes = await Notes(61);
+        const string expected =
+            """
 
-        Assert.AreEqual(string.Empty, target.Markup().ToString());
+            <div class="callnote"><span class="callnote text">Manuell not på svenska.</span></div>
+            """;
+        Assert.AreEqual(new MarkupString(expected), notes.First().Markup());
+
+    }
+
+    [TestMethod]
+    public async Task SingleTextNoteWithTranslationsDefault()
+    {
+        var notes = await Notes(62);
+        const string expected =
+            """
+
+            <div class="callnote"><span class="callnote text">Manual note in english.</span></div>
+            """;
+        Assert.AreEqual(new MarkupString(expected), notes.First().Markup());
+    }
+
+    [TestMethod]
+    public async Task SingleTextNoteWithTranslationsSwedish()
+    {
+       "sv-SE".IsTestLanguage();
+        var notes = await Notes(62);
+        const string expected =
+            """
+
+            <div class="callnote"><span class="callnote text">Manuell not på svenska.</span></div>
+            """;
+        Assert.AreEqual(new MarkupString(expected), notes.First().Markup());
+    }
+
+    [TestMethod]
+    public async Task SingleTextNoteWithTranslationsDanishMissing()
+    {
+        "da-DK".IsTestLanguage();
+        var notes = await Notes(62);
+        const string expected =
+            """
+
+            <div class="callnote"><span class="callnote text">Manual note in english.</span></div>
+            """;
+        Assert.AreEqual(new MarkupString(expected), notes.First().Markup());
     }
 }

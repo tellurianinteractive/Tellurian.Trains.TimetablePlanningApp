@@ -6,32 +6,32 @@ namespace TimetablePlanning.Models.CallNotes.Mappings;
 internal static class TrainMeetNoteMappings
 {
 
-    public static IEnumerable<TrainCallMeetNote> ToTrainMeetNotes(this IEnumerable<TrainMeetRecord> events) =>
-        events.Select(e => e.ToTrainMeetNote());
+    public static IEnumerable<TrainCallMeetNote> ToTrainMeetNotes(this IEnumerable<TrainMeetRecord> records) =>
+        records.Select(e => e.ToTrainMeetNote());
 
-    public static TrainCallMeetNote ToTrainMeetNote(this TrainMeetRecord e) =>
+    public static TrainCallMeetNote ToTrainMeetNote(this TrainMeetRecord record) =>
         new()
         {
-            ForCallId = e.CallId,
-            TrainNumber = e.TrainNumber,
+            ForCallId = record.CallId,
+            TrainNumber = record.TrainNumber,
             TrainCall = new()
             {
-                ArrivalTime = e.TrainArrivalTime,
-                DepartureTime = e.TrainDepartureTime
+                ArrivalTime = record.TrainArrivalTime,
+                DepartureTime = record.TrainDepartureTime
             },
-            DutyOperationDays = e.DutyOperatingDaysFlags.ToOperationDays(),
-            TrainOperationDays = e.TrainOperatingDaysFlags.ToOperationDays(),
+            DutyOperationDays = record.DutyOperatingDaysFlags.ToOperationDays(),
+            TrainOperationDays = record.TrainOperatingDaysFlags.ToOperationDays(),
             MeetingTrain = new()
             {
-                Number = e.MeetingTrainNumber,
-                Prefix = e.MeetingTrainPrefix,
-                OperatorSignature = e.MeetingTrainOperatorSignature,
-                OperationDays = e.MeetingTrainOperatingDaysFlags.ToOperationDays(),
+                Number = record.MeetingTrainNumber,
+                Prefix = record.MeetingTrainPrefix,
+                OperatorSignature = record.MeetingTrainOperatorSignature,
+                OperationDays = record.MeetingTrainOperatingDaysFlags.ToOperationDays(),
             },
             MeetingTrainCall = new()
             {
-                ArrivalTime = e.MeetingTrainArrivalTime,
-                DepartureTime = e.MeetingDepartureTime
+                ArrivalTime = record.MeetingTrainArrivalTime,
+                DepartureTime = record.MeetingDepartureTime
             }
         };
 }

@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.33.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.11" />
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.13" />
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
     <PackageReference Include="TimetablePlanning.Importers.Interfaces" Version="1.0.9" />
   </ItemGroup>

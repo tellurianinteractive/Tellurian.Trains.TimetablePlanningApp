@@ -160,12 +160,15 @@
     <value>Passerar</value>
   </data>
   <data name="TurnLoco" xml:space="preserve">
-    <value>Drej lokomotiv.</value>
+    <value>Vend lokomotiv.</value>
   </data>
   <data name="Turnus" xml:space="preserve">
     <value>omløb</value>
   </data>
   <data name="Wagons" xml:space="preserve">
     <value>vogne</value>
+  </data>
+  <data name="TurnAndReverseLoco" xml:space="preserve">
+    <value>Vend og omløb lokomotiv.</value>
   </data>
 </root>

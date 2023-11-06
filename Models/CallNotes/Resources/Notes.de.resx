@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CirculateLoco" xml:space="preserve">
-    <value>Lokomotive zirkulieren.</value>
+    <value>Lok umkehren.</value>
   </data>
   <data name="CollectLocoFromStagingArea" xml:space="preserve">
-    <value>Lokomotiv aus dem Bereitstellungsbereich holen.</value>
+    <value>Lok aus dem Bereitstellungsbereich holen.</value>
   </data>
   <data name="ConnectLoco" xml:space="preserve">
-    <value>Lokomotiv anschließen</value>
+    <value>Lok anschließen</value>
   </data>
   <data name="ConnectWagonGroups" xml:space="preserve">
     <value>Wagengruppen anschließen</value>
@@ -133,7 +133,7 @@
     <value>Wagen anschließen nach</value>
   </data>
   <data name="DisconnectLoco" xml:space="preserve">
-    <value>Lokomotiv trennen</value>
+    <value>Lok trennen</value>
   </data>
   <data name="DisconnectWagonGroups" xml:space="preserve">
     <value>Wagengruppen trennen</value>
@@ -142,7 +142,7 @@
     <value>Wagen trennen nach</value>
   </data>
   <data name="DriveToStagingArea" xml:space="preserve">
-    <value>Lokomotive zum Bereitstellungsbereich fahren.</value>
+    <value>Lok zum Bereitstellungsbereich fahren.</value>
   </data>
   <data name="From" xml:space="preserve">
     <value>aus</value>
@@ -167,5 +167,8 @@
   </data>
   <data name="Wagons" xml:space="preserve">
     <value>Wagen</value>
+  </data>
+  <data name="TurnAndReverseLoco" xml:space="preserve">
+    <value>Lok drehen und umkehren.</value>
   </data>
 </root>

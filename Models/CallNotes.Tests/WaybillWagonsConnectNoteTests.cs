@@ -1,25 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
-using TimetablePlanning.Models.CallNotes.Services;
 
 namespace TimetablePlanning.Models.CallNotes.Tests;
 
 [TestClass]
-public class WaybillWagonsConnectNoteTests {
-
-    private CallNotesService? CallNotesService;
-
-    [TestInitialize]
-    public void TestInitialize()
-    {
-        TestHelpers.SetTestLanguage();
-        CallNotesService = new CallNotesService(new TestCallEventsService());
-    }
-
-    private async Task<IEnumerable<TrainCallNote>> Notes(int testCase) =>
-        await CallNotesService!.GetCallNotesAsync(testCase).ConfigureAwait(false);
-
-
-
+public class WaybillWagonsConnectNoteTests: NoteTestsBase
+{
     [TestMethod]
     public async Task SingleNote()
     {
@@ -64,14 +49,5 @@ public class WaybillWagonsConnectNoteTests {
             <div class="callnote item"><span class="callnote days">Mo,We,Fr: </span><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
-    }
-
-    private void Compare(string one, string another)
-    {
-        //Assert.AreEqual(one.Length, another.Length, "Differts in length");
-        for (int i = 0; i < one.Length; i++)
-        {
-            Assert.AreEqual(one[i], another[i], $"{one[i]} differts from {another[i]} at position {i}");
-        }
     }
 }

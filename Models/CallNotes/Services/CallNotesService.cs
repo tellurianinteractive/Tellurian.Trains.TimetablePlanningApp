@@ -1,5 +1,9 @@
-﻿using TimetablePlanning.Models.CallNotes.Data;
+﻿using System.Runtime.CompilerServices;
+using TimetablePlanning.Models.CallNotes.Data;
 using TimetablePlanning.Models.CallNotes.Mappings;
+
+[assembly:InternalsVisibleTo("TimetablePlanning.Models.CallNotes.Tests")]
+
 
 namespace TimetablePlanning.Models.CallNotes.Services;
 
@@ -26,6 +30,8 @@ public class CallNotesService(ICallNoteRecordsService callEventsService, int exp
         result.AddRange((await CallEventsService.GetLocoConnectRecordsAsync(layoutId)).ToLocoConnectNotes());
         result.AddRange((await CallEventsService.GetLocoDisconnectRecordsAsync(layoutId)).ToLocoDisconnectNotes());
         result.AddRange((await CallEventsService.GetLocoExchangeRecordsAsync(layoutId)).ToLocoExchangeNotes());
+        result.AddRange((await CallEventsService.GetLocoTurnOrCirculateRecordsAsync(layoutId)).ToLocoTurnOrCirculateCallNotes());
+        result.AddRange((await CallEventsService.GetManualNoteRecordsAsync(layoutId)).ToManualTrainCallNotes());
         result.AddRange((await CallEventsService.GetScheduledWagonsConnectRecordsAsync(layoutId)).ToScheduledWagonsConnectNotes());
         result.AddRange((await CallEventsService.GetScheduledWagonsDisconnectRecordsAsync(layoutId)).ToScheduledWagonsDisconnectNotes());
         result.AddRange((await CallEventsService.GetTrainMeetRecordsAsync(layoutId)).ToTrainMeetNotes());

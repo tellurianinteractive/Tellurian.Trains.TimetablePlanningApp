@@ -18,11 +18,18 @@ public sealed class LocoDisconnectRecord
     : LocoRecord
 {
     public bool DriveToStagingArea { get; init; }
-    public bool CirculateLoco { get; init; }
-    public bool TurnLoco { get; init; }
 }
 
 public sealed class LocoExchangeRecord : LocoRecord
 {
     public required byte ReplacingLocoOperatingDaysFlags { get; init; }
+}
+
+public sealed class LocoTurnOrCirculateRecord : NoteRecord
+{
+    public required byte LocoOperatingDaysFlags { get; init; }
+    public bool IsDoubleDirection { get; init; }
+    public bool CirculateLoco { get; init; }
+    public bool TurnLoco { get; init; }
+
 }
