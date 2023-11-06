@@ -8,15 +8,16 @@ namespace TimetablePlanning.Models.CallNotes.Tests;
 /// This service creates test data for the tests in this assembly.
 /// The layoutId corresponds to a test case.
 /// </summary>
-internal class TestCallEventsService : ICallEventsService {
+internal class TestCallEventsService : ICallNoteRecordsService
+{
 
-    public Task<IEnumerable<LocoConnectEvent>> GetLocoConnectEventsAsync(int layoutId)
+    public Task<IEnumerable<LocoConnectRecord>> GetLocoConnectRecordsAsync(int layoutId)
     {
         return Task.FromResult(Data(layoutId));
 
-        static IEnumerable<LocoConnectEvent> Data(int layoutId) => layoutId switch
+        static IEnumerable<LocoConnectRecord> Data(int layoutId) => layoutId switch
         {
-            11 => new LocoConnectEvent()
+            11 => new LocoConnectRecord()
             {
                 CallId = 24,
                 LocoOperatorSignature = "SJ",
@@ -27,7 +28,7 @@ internal class TestCallEventsService : ICallEventsService {
                 TrainOperatingDaysFlags = OperationDayFlags.Daily,
                 DutyOperatingDaysFlags = OperationDayFlags.Daily
             }.AsEnumerable(),
-            12 => new LocoConnectEvent()
+            12 => new LocoConnectRecord()
             {
                 CallId = 24,
                 LocoOperatorSignature = "SJ",
@@ -38,7 +39,7 @@ internal class TestCallEventsService : ICallEventsService {
                 TrainOperatingDaysFlags = OperationDayFlags.Daily,
                 DutyOperatingDaysFlags = OperationDayFlags.Daily
             }.AsEnumerable(),
-            13 => new LocoConnectEvent()
+            13 => new LocoConnectRecord()
             {
                 CallId = 24,
                 LocoOperatorSignature = "SJ",
@@ -50,16 +51,16 @@ internal class TestCallEventsService : ICallEventsService {
                 DutyOperatingDaysFlags = 0b00010101,
                 CollectFromStagingArea = true,
             }.AsEnumerable(),
-            _ => Enumerable.Empty<LocoConnectEvent>(),
+            _ => Enumerable.Empty<LocoConnectRecord>(),
         };
     }
-    public Task<IEnumerable<LocoDisconnectEvent>> GetLocoDisconnectEventsAsync(int layoutId)
+    public Task<IEnumerable<LocoDisconnectRecord>> GetLocoDisconnectRecordsAsync(int layoutId)
     {
         return Task.FromResult(Data(layoutId));
 
-        static IEnumerable<LocoDisconnectEvent> Data(int layoutId) => layoutId switch
+        static IEnumerable<LocoDisconnectRecord> Data(int layoutId) => layoutId switch
         {
-            21 => new LocoDisconnectEvent()
+            21 => new LocoDisconnectRecord()
             {
                 CallId = 24,
                 LocoOperatorSignature = "SJ",
@@ -69,7 +70,7 @@ internal class TestCallEventsService : ICallEventsService {
                 TrainOperatingDaysFlags = OperationDayFlags.Daily,
                 DutyOperatingDaysFlags = OperationDayFlags.Daily
             }.AsEnumerable(),
-            22 => new LocoDisconnectEvent()
+            22 => new LocoDisconnectRecord()
             {
                 CallId = 24,
                 LocoOperatorSignature = "SJ",
@@ -80,7 +81,7 @@ internal class TestCallEventsService : ICallEventsService {
                 TrainOperatingDaysFlags = OperationDayFlags.Daily,
                 DutyOperatingDaysFlags = OperationDayFlags.Daily
             }.AsEnumerable(),
-            23 => new LocoDisconnectEvent()
+            23 => new LocoDisconnectRecord()
             {
                 CallId = 25,
                 LocoOperatorSignature = "SJ",
@@ -92,7 +93,7 @@ internal class TestCallEventsService : ICallEventsService {
                 DutyOperatingDaysFlags = 0b00010101,
                 DriveToStagingArea = true
             }.AsEnumerable(),
-            24 => new LocoDisconnectEvent()
+            24 => new LocoDisconnectRecord()
             {
                 LocoOperatorSignature = "SJ",
                 CallId = 25,
@@ -104,7 +105,7 @@ internal class TestCallEventsService : ICallEventsService {
                 DutyOperatingDaysFlags = OperationDayFlags.Daily,
                 TurnLoco = true
             }.AsEnumerable(),
-            25 => new LocoDisconnectEvent()
+            25 => new LocoDisconnectRecord()
             {
                 LocoOperatorSignature = "SJ",
                 CallId = 25,
@@ -116,7 +117,7 @@ internal class TestCallEventsService : ICallEventsService {
                 DutyOperatingDaysFlags = OperationDayFlags.Daily,
                 CirculateLoco = true
             }.AsEnumerable(),
-            26 => new LocoDisconnectEvent()
+            26 => new LocoDisconnectRecord()
             {
                 LocoOperatorSignature = "SJ",
                 CallId = 25,
@@ -129,7 +130,7 @@ internal class TestCallEventsService : ICallEventsService {
                 CirculateLoco = true,
                 TurnLoco = true,
             }.AsEnumerable(),
-            27 => new LocoDisconnectEvent()
+            27 => new LocoDisconnectRecord()
             {
                 LocoOperatorSignature = "SJ",
                 CallId = 25,
@@ -142,7 +143,7 @@ internal class TestCallEventsService : ICallEventsService {
                 DriveToStagingArea = true,
                 TurnLoco = true,
             }.AsEnumerable(),
-            28 => new LocoDisconnectEvent()
+            28 => new LocoDisconnectRecord()
             {
                 LocoOperatorSignature = "SJ",
                 CallId = 25,
@@ -156,16 +157,16 @@ internal class TestCallEventsService : ICallEventsService {
                 TurnLoco = true,
                 CirculateLoco = true,
             }.AsEnumerable(),
-            _ => Enumerable.Empty<LocoDisconnectEvent>(),
+            _ => Enumerable.Empty<LocoDisconnectRecord>(),
         };
     }
-    public Task<IEnumerable<LocoExchangeEvent>> GetLocoExchangeEventsAsync(int layoutId)
+    public Task<IEnumerable<LocoExchangeRecord>> GetLocoExchangeRecordsAsync(int layoutId)
     {
         return Task.FromResult(Data(layoutId));
 
-        static IEnumerable<LocoExchangeEvent> Data(int layoutId) => layoutId switch
+        static IEnumerable<LocoExchangeRecord> Data(int layoutId) => layoutId switch
         {
-            31 => new LocoExchangeEvent()
+            31 => new LocoExchangeRecord()
             {
                 CallId = 31,
                 DutyOperatingDaysFlags = OperationDayFlags.Daily,
@@ -176,17 +177,17 @@ internal class TestCallEventsService : ICallEventsService {
                 LocoOperatorSignature = "SJ",
                 TurnusNumber = 11,
             }.AsEnumerable(),
-            _ => Enumerable.Empty<LocoExchangeEvent>(),
+            _ => Enumerable.Empty<LocoExchangeRecord>(),
         };
     }
 
-    public Task<IEnumerable<ScheduledWagonsConnectEvent>> GetScheduledWagonsConnectEventsAsync(int layoutId)
+    public Task<IEnumerable<ScheduledWagonsConnectRecord>> GetScheduledWagonsConnectRecordsAsync(int layoutId)
     {
         return Task.FromResult(Data(layoutId));
 
-        static IEnumerable<ScheduledWagonsConnectEvent> Data(int layoutId) => layoutId switch
+        static IEnumerable<ScheduledWagonsConnectRecord> Data(int layoutId) => layoutId switch
         {
-            41 => new ScheduledWagonsConnectEvent()
+            41 => new ScheduledWagonsConnectRecord()
             {
                 CallId = 1,
                 DutyOperatingDaysFlags = OperationDayFlags.Daily,
@@ -196,9 +197,9 @@ internal class TestCallEventsService : ICallEventsService {
                 MaxNumberOfWagons = 2,
                 PositionInTrain = 1,
             }.AsEnumerable(),
-            42 => new ScheduledWagonsConnectEvent[]
+            42 => new ScheduledWagonsConnectRecord[]
             {
-                new ScheduledWagonsConnectEvent()
+                new()
                 {
                     CallId = 2,
                     DutyOperatingDaysFlags = OperationDayFlags.Daily,
@@ -207,7 +208,7 @@ internal class TestCallEventsService : ICallEventsService {
                     TurnusNumber = 22,
                     MaxNumberOfWagons = 4,
                     PositionInTrain = 2,
-                },new ScheduledWagonsConnectEvent()
+                },new()
                 {
                     CallId = 2,
                     DutyOperatingDaysFlags = OperationDayFlags.Daily,
@@ -218,37 +219,38 @@ internal class TestCallEventsService : ICallEventsService {
                     PositionInTrain = 1,
                 }
             },
-            _ => Enumerable.Empty<ScheduledWagonsConnectEvent>(),
+            _ => Enumerable.Empty<ScheduledWagonsConnectRecord>(),
         };
     }
 
-    public Task<IEnumerable<ScheduledWagonsDisconnectEvent>> GetScheduledWagonsDisconnectEventsAsync(int layoutId)
+    public Task<IEnumerable<ScheduledWagonsDisconnectRecord>> GetScheduledWagonsDisconnectRecordsAsync(int layoutId)
     {
         return Task.FromResult(Data(layoutId));
 
-        static IEnumerable<ScheduledWagonsDisconnectEvent> Data(int layoutId) => layoutId switch
+        static IEnumerable<ScheduledWagonsDisconnectRecord> Data(int layoutId) => layoutId switch
         {
-            51 => new ScheduledWagonsDisconnectEvent() { 
-                CallId= 3,
-                DutyOperatingDaysFlags= OperationDayFlags.Daily,
-                TrainOperatingDaysFlags= OperationDayFlags.Daily,
-                OperationDayFlags= OperationDayFlags.MoWeFr,
-                TurnusNumber= 21,
-                MaxNumberOfWagons= 2,
-                PositionInTrain= 1,
+            51 => new ScheduledWagonsDisconnectRecord()
+            {
+                CallId = 3,
+                DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                TrainOperatingDaysFlags = OperationDayFlags.Daily,
+                OperationDayFlags = OperationDayFlags.MoWeFr,
+                TurnusNumber = 21,
+                MaxNumberOfWagons = 2,
+                PositionInTrain = 1,
             }.AsEnumerable(),
-            _ => Enumerable.Empty<ScheduledWagonsDisconnectEvent>(),
+            _ => Enumerable.Empty<ScheduledWagonsDisconnectRecord>(),
         };
     }
 
-    public Task<IEnumerable<TrainMeetEvent>> GetTrainMeetEventsAsync(int layoutId)
+    public Task<IEnumerable<TrainMeetRecord>> GetTrainMeetRecordsAsync(int layoutId)
     {
 
         return Task.FromResult(Data(layoutId));
 
-        static IEnumerable<TrainMeetEvent> Data(int layoutId) => layoutId switch
+        static IEnumerable<TrainMeetRecord> Data(int layoutId) => layoutId switch
         {
-            71 => new TrainMeetEvent()
+            71 => new TrainMeetRecord()
             {
                 CallId = 1,
                 TrainOperatingDaysFlags = OperationDayFlags.Daily,
@@ -263,7 +265,7 @@ internal class TestCallEventsService : ICallEventsService {
                 MeetingTrainArrivalTime = new TimeSpan(12, 11, 0),
                 MeetingDepartureTime = new TimeSpan(12, 16, 0),
             }.AsEnumerable(),
-            72 => new TrainMeetEvent()
+            72 => new TrainMeetRecord()
             {
                 CallId = 1,
                 DutyOperatingDaysFlags = OperationDayFlags.Daily,
@@ -278,84 +280,71 @@ internal class TestCallEventsService : ICallEventsService {
                 MeetingTrainArrivalTime = new TimeSpan(12, 11, 0),
                 MeetingDepartureTime = new TimeSpan(12, 16, 0),
             }.AsEnumerable(),
-            _ => Enumerable.Empty<TrainMeetEvent>(),
+            _ => Enumerable.Empty<TrainMeetRecord>(),
         }; ;
     }
-    public Task<IEnumerable<WaybillWagonsConnectEvent>> GetWaybillWagonsConnectEventsAsync(int layoutId)
+    public Task<IEnumerable<WagonGroupConnectRecord>> GetWagonGroupsConnectRecordsAsync(int layoutId)
     {
 
         return Task.FromResult(Data(layoutId));
 
-        static IEnumerable<WaybillWagonsConnectEvent> Data(int layoutId) => layoutId switch
+        static IEnumerable<WagonGroupConnectRecord> Data(int layoutId) => layoutId switch
         {
-            81 => new WaybillWagonsConnectEvent()
+            81 => new WagonGroupConnectRecord()
             {
                 CallId = 1,
                 PositionInTrain = 2,
-                DestinationFullName = "Göteborg",
-                DestinationSignature = "Gbg",
-                DestinationForeColor = "#FFFFFF",
+                DestinationName = "Göteborg",
                 DestinationBackColor = "#009933",
-                OriginFullName = "Uddevalla",
-                OriginSignature = "Uv",
+                OriginStationName = "Uddevalla",
                 TrainOperatingDaysFlags = OperationDayFlags.Daily,
                 DutyOperatingDaysFlags = OperationDayFlags.Daily,
                 OperationDaysFlag = OperationDayFlags.Daily,
             }.AsEnumerable(),
-            82 => new WaybillWagonsConnectEvent[] {
-                    new WaybillWagonsConnectEvent()
+            82 => new WagonGroupConnectRecord[] {
+                    new()
                     {
                         CallId = 1,
                         PositionInTrain = 2,
-                        DestinationFullName = "Göteborg",
-                        DestinationSignature = "Gbg",
-                        DestinationForeColor = "#FFFFFF",
+                        DestinationName = "Göteborg",
                         DestinationBackColor = "#009933",
-                        OriginFullName = "Uddevalla",
-                        OriginSignature = "Uv",
+                        OriginStationName = "Uddevalla",
                         TrainOperatingDaysFlags = OperationDayFlags.Daily,
                         DutyOperatingDaysFlags = OperationDayFlags.Daily,
                         OperationDaysFlag = OperationDayFlags.Daily,
                     },
-                   new WaybillWagonsConnectEvent()
+                   new()
                     {
                         CallId = 1,
                         PositionInTrain = 1,
                         MaxNumberOfWagons = 6,
-                        DestinationFullName = "Ytterby",
-                        DestinationSignature = "Yb",
-                        OriginFullName = "Uddevalla",
-                        OriginSignature = "Uv",
+                        DestinationName = "Ytterby",
+                        OriginStationName = "Uddevalla",
                         TrainOperatingDaysFlags = OperationDayFlags.Daily,
                         DutyOperatingDaysFlags = OperationDayFlags.Daily,
                         OperationDaysFlag = OperationDayFlags.Daily,
                    },
              },
-            83 => new WaybillWagonsConnectEvent[] {
-                    new WaybillWagonsConnectEvent()
+            83 => new WagonGroupConnectRecord[] {
+                    new()
                     {
                         CallId = 1,
                         PositionInTrain = 2,
-                        DestinationFullName = "Göteborg",
-                        DestinationSignature = "Gbg",
-                        DestinationForeColor = "#FFFFFF",
+                        DestinationName = "Göteborg",
                         DestinationBackColor = "#009933",
-                        OriginFullName = "Uddevalla",
-                        OriginSignature = "Uv",
+                        OriginStationName = "Uddevalla",
                         TrainOperatingDaysFlags = OperationDayFlags.Daily,
                         DutyOperatingDaysFlags = OperationDayFlags.Daily,
                         OperationDaysFlag = OperationDayFlags.MoWeFr,
 
                     },
-                    new WaybillWagonsConnectEvent()
+                    new()
                     {
                         CallId = 1,
                         PositionInTrain = 1,
                         MaxNumberOfWagons = 6,
-                        DestinationFullName = "Ytterby",
-                        DestinationSignature = "Yb",
-                        OriginFullName = "Uddevalla",
-                        OriginSignature = "Uv",
+                        DestinationName = "Ytterby",
+                        OriginStationName = "Uddevalla",
                         TrainOperatingDaysFlags = OperationDayFlags.Daily,
                         DutyOperatingDaysFlags = OperationDayFlags.Daily,
                         OperationDaysFlag = OperationDayFlags.TuThSa,
@@ -363,82 +352,72 @@ internal class TestCallEventsService : ICallEventsService {
                     },
              },
 
-            _ => Enumerable.Empty<WaybillWagonsConnectEvent>(),
+            _ => Enumerable.Empty<WagonGroupConnectRecord>(),
         };
     }
-    public Task<IEnumerable<WaybillWagonsDisconnectEvent>> GetWaybillWagonsDisconnectEventsAsync(int layoutId)
+    public Task<IEnumerable<WagonGroupDisconnectRecord>> GetWagonGroupsDisconnectRecordsAsync(int layoutId)
     {
         return Task.FromResult(Data(layoutId));
 
-        static IEnumerable<WaybillWagonsDisconnectEvent> Data(int layoutId) => layoutId switch
+        static IEnumerable<WagonGroupDisconnectRecord> Data(int layoutId) => layoutId switch
         {
-            91 => new WaybillWagonsDisconnectEvent()
+            91 => new WagonGroupDisconnectRecord()
             {
                 CallId = 1,
                 PositionInTrain = 2,
-                DestinationFullName = "Göteborg",
-                DestinationSignature = "Gbg",
-                OriginFullName = "Uddevalla",
-                OriginSignature = "Uv",
+                DestinationName = "Göteborg",
+                OriginStationName = "Uddevalla",
                 TrainOperatingDaysFlags = OperationDayFlags.Daily,
                 DutyOperatingDaysFlags = OperationDayFlags.Daily,
                 OperationDaysFlag = OperationDayFlags.Daily,
             }.AsEnumerable(),
-            92 => new WaybillWagonsDisconnectEvent[] {
-                    new WaybillWagonsDisconnectEvent()
+            92 => new WagonGroupDisconnectRecord[] {
+                    new()
                     {
                         CallId = 1,
                         PositionInTrain = 2,
-                        DestinationFullName = "Göteborg",
-                        DestinationSignature = "Gbg",
-                        OriginFullName = "Uddevalla",
-                        OriginSignature = "Uv",
+                        DestinationName = "Göteborg",
+                        DestinationBackColor = "#009933",
+                        OriginStationName = "Uddevalla",
                         TrainOperatingDaysFlags = OperationDayFlags.Daily,
                         DutyOperatingDaysFlags = OperationDayFlags.Daily,
                         OperationDaysFlag = OperationDayFlags.Daily,
                     },
-                   new WaybillWagonsDisconnectEvent()
+                   new()
                     {
                         CallId = 1,
                         PositionInTrain = 1,
-                        DestinationFullName = "Ytterby",
-                        DestinationSignature = "Yb",
-                        OriginFullName = "Uddevalla",
-                        OriginSignature = "Uv",
+                        DestinationName = "Ytterby",
+                        OriginStationName = "Uddevalla",
                         TrainOperatingDaysFlags = OperationDayFlags.Daily,
                         DutyOperatingDaysFlags = OperationDayFlags.Daily,
                         OperationDaysFlag = OperationDayFlags.Daily,
                     },
              },
-            93 => new WaybillWagonsDisconnectEvent[] {
-                    new WaybillWagonsDisconnectEvent()
+            93 => new WagonGroupDisconnectRecord[] {
+                    new()
                     {
                         CallId = 1,
                         PositionInTrain = 2,
-                        DestinationFullName = "Göteborg",
-                        DestinationSignature = "Gbg",
-                        DestinationForeColor = "#FFFFFF",
+                        DestinationName = "Göteborg",
                         DestinationBackColor = "#009933",
-                        OriginFullName = "Uddevalla",
-                        OriginSignature = "Uv",
+                        OriginStationName = "Uddevalla",
                         TrainOperatingDaysFlags = OperationDayFlags.Daily,
                         DutyOperatingDaysFlags = OperationDayFlags.Daily,
                         OperationDaysFlag = OperationDayFlags.Daily,
                     },
-                   new WaybillWagonsDisconnectEvent()
+                   new()
                     {
                         CallId = 2,
                         PositionInTrain = 1,
-                        DestinationFullName = "Ytterby",
-                        DestinationSignature = "Yb",
-                        OriginFullName = "Uddevalla",
-                        OriginSignature = "Uv",
+                        DestinationName = "Ytterby",
+                        OriginStationName = "Uddevalla",
                         TrainOperatingDaysFlags = OperationDayFlags.Daily,
                         DutyOperatingDaysFlags = OperationDayFlags.Daily,
                         OperationDaysFlag = OperationDayFlags.Daily,
                     },
              },
-            _ => Enumerable.Empty<WaybillWagonsDisconnectEvent>(),
+            _ => Enumerable.Empty<WagonGroupDisconnectRecord>(),
         };
     }
 

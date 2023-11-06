@@ -21,7 +21,7 @@ public class ScheduledWagonsInfo
             OperationDays.IsAllOtherDays(scheduledDays) ? ToString().SpanValue() :
             OperationDays.IsAnyOtherDays(scheduledDays) ? string.Concat(OperationDays.ShortName.SpanDays(), ToString().SpanValue()) :
             string.Empty
-        );
+        , "item");
 
     public override string ToString() => 
         $"{DescriptionText} {Resources.Notes.Turnus} {TurnusNumber} {MaxNumberOfWagonsText}".Trim();

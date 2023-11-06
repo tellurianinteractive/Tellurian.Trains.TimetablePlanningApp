@@ -1,34 +1,34 @@
 ﻿using TimetablePlanning.Models.CallNotes.Data;
 using TimetablePlanning.Models.Common;
 
-namespace TimetablePlanning.Models.CallNotes.Extensions;
+namespace TimetablePlanning.Models.CallNotes.Mappings;
 
-internal static class TrainMeetNoteExtensions
+internal static class TrainMeetNoteMappings
 {
 
-    public static IEnumerable<TrainMeetNote> AsTrainMeetNotes(this IEnumerable<TrainMeetEvent> events) =>
-        events.Select(e => e.AsTrainMeetNote());
+    public static IEnumerable<TrainCallMeetNote> ToTrainMeetNotes(this IEnumerable<TrainMeetRecord> events) =>
+        events.Select(e => e.ToTrainMeetNote());
 
-    public static TrainMeetNote AsTrainMeetNote(this TrainMeetEvent e) =>
+    public static TrainCallMeetNote ToTrainMeetNote(this TrainMeetRecord e) =>
         new()
         {
             ForCallId = e.CallId,
             TrainNumber = e.TrainNumber,
-            TrainCall = new ()
+            TrainCall = new()
             {
                 ArrivalTime = e.TrainArrivalTime,
                 DepartureTime = e.TrainDepartureTime
             },
-            DutyOperationDays = e.DutyOperatingDaysFlags.AsOperationDays(),
-            TrainOperationDays = e.TrainOperatingDaysFlags.AsOperationDays(),
+            DutyOperationDays = e.DutyOperatingDaysFlags.ToOperationDays(),
+            TrainOperationDays = e.TrainOperatingDaysFlags.ToOperationDays(),
             MeetingTrain = new()
             {
                 Number = e.MeetingTrainNumber,
                 Prefix = e.MeetingTrainPrefix,
                 OperatorSignature = e.MeetingTrainOperatorSignature,
-                OperationDays = e.MeetingTrainOperatingDaysFlags.AsOperationDays(),
+                OperationDays = e.MeetingTrainOperatingDaysFlags.ToOperationDays(),
             },
-            MeetingTrainCall = new ()
+            MeetingTrainCall = new()
             {
                 ArrivalTime = e.MeetingTrainArrivalTime,
                 DepartureTime = e.MeetingDepartureTime

@@ -22,7 +22,7 @@
             ForCallId = 1,
             DutyOperationDays = OperationDays.Daily,
             TrainOperationDays = OperationDays.Daily,
-            LocoOperationDays = OperationDayFlags.MoWeFr.AsOperationDays(),
+            LocoOperationDays = OperationDayFlags.MoWeFr.ToOperationDays(),
             LocoInfo = new()
             {
                 Class = "Rc6",
@@ -52,7 +52,7 @@
                 {
                     PositionInTrain = 2,
                     TurnusNumber=45,
-                    OperationDays = OperationDayFlags.MoWeFr.AsOperationDays(),
+                    OperationDays = OperationDayFlags.MoWeFr.ToOperationDays(),
                     MaxNumberOfWagons = 3
                 },
 

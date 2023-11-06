@@ -1,5 +1,5 @@
 ﻿namespace TimetablePlanning.Models.CallNotes.Data;
-public abstract class ScheduledWagonsEvent : NoteEvent 
+public abstract class ScheduledWagonsRecord : NoteRecord 
 {
     public int PositionInTrain { get; init; }
     public int MaxNumberOfWagons { get; init; }
@@ -8,10 +8,10 @@ public abstract class ScheduledWagonsEvent : NoteEvent
     public string? Description { get; init; }
 }
 
-public sealed class ScheduledWagonsConnectEvent : ScheduledWagonsEvent
+public sealed class ScheduledWagonsConnectRecord : ScheduledWagonsRecord
 {
 
 }
-public sealed class ScheduledWagonsDisconnectEvent : ScheduledWagonsEvent {
+public sealed class ScheduledWagonsDisconnectRecord : ScheduledWagonsRecord {
 
 }

@@ -4,9 +4,9 @@ using TimetablePlanning.Models.Common;
 using TimetablePlanning.Utilities.Extensions;
 
 namespace TimetablePlanning.Models.CallNotes;
-public class TrainMeetNote : TrainCallNote
+public class TrainCallMeetNote : TrainCallNote
 {
-    public TrainMeetNote()
+    public TrainCallMeetNote()
     {
         IsForArrival = true;
         IsToLocoDriver = true;

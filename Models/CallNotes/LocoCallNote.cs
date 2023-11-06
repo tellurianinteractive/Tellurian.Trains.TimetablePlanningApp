@@ -10,7 +10,7 @@ public abstract class LocoCallNote : TrainCallNote {
         IsToLocoDriver = true;
         IsToShunter = true;
         IsToDispatcher = true;
-        LocoOperationDays = OperationDayFlags.Daily.AsOperationDays();
+        LocoOperationDays = OperationDays.Daily;
     }
     public OperationDays LocoOperationDays { get; init; }
     protected abstract string Item { get; }
@@ -19,7 +19,7 @@ public abstract class LocoCallNote : TrainCallNote {
     private string Days => LocoOperationDays.IsAllOtherDays(ServiceOperationDays) ? string.Empty : NoteDays.ShortName.SpanDays();
     protected virtual string Remark => string.Empty;
     private OperationDays NoteDays => LocoOperationDays & ServiceOperationDays;
-    public override MarkupString Markup() => new(string.Concat(Days, Text, Item, Remark));
+    public override MarkupString Markup() => new(string.Concat(Days, Text, Item, Remark).Div());
 }
 
 public sealed class LocoConnectNote : LocoCallNote {

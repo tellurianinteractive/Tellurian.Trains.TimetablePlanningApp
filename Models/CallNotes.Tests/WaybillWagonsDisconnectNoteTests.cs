@@ -28,7 +28,9 @@ public class WaybillWagonsDisconnectNoteTests
         var note = notes.First();
 
         const string expected = """
-            <span class="note-text">Disconnect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Göteborg</span> </span></div>
+
+            <div class="callnote text">Disconnect wagons to </div>
+            <div class="callnote item"><span class="callnote destination other">Göteborg</span></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());
@@ -47,7 +49,10 @@ public class WaybillWagonsDisconnectNoteTests
         var notes = await Notes(92);
 
         const string expected = """
-            <span class="note-text">Disconnect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby</span> </span></div><div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Göteborg</span> </span></div>
+
+            <div class="callnote text">Disconnect wagons to </div>
+            <div class="callnote item"><span class="callnote destination other">Ytterby</span></div>
+            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), notes.First().Markup());
@@ -61,11 +66,15 @@ public class WaybillWagonsDisconnectNoteTests
         var note2 = notes.Last();
 
         const string extected1 = """
-            <span class="note-text">Disconnect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #FFFFFF;background-color: #009933;">Göteborg</span> </span></div>
+
+            <div class="callnote text">Disconnect wagons to </div>
+            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
             """; ;
 
         const string expected2 = """
-            <span class="note-text">Disconnect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby</span> </span></div>
+
+            <div class="callnote text">Disconnect wagons to </div>
+            <div class="callnote item"><span class="callnote destination other">Ytterby</span></div>
             """;
 
         Assert.AreEqual(1, note1.ForCallId);

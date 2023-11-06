@@ -3,9 +3,9 @@ using TimetablePlanning.Models.CallNotes.Extensions;
 
 namespace TimetablePlanning.Models.CallNotes;
 
-public abstract class ScheduledWagonsNote : TrainCallNote {
+public abstract class ScheduledWagonsCallNote : TrainCallNote {
 
-    public ScheduledWagonsNote() {
+    public ScheduledWagonsCallNote() {
         IsToDispatcher = true;
         IsToLocoDriver = true;
         IsToShunter = true;
@@ -19,20 +19,22 @@ public abstract class ScheduledWagonsNote : TrainCallNote {
             _wagons = value;
         }
     }
-    public override MarkupString Markup() => new(string.Concat(Label, string.Join("",Wagons.Select(w => w.Markup(ServiceOperationDays, ShowAllOperationDays)))));
+    public override MarkupString Markup() => new(MarkupString);
+
+    private string MarkupString => $"{LocalizedText.DivText()}{string.Join("", Wagons.Select(w => w.Markup(ServiceOperationDays, ShowAllOperationDays)))}";
     protected bool HasBlocks => _wagons.Any();
     private bool ShowAllOperationDays => _wagons.Any(w => !w.OperationDays.IsAllOtherDays(ServiceOperationDays));
 
-    protected abstract string Label { get; }
+    protected abstract string LocalizedText { get; }
 }
 
-public sealed class ScheduledWagonsConnectNote : ScheduledWagonsNote {
+public sealed class ScheduledWagonsConnectNote : ScheduledWagonsCallNote {
     public ScheduledWagonsConnectNote() { IsForDeparture = true; }
 
-    protected override string Label => Resources.Notes.ConnectWagonGroups.SpanText();
+    protected override string LocalizedText => Resources.Notes.ConnectWagonGroups;
 }
-public sealed class ScheduledWagonsDisconnectNote : ScheduledWagonsNote {
+public sealed class ScheduledWagonsDisconnectNote : ScheduledWagonsCallNote {
     public ScheduledWagonsDisconnectNote() { IsForArrival = true; }
 
-    protected override string Label => Resources.Notes.DisconnectWagonGroups.SpanText();
+    protected override string LocalizedText => Resources.Notes.DisconnectWagonGroups;
 }

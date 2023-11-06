@@ -1,6 +1,6 @@
 ﻿namespace TimetablePlanning.Models.CallNotes.Data;
 
-public abstract class LocoEvent : NoteEvent
+public abstract class LocoRecord : NoteRecord
 {
     public required string LocoOperatorSignature { get; init; }
     public required string LocoClass { get; init; }
@@ -9,19 +9,20 @@ public abstract class LocoEvent : NoteEvent
     public required byte LocoOperatingDaysFlags { get; init; }
     public bool IsDoubleDirectionTrain { get; init; }
 }
-public sealed class LocoConnectEvent : LocoEvent
+public sealed class LocoConnectRecord : LocoRecord
 {
     public bool CollectFromStagingArea { get; init; }
 }
 
-public sealed class LocoDisconnectEvent : LocoEvent
+public sealed class LocoDisconnectRecord
+    : LocoRecord
 {
     public bool DriveToStagingArea { get; init; }
     public bool CirculateLoco { get; init; }
     public bool TurnLoco { get; init; }
 }
 
-public sealed class LocoExchangeEvent : LocoEvent
+public sealed class LocoExchangeRecord : LocoRecord
 {
     public required byte ReplacingLocoOperatingDaysFlags { get; init; }
 }

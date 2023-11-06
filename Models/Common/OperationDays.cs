@@ -18,13 +18,13 @@ public class OperationDays
     public override int GetHashCode() => ShortName.GetHashCode(StringComparison.OrdinalIgnoreCase);
     public override string ToString() => ShortName;
 
-    public static OperationDays Daily => OperationDayFlags.Daily.AsOperationDays();
-    public static OperationDays OnDemand => OperationDayFlags.OnDemand.AsOperationDays();
+    public static OperationDays Daily => OperationDayFlags.Daily.ToOperationDays();
+    public static OperationDays OnDemand => OperationDayFlags.OnDemand.ToOperationDays();
 
 
     public static OperationDays operator &(OperationDays days1, OperationDays days2) => 
         days1.IsOnDemand || days2.IsOnDemand ? OnDemand : 
-        ((byte)(days1.Flags & days2.Flags)).AsOperationDays();
+        ((byte)(days1.Flags & days2.Flags)).ToOperationDays();
 
     public bool IsAllOtherDays(OperationDays operationDays) => And(Flags) == operationDays.Flags;
     public bool IsAnyOtherDays(OperationDays operationDays) => And(operationDays.Flags) > 0;
@@ -60,7 +60,7 @@ public static class OperationDaysExtensions
         flags == Days[8].Flag ? new Day[] { Days[8] } :
         Days.Where(d => d.Number > 0 && (d.Flag & flags) > 0).ToArray();
 
-    public static OperationDays AsOperationDays(this byte flags)
+    public static OperationDays ToOperationDays(this byte flags)
     {
         var days = GetDays(flags);
         var fullName = new StringBuilder(20);

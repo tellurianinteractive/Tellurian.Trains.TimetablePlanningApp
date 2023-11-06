@@ -27,7 +27,9 @@ public class WaybillWagonsConnectNoteTests {
         var note = notes.First();
 
         const string expected = """
-            <span class="note-text">Connect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #FFFFFF;background-color: #009933;">Göteborg</span> </span></div>
+
+            <div class="callnote text">Connect wagons to </div>
+            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());
@@ -40,7 +42,10 @@ public class WaybillWagonsConnectNoteTests {
         var note = notes.First();
 
         const string expected = """
-            <span class="note-text">Connect wagons to </span> <div class="note-item"><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby × 6</span> </span></div><div class="note-item"><span class="note-value"><span class="note-destination" style="color: #FFFFFF;background-color: #009933;">Göteborg</span> </span></div>
+
+            <div class="callnote text">Connect wagons to </div>
+            <div class="callnote item"><span class="callnote destination other">Ytterby</span></div>
+            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());
@@ -53,9 +58,20 @@ public class WaybillWagonsConnectNoteTests {
         var note = notes.First();
 
         const string expected = """
-            <span class="note-text">Connect wagons to </span> <div class="note-item"><span class="note-days">Tu,Th,Sa: </span><span class="note-value"><span class="note-destination" style="color: #000000;background-color: #C0C0C0;">Ytterby × 6</span> </span></div><div class="note-item"><span class="note-days">Mo,We,Fr: </span><span class="note-value"><span class="note-destination" style="color: #FFFFFF;background-color: #009933;">Göteborg</span> </span></div>
+            
+            <div class="callnote text">Connect wagons to </div>
+            <div class="callnote item"><span class="callnote days">Tu,Th,Sa: </span><span class="callnote destination other">Ytterby</span></div>
+            <div class="callnote item"><span class="callnote days">Mo,We,Fr: </span><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
             """;
-
         Assert.AreEqual(new MarkupString(expected), note.Markup());
+    }
+
+    private void Compare(string one, string another)
+    {
+        //Assert.AreEqual(one.Length, another.Length, "Differts in length");
+        for (int i = 0; i < one.Length; i++)
+        {
+            Assert.AreEqual(one[i], another[i], $"{one[i]} differts from {another[i]} at position {i}");
+        }
     }
 }

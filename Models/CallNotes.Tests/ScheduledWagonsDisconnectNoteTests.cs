@@ -25,7 +25,9 @@ public class ScheduledWagonsDisconnectNoteTests
         var note = notes.First();
 
         const string expected = """
-            <span class="note-text">Disconnect wagon groups </span><div class="note-item"><span class="note-days">Mo,We,Fr: </span><span class="note-value">turnus 21 (max 2 wagons) </span></div>
+
+            <div class="callnote text">Disconnect wagon groups </div>
+            <div class="callnote item"><span class="callnote days">Mo,We,Fr: </span><span class="callnote value">turnus 21 (max 2 wagons) </span></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());

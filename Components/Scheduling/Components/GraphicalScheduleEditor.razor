@@ -212,6 +212,7 @@ else
     protected override void OnParametersSet()
     {
         Current = TimetableStretches?.FirstOrDefault();
+        if (Current is null) return;
         Current.GraphSettings.ShowArrivalMinutes = false;
         Current.GraphSettings.ShowDepartureMinutes = false;
     }

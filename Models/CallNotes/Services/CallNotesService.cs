@@ -1,19 +1,15 @@
 ﻿using TimetablePlanning.Models.CallNotes.Data;
-using TimetablePlanning.Models.CallNotes.Extensions;
+using TimetablePlanning.Models.CallNotes.Mappings;
 
 namespace TimetablePlanning.Models.CallNotes.Services;
 
 /// <summary>
-/// Service to load all <see cref="TrainCallNote"/> from a datasource using a <see cref="ICallEventsService"/>.
+/// Service to load all <see cref="TrainCallNote"/> from a datasource using a <see cref="ICallNoteRecordsService"/>.
 /// </summary>
-public class CallNotesService {
+public class CallNotesService(ICallNoteRecordsService callEventsService, int expectedNumberOfCallNotes = 200)
+{
 
-    private readonly ICallEventsService CallEventsService;
-
-    public CallNotesService(ICallEventsService callEventsService)
-    {
-        CallEventsService = callEventsService;
-    }
+    private readonly ICallNoteRecordsService CallEventsService = callEventsService;
 
     /// <summary>
     /// 
@@ -26,15 +22,15 @@ public class CallNotesService {
     /// </remarks>
     public async Task<IEnumerable<TrainCallNote>> GetCallNotesAsync(int layoutId)
     {
-        var result = new List<TrainCallNote>(200);
-        result.AddRange((await CallEventsService.GetLocoConnectEventsAsync(layoutId)).AsLocoConnectNotes());
-        result.AddRange((await CallEventsService.GetLocoDisconnectEventsAsync(layoutId)).AsLocoDisconnectNotes());
-        result.AddRange((await CallEventsService.GetLocoExchangeEventsAsync(layoutId)).AsLocoExchangeNotes());
-        result.AddRange((await CallEventsService.GetScheduledWagonsConnectEventsAsync(layoutId)).AsScheduledWagonsConnectNotes());
-        result.AddRange((await CallEventsService.GetScheduledWagonsDisconnectEventsAsync(layoutId)).AsScheduledWagonsDisconnectNotes());
-        result.AddRange((await CallEventsService.GetTrainMeetEventsAsync(layoutId)).AsTrainMeetNotes());
-        result.AddRange((await CallEventsService.GetWaybillWagonsConnectEventsAsync(layoutId)).AsWaybillWagonsConnectNotes());
-        result.AddRange((await CallEventsService.GetWaybillWagonsDisconnectEventsAsync(layoutId)).AsWaybillWagonsDisconnectNotes());
+        var result = new List<TrainCallNote>(expectedNumberOfCallNotes);
+        result.AddRange((await CallEventsService.GetLocoConnectRecordsAsync(layoutId)).ToLocoConnectNotes());
+        result.AddRange((await CallEventsService.GetLocoDisconnectRecordsAsync(layoutId)).ToLocoDisconnectNotes());
+        result.AddRange((await CallEventsService.GetLocoExchangeRecordsAsync(layoutId)).ToLocoExchangeNotes());
+        result.AddRange((await CallEventsService.GetScheduledWagonsConnectRecordsAsync(layoutId)).ToScheduledWagonsConnectNotes());
+        result.AddRange((await CallEventsService.GetScheduledWagonsDisconnectRecordsAsync(layoutId)).ToScheduledWagonsDisconnectNotes());
+        result.AddRange((await CallEventsService.GetTrainMeetRecordsAsync(layoutId)).ToTrainMeetNotes());
+        result.AddRange((await CallEventsService.GetWagonGroupsConnectRecordsAsync(layoutId)).ToWagonGroupsConnectNotes());
+        result.AddRange((await CallEventsService.GetWagonGroupsDisconnectRecordsAsync(layoutId)).ToWagonGroupsDisconnectNotes());
         return result;
     }
 }

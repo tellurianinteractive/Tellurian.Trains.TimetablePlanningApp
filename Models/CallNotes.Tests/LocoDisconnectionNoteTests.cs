@@ -27,7 +27,8 @@ public class LocoDisconnectionNoteTests
 
         const string expected =
             """
-            <span class="note-days">Tu,Th,Sa,Su: </span><span class="note-text">Disconnect loco </span><span class="note-value">SJ Rc6 turnus 2. </span>
+
+            <div class="callnote"><span class="callnote days">Tu,Th,Sa,Su: </span><span class="callnote text">Disconnect loco </span><span class="callnote value">SJ Rc6 turnus 2. </span></div>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
 
@@ -47,7 +48,8 @@ public class LocoDisconnectionNoteTests
 
         const string expected =
             """
-            <span class="note-days">Mo,We,Fr: </span><span class="note-text">Disconnect loco </span><span class="note-value">SJ Rc6 turnus 1. </span>
+            
+            <div class="callnote"><span class="callnote days">Mo,We,Fr: </span><span class="callnote text">Disconnect loco </span><span class="callnote value">SJ Rc6 turnus 1. </span></div>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
@@ -60,7 +62,8 @@ public class LocoDisconnectionNoteTests
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 232 turnus 3. </span><span class="note-text">Drive loco to staging area. </span>
+            
+            <div class="callnote"><span class="callnote text">Disconnect loco </span><span class="callnote value">SJ T44 232 turnus 3. </span><span class="callnote text">Drive loco to staging area. </span></div>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
@@ -73,7 +76,8 @@ public class LocoDisconnectionNoteTests
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Turn loco. </span>
+            
+            <div class="callnote"><span class="callnote text">Disconnect loco </span><span class="callnote value">SJ T44 236 turnus 8. </span><span class="callnote text">Turn loco. </span></div>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
@@ -86,7 +90,8 @@ public class LocoDisconnectionNoteTests
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Circulate loco. </span>
+            
+            <div class="callnote"><span class="callnote text">Disconnect loco </span><span class="callnote value">SJ T44 236 turnus 8. </span><span class="callnote text">Circulate loco. </span></div>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
@@ -99,7 +104,8 @@ public class LocoDisconnectionNoteTests
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Turn loco. </span><span class="note-text">Circulate loco. </span>
+            
+            <div class="callnote"><span class="callnote text">Disconnect loco </span><span class="callnote value">SJ T44 236 turnus 8. </span><span class="callnote text">Turn loco. </span><span class="callnote text">Circulate loco. </span></div>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
@@ -112,7 +118,8 @@ public class LocoDisconnectionNoteTests
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Drive loco to staging area. </span><span class="note-text">Turn loco. </span>
+            
+            <div class="callnote"><span class="callnote text">Disconnect loco </span><span class="callnote value">SJ T44 236 turnus 8. </span><span class="callnote text">Drive loco to staging area. </span><span class="callnote text">Turn loco. </span></div>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
     }
@@ -125,7 +132,8 @@ public class LocoDisconnectionNoteTests
 
         const string expected =
             """
-            <span class="note-text">Disconnect loco </span><span class="note-value">SJ T44 236 turnus 8. </span><span class="note-text">Drive loco to staging area. </span><span class="note-text">Turn loco. </span><span class="note-text">Circulate loco. </span>
+            
+            <div class="callnote"><span class="callnote text">Disconnect loco </span><span class="callnote value">SJ T44 236 turnus 8. </span><span class="callnote text">Drive loco to staging area. </span><span class="callnote text">Turn loco. </span><span class="callnote text">Circulate loco. </span></div>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
     }

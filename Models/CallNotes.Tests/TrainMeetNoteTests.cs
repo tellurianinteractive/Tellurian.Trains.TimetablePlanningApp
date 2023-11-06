@@ -28,7 +28,7 @@ public class TrainMeetNoteTests {
 
         const string expected =
             """
-            <span class="note-text">Meets </span><span class="note-value">SJ Gt 4001 </span><span class="note-value">12:11-12:15 </span>
+            <span class="callnote text">Meets </span><span class="callnote value">SJ Gt 4001 </span><span class="callnote value">12:11-12:15 </span>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());
@@ -48,7 +48,7 @@ public class TrainMeetNoteTests {
 
         const string expected =
             """
-            <span class="note-days">Mo,We,Fr: </span><span class="note-text">Passes </span><span class="note-value">SJ Gt 4001 </span><span class="note-value">12:11-12:15 </span>
+            <span class="callnote days">Mo,We,Fr: </span><span class="callnote text">Passes </span><span class="callnote value">SJ Gt 4001 </span><span class="callnote value">12:11-12:15 </span>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());

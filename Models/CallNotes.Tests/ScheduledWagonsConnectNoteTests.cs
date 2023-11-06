@@ -26,7 +26,9 @@ public class ScheduledWagonsConnectNoteTests {
         var note = notes.First();
 
         const string expected = """
-            <span class="note-text">Connect wagon groups </span><div class="note-item"><span class="note-value">turnus 22 (max 2 wagons) </span></div>
+
+            <div class="callnote text">Connect wagon groups </div>
+            <div class="callnote item"><span class="callnote value">turnus 22 (max 2 wagons) </span></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());
@@ -45,7 +47,10 @@ public class ScheduledWagonsConnectNoteTests {
         var note = notes.First();
 
         const string expected = """
-            <span class="note-text">Connect wagon groups </span><div class="note-item"><span class="note-days">Mo,We,Fr: </span><span class="note-value">turnus 21 (max 2 wagons) </span></div><div class="note-item"><span class="note-days">Daily: </span><span class="note-value">turnus 22 (max 4 wagons) </span></div>
+
+            <div class="callnote text">Connect wagon groups </div>
+            <div class="callnote item"><span class="callnote days">Mo,We,Fr: </span><span class="callnote value">turnus 21 (max 2 wagons) </span></div>
+            <div class="callnote item"><span class="callnote days">Daily: </span><span class="callnote value">turnus 22 (max 4 wagons) </span></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());

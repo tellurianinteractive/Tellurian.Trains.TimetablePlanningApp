@@ -1,8 +1,6 @@
 ﻿namespace TimetablePlanning.Models.CallNotes.Data;
-public class TrainMeetEvent : NoteEvent {
-    public required int TrainNumber { get; set; }
-    public required TimeSpan TrainArrivalTime { get; init; }
-    public required TimeSpan TrainDepartureTime { get; init;}
+
+    public class TrainMeetRecord : TrainRecord {
     public string? MeetingTrainPrefix { get; init; }
     public required int MeetingTrainNumber { get; init; }
     public string? MeetingTrainOperatorSignature { get; init; }

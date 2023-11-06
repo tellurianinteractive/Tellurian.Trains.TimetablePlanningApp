@@ -9,6 +9,10 @@ public class ExampleTimetableService : ITimetableService
 {
     public async Task<IEnumerable<Schedule>> GetTimetableStretchesAsync()
     {
-        return await Task.FromResult(new[] { ScheduleBuilder.Bohusbanan }).ConfigureAwait(false);
+        var result = new List<Schedule>
+        {
+            ScheduleBuilder.Bohusbanan()
+        };         
+        return await Task.FromResult(result).ConfigureAwait(false);
     }
 }
