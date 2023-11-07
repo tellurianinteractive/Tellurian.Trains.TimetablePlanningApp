@@ -2,7 +2,7 @@
 
 public abstract class NoteRecord
 {
-    public required int CallId { get; init; }
-    public required byte TrainOperatingDaysFlags { get; init; }
-    public required byte DutyOperatingDaysFlags { get; init; }
+    public required int CallId { get; set; }
+    public required byte TrainOperationDaysFlags { get; set; }
+    public required byte DutyOperationDaysFlags { get; set; }
 }

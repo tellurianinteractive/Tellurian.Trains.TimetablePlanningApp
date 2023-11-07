@@ -6,11 +6,10 @@ namespace TimetablePlanning.Models.CallNotes;
 public sealed class TrainInfo
 {
     public string? OperatorSignature { get; init; }
-    public string? Prefix { get; init; }
-    public required int Number { get; init; }
+    public required string Number { get; init; }
     public required OperationDays OperationDays { get; init; }
 
-    public override string ToString() => $"{OperatorSignature} {Prefix} {Number}".TrimStart();
+    public override string ToString() => $"{OperatorSignature} {Number}".TrimStart();
     public string Markup => ToString().SpanValue();
 }
 

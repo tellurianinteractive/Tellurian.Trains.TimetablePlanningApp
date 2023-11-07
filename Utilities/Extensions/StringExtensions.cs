@@ -5,7 +5,7 @@ namespace TimetablePlanning.Utilities.Extensions;
 public static class StringExtensions
 {
     public static string[] AsArray(this string? value) =>
-        value is null ? Array.Empty<string>() : new string[] { value };
+        value is null ? [] : new string[] { value };
 
     public static bool HasValue([NotNullWhen(true)] this string? me) =>
         !string.IsNullOrWhiteSpace(me);
@@ -15,7 +15,4 @@ public static class StringExtensions
 
     public static string FirstItem(this string? me, string defaultValue = "") =>
         me is null || me.Length == 0 ? defaultValue : me.Split(',')[0] ?? defaultValue;
-
-
-
 }

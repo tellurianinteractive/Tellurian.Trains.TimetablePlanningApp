@@ -16,30 +16,30 @@ public abstract class GroupDestination(int displayOrder, OperationDays operation
 
 }
 
-public sealed class CountryDestination(string name, OperationDays operationDays, Image flag, int positionInTrain, int maxNumberOfWagons) : GroupDestination(1, operationDays, name, positionInTrain, maxNumberOfWagons)
+public sealed class CountryDestination(string name, OperationDays operationDays, string? flagHref, int positionInTrain, int maxNumberOfWagons) : GroupDestination(1, operationDays, name, positionInTrain, maxNumberOfWagons)
 {
-    public CountryDestination(WagonGroupConnectRecord record) : this(record.DestinationName, record.OperationDaysFlag.ToOperationDays(), record.Flag!, record.PositionInTrain, record.MaxNumberOfWagons) { }
-    public CountryDestination(WagonGroupDisconnectRecord record) : this(record.DestinationName, record.OperationDaysFlag.ToOperationDays(), record.Flag!, record.PositionInTrain, 0) { }
-    internal readonly Image Flag = flag;
+    public CountryDestination(WagonGroupConnectRecord record) : this(record.DestinationName, record.OperationDaysFlags.ToOperationDays(), record.FlagHref, record.PositionInTrain, record.MaxNumberOfWagons) { }
+    public CountryDestination(WagonGroupDisconnectRecord record) : this(record.DestinationName, record.OperationDaysFlags.ToOperationDays(), record.FlagHref, record.PositionInTrain, 0) { }
+    internal readonly string? FlagHref = flagHref;
 
 }
 
 public sealed class RegionDestination(string name, OperationDays operationDays, string backColor, int positionInTrain, int maxNumberOfWagons) : GroupDestination(2, operationDays, name, positionInTrain, maxNumberOfWagons)
 {
-    public RegionDestination(WagonGroupConnectRecord record) : this(record.DestinationName, record.OperationDaysFlag.ToOperationDays(), record.DestinationBackColor!, record.PositionInTrain, record.MaxNumberOfWagons) { }
-    public RegionDestination(WagonGroupDisconnectRecord record) : this(record.DestinationName, record.OperationDaysFlag.ToOperationDays(), record.DestinationBackColor!, record.PositionInTrain, 0) { }
+    public RegionDestination(WagonGroupConnectRecord record) : this(record.DestinationName, record.OperationDaysFlags.ToOperationDays(), record.DestinationBackColor!, record.PositionInTrain, record.MaxNumberOfWagons) { }
+    public RegionDestination(WagonGroupDisconnectRecord record) : this(record.DestinationName, record.OperationDaysFlags.ToOperationDays(), record.DestinationBackColor!, record.PositionInTrain, 0) { }
     internal string BackColor { get; init; } = backColor;
     internal string ForeColor => BackColor.TextColor();
 }
 
 public sealed class CargoDestination(string name, OperationDays operationDays, int positionInTrain, int maxNumberOfWagons) : GroupDestination(3, operationDays, name, positionInTrain, maxNumberOfWagons) {
-    public CargoDestination(WagonGroupConnectRecord record) : this(record.DestinationName, record.OperationDaysFlag.ToOperationDays(), record.PositionInTrain, record.MaxNumberOfWagons) { }
-    public CargoDestination(WagonGroupDisconnectRecord record) : this(record.DestinationName, record.OperationDaysFlag.ToOperationDays(), record.PositionInTrain, 0) { }
+    public CargoDestination(WagonGroupConnectRecord record) : this(record.DestinationName, record.OperationDaysFlags.ToOperationDays(), record.PositionInTrain, record.MaxNumberOfWagons) { }
+    public CargoDestination(WagonGroupDisconnectRecord record) : this(record.DestinationName, record.OperationDaysFlags.ToOperationDays(), record.PositionInTrain, 0) { }
 }
 
 public sealed class TransferDestination(string name, OperationDays operationDays, int positionInTrain, int maxNumberOfWagons) : GroupDestination(4, operationDays, name, positionInTrain, maxNumberOfWagons) { 
-    public TransferDestination(WagonGroupConnectRecord record) : this(record.TransferDestinationFullName!, record.OperationDaysFlag.ToOperationDays(), record.PositionInTrain, record.MaxNumberOfWagons) { }
-    public TransferDestination(WagonGroupDisconnectRecord record) : this(record.TransferDestinationFullName!, record.OperationDaysFlag.ToOperationDays(), record.PositionInTrain, 0) { }
+    public TransferDestination(WagonGroupConnectRecord record) : this(record.TransferDestinationName!, record.OperationDaysFlags.ToOperationDays(), record.PositionInTrain, record.MaxNumberOfWagons) { }
+    public TransferDestination(WagonGroupDisconnectRecord record) : this(record.TransferDestinationName!, record.OperationDaysFlags.ToOperationDays(), record.PositionInTrain, 0) { }
 }
 
 public record Image(string MimeType, byte[] Data);
@@ -47,14 +47,14 @@ public record Image(string MimeType, byte[] Data);
 internal static class GroupDestinationExtensions
 {
     public static GroupDestination ToGroupDestination(this WagonGroupConnectRecord record) =>
-        record.TransferDestinationFullName.HasValue() ? new TransferDestination(record) :
-        record.Flag is not null && record.CountryDomain.HasValue() ? new CountryDestination(record) :
+        record.TransferDestinationName.HasValue() ? new TransferDestination(record) :
+        record.FlagHref is not null && record.CountryDomain.HasValue() ? new CountryDestination(record) :
         record.DestinationBackColor.IsNoneWhiteColor() ? new RegionDestination(record) :
         new CargoDestination(record);
 
     public static GroupDestination ToGroupDestination(this WagonGroupDisconnectRecord record) =>
-        record.TransferDestinationFullName.HasValue() ? new TransferDestination(record) :
-        record.Flag is not null && record.CountryDomain.HasValue() ? new CountryDestination(record) :
+        record.TransferDestinationName.HasValue() ? new TransferDestination(record) :
+        record.FlagHref is not null && record.CountryDomain.HasValue() ? new CountryDestination(record) :
         record.DestinationBackColor.IsNoneWhiteColor() ? new RegionDestination(record) :
         new CargoDestination(record);
 

@@ -11,8 +11,8 @@ internal static class ScheduledWagonsNoteMappings
         new()
         {
             ForCallId = records.First().CallId,
-            DutyOperationDays = records.First().DutyOperatingDaysFlags.ToOperationDays(),
-            TrainOperationDays = records.First().TrainOperatingDaysFlags.ToOperationDays(),
+            DutyOperationDays = records.First().DutyOperationDaysFlags.ToOperationDays(),
+            TrainOperationDays = records.First().TrainOperationDaysFlags.ToOperationDays(),
             Wagons = records.Select(e => e.ToScheduledWagonsInfo()),
 
         };
@@ -24,8 +24,8 @@ internal static class ScheduledWagonsNoteMappings
         new()
         {
             ForCallId = records.First().CallId,
-            DutyOperationDays = records.First().DutyOperatingDaysFlags.ToOperationDays(),
-            TrainOperationDays = records.First().TrainOperatingDaysFlags.ToOperationDays(),
+            DutyOperationDays = records.First().DutyOperationDaysFlags.ToOperationDays(),
+            TrainOperationDays = records.First().TrainOperationDaysFlags.ToOperationDays(),
             Wagons = records.Select(e => e.ToScheduledWagonsInfo()),
         };
 
@@ -34,7 +34,7 @@ internal static class ScheduledWagonsNoteMappings
         {
             PositionInTrain = record.PositionInTrain,
             Description = record.Description,
-            OperationDays = record.OperationDayFlags.ToOperationDays(),
+            OperationDays = record.OperationDaysFlags.ToOperationDays(),
             TurnusNumber = record.TurnusNumber,
             MaxNumberOfWagons = record.MaxNumberOfWagons,
         };

@@ -3,8 +3,8 @@ public abstract class ScheduledWagonsRecord : NoteRecord
 {
     public int PositionInTrain { get; init; }
     public int MaxNumberOfWagons { get; init; }
-    public required byte OperationDayFlags { get; init; }
-    public required int TurnusNumber { get; init; }
+    public required byte OperationDaysFlags { get; init; }
+    public required string TurnusNumber { get; init; }
     public string? Description { get; init; }
 }
 

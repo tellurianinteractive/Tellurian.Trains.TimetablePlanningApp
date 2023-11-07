@@ -2,7 +2,7 @@
 
 public class ManualNoteRecord : NoteRecord
 {
-    public required byte DisplayedDaysFlag { get; init; }
+    public required byte LocoOperationDaysFlags { get; init; }
     public required string TwoLetterIsoLanguageName { get; init; }
     public required string Text { get; init; }
     public bool IsForArrival {  get; init; }

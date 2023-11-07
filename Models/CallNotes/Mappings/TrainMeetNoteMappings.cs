@@ -19,19 +19,19 @@ internal static class TrainMeetNoteMappings
                 ArrivalTime = record.TrainArrivalTime,
                 DepartureTime = record.TrainDepartureTime
             },
-            DutyOperationDays = record.DutyOperatingDaysFlags.ToOperationDays(),
-            TrainOperationDays = record.TrainOperatingDaysFlags.ToOperationDays(),
+            DutyOperationDays = record.DutyOperationDaysFlags.ToOperationDays(),
+            TrainOperationDays = record.TrainOperationDaysFlags.ToOperationDays(),
             MeetingTrain = new()
             {
                 Number = record.MeetingTrainNumber,
-                Prefix = record.MeetingTrainPrefix,
                 OperatorSignature = record.MeetingTrainOperatorSignature,
-                OperationDays = record.MeetingTrainOperatingDaysFlags.ToOperationDays(),
+                OperationDays = record.MeetingTrainOperationDaysFlags.ToOperationDays(),
             },
             MeetingTrainCall = new()
             {
                 ArrivalTime = record.MeetingTrainArrivalTime,
-                DepartureTime = record.MeetingDepartureTime
-            }
+                DepartureTime = record.MeetingTrainDepartureTime
+            },
+            IsPassing = record.IsPassing,
         };
 }

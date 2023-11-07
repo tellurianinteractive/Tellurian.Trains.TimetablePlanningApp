@@ -13,18 +13,19 @@ public class TrainCallMeetNote : TrainCallNote
         IsToDispatcher = true;
     }
 
-    public required int TrainNumber { get; init; }
+    public required string TrainNumber { get; init; }
     public required TrainCallInfo TrainCall { get; init; }
     public required TrainInfo MeetingTrain { get; init; }
     public required TrainCallInfo MeetingTrainCall { get; init; }
+    public bool IsPassing { get; init; }
 
     public override MarkupString Markup() => new(MarkupText);
     private string MarkupText => TrainCall.IsOverlapping(MeetingTrainCall) ?
-            NoteDays.IsAnyOtherDays(ServiceOperationDays) ? string.Concat(Days,LocalizedText, MeetingTrain.Markup, Time) :
+            NoteDays.IsAnyOtherDays(ServiceOperationDays) ? string.Concat(Days, LocalizedText.SpanText(), MeetingTrain.Markup, Time) :
             string.Empty :
         string.Empty;
 
-    private string LocalizedText => TrainNumber.BothIsOddOrEven(MeetingTrain.Number) ? Resources.Notes.Passes.SpanText() : Resources.Notes.Meets.SpanText();
+    private string LocalizedText => IsPassing ? Resources.Notes.Passes : Resources.Notes.Meets;
     private string Time => $"{TrainCall.ArrivalTime.Max(MeetingTrainCall.ArrivalTime):hh\\:mm}-{TrainCall.DepartureTime.Min(MeetingTrainCall.DepartureTime):hh\\:mm}".SpanValue();
     private string Days => NoteDays.IsAllOtherDays(ServiceOperationDays) ? string.Empty : NoteDays.ShortName.SpanDays();
     private OperationDays NoteDays => MeetingTrain.OperationDays & ServiceOperationDays;

@@ -23,10 +23,10 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 LocoOperatorSignature = "SJ",
                 LocoClass = "Rc6",
                 LocoNumber = "",
-                TurnusNumber = 2,
-                LocoOperatingDaysFlags = 0b01101010,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily
+                TurnusNumber = "2",
+                LocoOperationDaysFlags = 0b01101010,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily
             }.AsEnumerable(),
             12 => new LocoConnectRecord()
             {
@@ -34,10 +34,10 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 LocoOperatorSignature = "SJ",
                 LocoClass = "Rc6",
                 LocoNumber = "",
-                TurnusNumber = 1,
-                LocoOperatingDaysFlags = 0b00010101,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily
+                TurnusNumber = "1",
+                LocoOperationDaysFlags = 0b00010101,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily
             }.AsEnumerable(),
             13 => new LocoConnectRecord()
             {
@@ -45,10 +45,10 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 LocoOperatorSignature = "SJ",
                 LocoClass = "T44",
                 LocoNumber = "232",
-                TurnusNumber = 2,
-                LocoOperatingDaysFlags = 0b00010101,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = 0b00010101,
+                TurnusNumber = "2",
+                LocoOperationDaysFlags = 0b00010101,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = 0b00010101,
                 CollectFromStagingArea = true,
             }.AsEnumerable(),
             _ => Enumerable.Empty<LocoConnectRecord>(),
@@ -65,10 +65,10 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 CallId = 24,
                 LocoOperatorSignature = "SJ",
                 LocoClass = "Rc6",
-                TurnusNumber = 2,
-                LocoOperatingDaysFlags = 0b01101010,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily
+                TurnusNumber = "2",
+                LocoOperationDaysFlags = 0b01101010,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily
             }.AsEnumerable(),
             22 => new LocoDisconnectRecord()
             {
@@ -76,10 +76,10 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 LocoOperatorSignature = "SJ",
                 LocoClass = "Rc6",
                 LocoNumber = "",
-                TurnusNumber = 1,
-                LocoOperatingDaysFlags = 0b00010101,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily
+                TurnusNumber = "1",
+                LocoOperationDaysFlags = 0b00010101,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily
             }.AsEnumerable(),
             23 => new LocoDisconnectRecord()
             {
@@ -87,10 +87,10 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 LocoOperatorSignature = "SJ",
                 LocoClass = "T44",
                 LocoNumber = "232",
-                TurnusNumber = 3,
-                LocoOperatingDaysFlags = 0b00010101,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = 0b00010101,
+                TurnusNumber = "3",
+                LocoOperationDaysFlags = 0b00010101,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = 0b00010101,
             }.AsEnumerable(),
             _ => Enumerable.Empty<LocoDisconnectRecord>(),
         };
@@ -105,43 +105,43 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
             24 => new LocoTurnOrCirculateRecord()
             {
                 CallId = 25,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                LocoOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
                 CirculateLoco = true,
             }.AsEnumerable(),
             25 => new LocoTurnOrCirculateRecord()
             {
                 CallId = 25,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                LocoOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
                 TurnLoco = true,
             }.AsEnumerable(),
             26 => new LocoTurnOrCirculateRecord()
             {
                 CallId = 25,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                LocoOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
                 TurnLoco = true,
                 CirculateLoco = true,
             }.AsEnumerable(),
             27 => new LocoTurnOrCirculateRecord()
             {
                 CallId = 25,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
+                LocoOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
                 CirculateLoco = true,
                 IsDoubleDirection = true
             }.AsEnumerable(),
             28 => new LocoTurnOrCirculateRecord()
             {
                 CallId = 25,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.MoWeFr,
+                LocoOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.MoWeFr,
                 TurnLoco = true,
                 CirculateLoco= true,
             }.AsEnumerable(),
@@ -158,13 +158,10 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
             31 => new LocoExchangeRecord()
             {
                 CallId = 31,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                LocoOperatingDaysFlags = OperationDayFlags.Daily,
-                ReplacingLocoOperatingDaysFlags = OperationDayFlags.Daily,
-                LocoClass = "Ma",
-                LocoOperatorSignature = "SJ",
-                TurnusNumber = 11,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                LocoOperationDaysFlags = OperationDayFlags.Daily,
+                ReplacingLocoOperationDaysFlags = OperationDayFlags.Daily,
             }.AsEnumerable(),
             _ => Enumerable.Empty<LocoExchangeRecord>(),
         };
@@ -179,10 +176,10 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
             41 => new ScheduledWagonsConnectRecord()
             {
                 CallId = 1,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                OperationDayFlags = OperationDayFlags.Daily,
-                TurnusNumber = 22,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                OperationDaysFlags = OperationDayFlags.Daily,
+                TurnusNumber = "22",
                 MaxNumberOfWagons = 2,
                 PositionInTrain = 1,
             }.AsEnumerable(),
@@ -191,19 +188,19 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 new()
                 {
                     CallId = 2,
-                    DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                    TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                    OperationDayFlags = OperationDayFlags.Daily,
-                    TurnusNumber = 22,
+                    DutyOperationDaysFlags = OperationDayFlags.Daily,
+                    TrainOperationDaysFlags = OperationDayFlags.Daily,
+                    OperationDaysFlags = OperationDayFlags.Daily,
+                    TurnusNumber = "22",
                     MaxNumberOfWagons = 4,
                     PositionInTrain = 2,
                 },new()
                 {
                     CallId = 2,
-                    DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                    TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                    OperationDayFlags = OperationDayFlags.MoWeFr,
-                    TurnusNumber = 21,
+                    DutyOperationDaysFlags = OperationDayFlags.Daily,
+                    TrainOperationDaysFlags = OperationDayFlags.Daily,
+                    OperationDaysFlags = OperationDayFlags.MoWeFr,
+                    TurnusNumber = "21",
                     MaxNumberOfWagons = 2,
                     PositionInTrain = 1,
                 }
@@ -221,10 +218,10 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
             51 => new ScheduledWagonsDisconnectRecord()
             {
                 CallId = 3,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                OperationDayFlags = OperationDayFlags.MoWeFr,
-                TurnusNumber = 21,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                OperationDaysFlags = OperationDayFlags.MoWeFr,
+                TurnusNumber = "21",
                 MaxNumberOfWagons = 2,
                 PositionInTrain = 1,
             }.AsEnumerable(),
@@ -241,9 +238,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
             61 => new ManualNoteRecord()
             {
                 CallId = 1,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DisplayedDaysFlag = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                LocoOperationDaysFlags = OperationDayFlags.Daily,
                 TwoLetterIsoLanguageName = "sv",
                 Text = "Manuell not på svenska.",
                 IsForDeparture = true,
@@ -255,9 +252,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 new ()
                 {
                     CallId = 2,
-                    DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                    TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                    DisplayedDaysFlag = OperationDayFlags.Daily,
+                    DutyOperationDaysFlags = OperationDayFlags.Daily,
+                    TrainOperationDaysFlags = OperationDayFlags.Daily,
+                    LocoOperationDaysFlags = OperationDayFlags.Daily,
                     TwoLetterIsoLanguageName = "en",
                     Text = "Manual note in english.",
                     IsForDeparture = true,
@@ -266,9 +263,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 new ()
                 {
                     CallId = 2,
-                    DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                    TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                    DisplayedDaysFlag = OperationDayFlags.Daily,
+                    DutyOperationDaysFlags = OperationDayFlags.Daily,
+                    TrainOperationDaysFlags = OperationDayFlags.Daily,
+                    LocoOperationDaysFlags = OperationDayFlags.Daily,
                     TwoLetterIsoLanguageName = "sv",
                     Text = "Manuell not på svenska.",
                     IsForDeparture = true,
@@ -289,32 +286,31 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
             71 => new TrainMeetRecord()
             {
                 CallId = 1,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainNumber = 124,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
+                TrainNumber = "Pt 124",
                 TrainArrivalTime = new TimeSpan(12, 10, 0),
                 TrainDepartureTime = new TimeSpan(12, 15, 0),
-                MeetingTrainNumber = 4001,
+                MeetingTrainNumber = "Gt 4001",
                 MeetingTrainOperatorSignature = "SJ",
-                MeetingTrainPrefix = "Gt",
-                MeetingTrainOperatingDaysFlags = OperationDayFlags.Daily,
+                MeetingTrainOperationDaysFlags = OperationDayFlags.Daily,
                 MeetingTrainArrivalTime = new TimeSpan(12, 11, 0),
-                MeetingDepartureTime = new TimeSpan(12, 16, 0),
+                MeetingTrainDepartureTime = new TimeSpan(12, 16, 0),
             }.AsEnumerable(),
             72 => new TrainMeetRecord()
             {
                 CallId = 1,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                TrainNumber = 123,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                TrainNumber = "Pt 123",
                 TrainArrivalTime = new TimeSpan(12, 10, 0),
                 TrainDepartureTime = new TimeSpan(12, 15, 0),
-                MeetingTrainNumber = 4001,
+                MeetingTrainNumber = "Gt 4001",
                 MeetingTrainOperatorSignature = "SJ",
-                MeetingTrainPrefix = "Gt",
-                MeetingTrainOperatingDaysFlags = OperationDayFlags.MoWeFr,
+                MeetingTrainOperationDaysFlags = OperationDayFlags.MoWeFr,
                 MeetingTrainArrivalTime = new TimeSpan(12, 11, 0),
-                MeetingDepartureTime = new TimeSpan(12, 16, 0),
+                MeetingTrainDepartureTime = new TimeSpan(12, 16, 0),
+                IsPassing = true,
             }.AsEnumerable(),
             _ => Enumerable.Empty<TrainMeetRecord>(),
         }; ;
@@ -333,9 +329,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 DestinationName = "Göteborg",
                 DestinationBackColor = "#009933",
                 OriginStationName = "Uddevalla",
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                OperationDaysFlag = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
+                OperationDaysFlags = OperationDayFlags.Daily,
             }.AsEnumerable(),
             82 => new WagonGroupConnectRecord[] {
                     new()
@@ -345,9 +341,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                         DestinationName = "Göteborg",
                         DestinationBackColor = "#009933",
                         OriginStationName = "Uddevalla",
-                        TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                        DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                        OperationDaysFlag = OperationDayFlags.Daily,
+                        TrainOperationDaysFlags = OperationDayFlags.Daily,
+                        DutyOperationDaysFlags = OperationDayFlags.Daily,
+                        OperationDaysFlags = OperationDayFlags.Daily,
                     },
                    new()
                     {
@@ -356,9 +352,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                         MaxNumberOfWagons = 6,
                         DestinationName = "Ytterby",
                         OriginStationName = "Uddevalla",
-                        TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                        DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                        OperationDaysFlag = OperationDayFlags.Daily,
+                        TrainOperationDaysFlags = OperationDayFlags.Daily,
+                        DutyOperationDaysFlags = OperationDayFlags.Daily,
+                        OperationDaysFlags = OperationDayFlags.Daily,
                    },
              },
             83 => new WagonGroupConnectRecord[] {
@@ -369,9 +365,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                         DestinationName = "Göteborg",
                         DestinationBackColor = "#009933",
                         OriginStationName = "Uddevalla",
-                        TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                        DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                        OperationDaysFlag = OperationDayFlags.MoWeFr,
+                        TrainOperationDaysFlags = OperationDayFlags.Daily,
+                        DutyOperationDaysFlags = OperationDayFlags.Daily,
+                        OperationDaysFlags = OperationDayFlags.MoWeFr,
 
                     },
                     new()
@@ -381,9 +377,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                         MaxNumberOfWagons = 6,
                         DestinationName = "Ytterby",
                         OriginStationName = "Uddevalla",
-                        TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                        DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                        OperationDaysFlag = OperationDayFlags.TuThSa,
+                        TrainOperationDaysFlags = OperationDayFlags.Daily,
+                        DutyOperationDaysFlags = OperationDayFlags.Daily,
+                        OperationDaysFlags = OperationDayFlags.TuThSa,
 
                     },
              },
@@ -403,9 +399,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 PositionInTrain = 2,
                 DestinationName = "Göteborg",
                 OriginStationName = "Uddevalla",
-                TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                OperationDaysFlag = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
+                OperationDaysFlags = OperationDayFlags.Daily,
             }.AsEnumerable(),
             92 => new WagonGroupDisconnectRecord[] {
                     new()
@@ -415,9 +411,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                         DestinationName = "Göteborg",
                         DestinationBackColor = "#009933",
                         OriginStationName = "Uddevalla",
-                        TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                        DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                        OperationDaysFlag = OperationDayFlags.Daily,
+                        TrainOperationDaysFlags = OperationDayFlags.Daily,
+                        DutyOperationDaysFlags = OperationDayFlags.Daily,
+                        OperationDaysFlags = OperationDayFlags.Daily,
                     },
                    new()
                     {
@@ -425,9 +421,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                         PositionInTrain = 1,
                         DestinationName = "Ytterby",
                         OriginStationName = "Uddevalla",
-                        TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                        DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                        OperationDaysFlag = OperationDayFlags.Daily,
+                        TrainOperationDaysFlags = OperationDayFlags.Daily,
+                        DutyOperationDaysFlags = OperationDayFlags.Daily,
+                        OperationDaysFlags = OperationDayFlags.Daily,
                     },
              },
             93 => new WagonGroupDisconnectRecord[] {
@@ -438,9 +434,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                         DestinationName = "Göteborg",
                         DestinationBackColor = "#009933",
                         OriginStationName = "Uddevalla",
-                        TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                        DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                        OperationDaysFlag = OperationDayFlags.Daily,
+                        TrainOperationDaysFlags = OperationDayFlags.Daily,
+                        DutyOperationDaysFlags = OperationDayFlags.Daily,
+                        OperationDaysFlags = OperationDayFlags.Daily,
                     },
                    new()
                     {
@@ -448,9 +444,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                         PositionInTrain = 1,
                         DestinationName = "Ytterby",
                         OriginStationName = "Uddevalla",
-                        TrainOperatingDaysFlags = OperationDayFlags.Daily,
-                        DutyOperatingDaysFlags = OperationDayFlags.Daily,
-                        OperationDaysFlag = OperationDayFlags.Daily,
+                        TrainOperationDaysFlags = OperationDayFlags.Daily,
+                        DutyOperationDaysFlags = OperationDayFlags.Daily,
+                        OperationDaysFlags = OperationDayFlags.Daily,
                     },
              },
             _ => Enumerable.Empty<WagonGroupDisconnectRecord>(),

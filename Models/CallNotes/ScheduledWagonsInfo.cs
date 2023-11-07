@@ -9,11 +9,11 @@ public class ScheduledWagonsInfo
     {
         OperationDays = OperationDays.Daily;
     }
-    public string? Description { get; set; }
     public required int PositionInTrain { get; init; }
-    public required int TurnusNumber { get; init; }
+    public required string TurnusNumber { get; init; }
     public int MaxNumberOfWagons { get; init; }
     public OperationDays OperationDays { get; init; }
+    public string? Description { get; set; }
 
     public string Markup(OperationDays scheduledDays, bool alwaysShowOperationDays = false) =>
         MarkupExtensions.Div(

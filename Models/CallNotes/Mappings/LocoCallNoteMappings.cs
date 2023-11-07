@@ -13,9 +13,9 @@ internal static class LocoCallNoteMappings
         {
             ForCallId = record.CallId,
             LocoInfo = record.ToLocoInfo(),
-            TrainOperationDays = record.TrainOperatingDaysFlags.ToOperationDays(),
-            DutyOperationDays = record.DutyOperatingDaysFlags.ToOperationDays(),
-            LocoOperationDays = record.LocoOperatingDaysFlags.ToOperationDays(),
+            TrainOperationDays = record.TrainOperationDaysFlags.ToOperationDays(),
+            DutyOperationDays = record.DutyOperationDaysFlags.ToOperationDays(),
+            LocoOperationDays = record.LocoOperationDaysFlags.ToOperationDays(),
             CollectFromStagingArea = record.CollectFromStagingArea,
         };
 
@@ -27,9 +27,9 @@ internal static class LocoCallNoteMappings
          {
              ForCallId = record.CallId,
              LocoInfo = record.ToLocoInfo(),
-             TrainOperationDays = record.TrainOperatingDaysFlags.ToOperationDays(),
-             DutyOperationDays = record.DutyOperatingDaysFlags.ToOperationDays(),
-             LocoOperationDays = record.LocoOperatingDaysFlags.ToOperationDays(),
+             TrainOperationDays = record.TrainOperationDaysFlags.ToOperationDays(),
+             DutyOperationDays = record.DutyOperationDaysFlags.ToOperationDays(),
+             LocoOperationDays = record.LocoOperationDaysFlags.ToOperationDays(),
              DriveToStagingArea = record.DriveToStagingArea,
          };
     public static IEnumerable<LocoExchangeNote> ToLocoExchangeNotes(this IEnumerable<LocoExchangeRecord> records) =>
@@ -40,10 +40,10 @@ internal static class LocoCallNoteMappings
         return new()
         {
             ForCallId = record.CallId,
-            DutyOperationDays = record.DutyOperatingDaysFlags.ToOperationDays(),
-            TrainOperationDays = record.TrainOperatingDaysFlags.ToOperationDays(),
-            LocoOperationDays = record.LocoOperatingDaysFlags.ToOperationDays(),
-            ReplacingLocoOperationDays = record.ReplacingLocoOperatingDaysFlags.ToOperationDays(),
+            DutyOperationDays = record.DutyOperationDaysFlags.ToOperationDays(),
+            TrainOperationDays = record.TrainOperationDaysFlags.ToOperationDays(),
+            LocoOperationDays = record.LocoOperationDaysFlags.ToOperationDays(),
+            ReplacingLocoOperationDays = record.ReplacingLocoOperationDaysFlags.ToOperationDays(),
         };
     }
 
@@ -53,9 +53,9 @@ internal static class LocoCallNoteMappings
         new()
         {
             ForCallId = record.CallId,
-            DutyOperationDays = record.DutyOperatingDaysFlags.ToOperationDays(),
-            TrainOperationDays = record.TrainOperatingDaysFlags.ToOperationDays(),
-            LocoOperationDays = record.LocoOperatingDaysFlags.ToOperationDays(),
+            DutyOperationDays = record.DutyOperationDaysFlags.ToOperationDays(),
+            TrainOperationDays = record.TrainOperationDaysFlags.ToOperationDays(),
+            LocoOperationDays = record.LocoOperationDaysFlags.ToOperationDays(),
             CirculateLoco = record.CirculateLoco,
             TurnLoco = record.TurnLoco,
         };
@@ -67,7 +67,6 @@ internal static class LocoCallNoteMappings
             OperatorSignature = record.LocoOperatorSignature,
             LocoNumber = record.LocoNumber ?? string.Empty,
             TurnusNumber = record.TurnusNumber,
-            IsDoubleDirectionTrain = record.IsDoubleDirectionTrain
         };
 }
 
