@@ -5,10 +5,10 @@ namespace TimetablePlanning.Models.CallNotes.Mappings;
 
 internal static class LocoCallNoteMappings
 {
-    public static IEnumerable<LocoConnectNote> ToLocoConnectNotes(this IEnumerable<LocoConnectRecord> records) =>
+    public static IEnumerable<LocoConnectCallNote> ToLocoConnectNotes(this IEnumerable<LocoConnectRecord> records) =>
         records.Select(e => e.ToLocoConnectioNote());
 
-    public static LocoConnectNote ToLocoConnectioNote(this LocoConnectRecord record) =>
+    public static LocoConnectCallNote ToLocoConnectioNote(this LocoConnectRecord record) =>
         new()
         {
             ForCallId = record.CallId,
@@ -19,10 +19,10 @@ internal static class LocoCallNoteMappings
             CollectFromStagingArea = record.CollectFromStagingArea,
         };
 
-    public static IEnumerable<LocoDisconnectNote> ToLocoDisconnectNotes(this IEnumerable<LocoDisconnectRecord> records) =>
+    public static IEnumerable<LocoDisconnectCallNote> ToLocoDisconnectNotes(this IEnumerable<LocoDisconnectRecord> records) =>
         records.Select(ld => ld.ToLocoDisconnectNote());
 
-    public static LocoDisconnectNote ToLocoDisconnectNote(this LocoDisconnectRecord record) =>
+    public static LocoDisconnectCallNote ToLocoDisconnectNote(this LocoDisconnectRecord record) =>
          new()
          {
              ForCallId = record.CallId,
@@ -32,10 +32,10 @@ internal static class LocoCallNoteMappings
              LocoOperationDays = record.LocoOperationDaysFlags.ToOperationDays(),
              DriveToStagingArea = record.DriveToStagingArea,
          };
-    public static IEnumerable<LocoExchangeNote> ToLocoExchangeNotes(this IEnumerable<LocoExchangeRecord> records) =>
+    public static IEnumerable<LocoExchangeCallNote> ToLocoExchangeNotes(this IEnumerable<LocoExchangeRecord> records) =>
         records.Select(e => e.ToLocoExchangeNote());
 
-    public static LocoExchangeNote ToLocoExchangeNote(this LocoExchangeRecord record)
+    public static LocoExchangeCallNote ToLocoExchangeNote(this LocoExchangeRecord record)
     {
         return new()
         {
@@ -44,6 +44,9 @@ internal static class LocoCallNoteMappings
             TrainOperationDays = record.TrainOperationDaysFlags.ToOperationDays(),
             LocoOperationDays = record.LocoOperationDaysFlags.ToOperationDays(),
             ReplacingLocoOperationDays = record.ReplacingLocoOperationDaysFlags.ToOperationDays(),
+            ReplacingLocoOperatorSignature = record.ReplacingLocoOperatorSignature,
+            ReplacingLocoClass = record.ReplacingLocoClass,
+            ReplacingLocoNumber = record.ReplacingLocoNumber,
         };
     }
 

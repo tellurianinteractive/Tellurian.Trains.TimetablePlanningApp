@@ -25,8 +25,12 @@ public sealed class LocoDisconnectRecord : LocoRecord
 
 public sealed class LocoExchangeRecord : NoteRecord
 {
-    public required byte LocoOperationDaysFlags { get; set; }
+    public required byte LocoOperationDaysFlags { get; init; }
     public required byte ReplacingLocoOperationDaysFlags { get; init; }
+    public required string ReplacingLocoOperatorSignature { get; init; }
+    public required string ReplacingLocoClass { get; init; }
+    public string? ReplacingLocoNumber { get; init; }
+    public required string ReplacingLocoTurnusNumber { get; init; }
 }
 
 public sealed class LocoTurnOrCirculateRecord : NoteRecord

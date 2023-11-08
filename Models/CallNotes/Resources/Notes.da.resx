@@ -171,4 +171,16 @@
   <data name="TurnAndReverseLoco" xml:space="preserve">
     <value>Vend og omløb lokomotiv.</value>
   </data>
+  <data name="ReplaceLoco" xml:space="preserve">
+    <value>Udskift lokomotiv.</value>
+  </data>
+  <data name="UseLoco" xml:space="preserve">
+    <value>Brug lokomotiv</value>
+  </data>
+  <data name="SwitchWagonsToFreightCustomers" xml:space="preserve">
+    <value>Skift vogne til fragtkunder.</value>
+  </data>
+  <data name="CollectWagonsFromFreightCustomers" xml:space="preserve">
+    <value>Saml vogne fra fragtkunder.</value>
+  </data>
 </root>

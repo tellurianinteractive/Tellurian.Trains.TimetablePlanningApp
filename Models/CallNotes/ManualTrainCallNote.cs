@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Globalization;
 using TimetablePlanning.Models.CallNotes.Extensions;
+using TimetablePlanning.Models.Common;
 
 namespace TimetablePlanning.Models.CallNotes;
 public class ManualTrainCallNote : TrainCallNote
 {
+    public required OperationDays DisplayDays { get; set; }  
+    protected override OperationDays NoteDays => DisplayDays;
     public override MarkupString Markup() => new(MarkupText);
 
     private string MarkupText => 
@@ -32,6 +35,7 @@ public class ManualTrainCallNote : TrainCallNote
 
         }
     }
+
 
     private readonly Dictionary<string, string> _localizedTexts = [];
     public void Add(string text, string twoLetterIsoLanguageName) =>

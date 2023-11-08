@@ -171,4 +171,16 @@
   <data name="TurnAndReverseLoco" xml:space="preserve">
     <value>Turn and circulate loco.</value>
   </data>
+  <data name="ReplaceLoco" xml:space="preserve">
+    <value>Replace loco.</value>
+  </data>
+  <data name="UseLoco" xml:space="preserve">
+    <value>Use loco</value>
+  </data>
+  <data name="SwitchWagonsToFreightCustomers" xml:space="preserve">
+    <value>Switch wagons to freight customers.</value>
+  </data>
+  <data name="CollectWagonsFromFreightCustomers" xml:space="preserve">
+    <value>Collect wagons from freight customers.</value>
+  </data>
 </root>

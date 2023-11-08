@@ -79,6 +79,15 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Collect wagons from freight customers..
+        /// </summary>
+        internal static string CollectWagonsFromFreightCustomers {
+            get {
+                return ResourceManager.GetString("CollectWagonsFromFreightCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connect loco.
         /// </summary>
         internal static string ConnectLoco {
@@ -187,6 +196,24 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Replace loco..
+        /// </summary>
+        internal static string ReplaceLoco {
+            get {
+                return ResourceManager.GetString("ReplaceLoco", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Switch wagons to freight customers..
+        /// </summary>
+        internal static string SwitchWagonsToFreightCustomers {
+            get {
+                return ResourceManager.GetString("SwitchWagonsToFreightCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Turn and circulate loco..
         /// </summary>
         internal static string TurnAndReverseLoco {
@@ -210,6 +237,15 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         internal static string Turnus {
             get {
                 return ResourceManager.GetString("Turnus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use loco.
+        /// </summary>
+        internal static string UseLoco {
+            get {
+                return ResourceManager.GetString("UseLoco", resourceCulture);
             }
         }
         

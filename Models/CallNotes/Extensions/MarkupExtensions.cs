@@ -24,16 +24,17 @@ internal static class MarkupExtensions
         Span(origin.FullName, "origin");
 
     public static string Span(this string? text, string cssClass = "text", string after = "") =>
-       $"""
+        string.IsNullOrWhiteSpace(text) ? string.Empty :
+        $"""
         <span class="callnote {cssClass}">{text ?? string.Empty}{after} </span>
         """;
     public static string Div(this string? text, string cssClass = "", string after = "") =>
         string.IsNullOrEmpty(cssClass) ?
-       $"""
+        $"""
         
         <div class="callnote">{text ?? string.Empty}{after}</div>
         """:
-       $"""
+        $"""
         
         <div class="callnote {cssClass}">{text ?? string.Empty}{after}</div>
         """;

@@ -40,6 +40,10 @@ public static class LocoRecordMapper
              TrainOperationDaysFlags = record.GetByte(nameof(LocoRecord.TrainOperationDaysFlags)),
              LocoOperationDaysFlags = record.GetByte(nameof(LocoExchangeRecord.LocoOperationDaysFlags)),
              ReplacingLocoOperationDaysFlags = record.GetByte(nameof(LocoExchangeRecord.ReplacingLocoOperationDaysFlags)),
+             ReplacingLocoOperatorSignature = record.GetString(nameof(LocoExchangeRecord.ReplacingLocoOperatorSignature)),
+             ReplacingLocoClass = record.GetString(nameof(LocoExchangeRecord.ReplacingLocoClass)),
+             ReplacingLocoNumber = record.GetString(nameof(LocoExchangeRecord.ReplacingLocoNumber)),
+             ReplacingLocoTurnusNumber = record.GetString(nameof(LocoExchangeRecord.ReplacingLocoTurnusNumber)),
          };
 
     public static LocoTurnOrCirculateRecord ToLocoTurnOrCirculateRecord(this IDataRecord record) =>

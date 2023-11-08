@@ -24,6 +24,7 @@ internal static class ManualTrainCallNoteMappings
             ForCallId=first.CallId,
             DutyOperationDays = first.DutyOperationDaysFlags.ToOperationDays(),
             TrainOperationDays = first.TrainOperationDaysFlags.ToOperationDays(),
+            DisplayDays = first.DisplayDaysFlags.ToOperationDays(),
             IsForArrival = first.IsForArrival,
             IsForDeparture = first.IsForDeparture,
             IsToDispatcher = first.IsToDispatcher,

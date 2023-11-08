@@ -162,8 +162,24 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 TrainOperationDaysFlags = OperationDayFlags.Daily,
                 LocoOperationDaysFlags = OperationDayFlags.Daily,
                 ReplacingLocoOperationDaysFlags = OperationDayFlags.Daily,
+                ReplacingLocoOperatorSignature = "SJ",
+                ReplacingLocoClass = "Rc5",
+                ReplacingLocoNumber = "1422",
+                ReplacingLocoTurnusNumber = "23"
             }.AsEnumerable(),
-            _ => Enumerable.Empty<LocoExchangeRecord>(),
+             32 => new LocoExchangeRecord()
+             {
+                 CallId = 31,
+                 DutyOperationDaysFlags = OperationDayFlags.Daily,
+                 TrainOperationDaysFlags = OperationDayFlags.Daily,
+                 LocoOperationDaysFlags = OperationDayFlags.MoWeFr,
+                 ReplacingLocoOperationDaysFlags = OperationDayFlags.MoWeFr,
+                 ReplacingLocoOperatorSignature = "SJ",
+                 ReplacingLocoClass = "Rc5",
+                 ReplacingLocoNumber = "1422",
+                 ReplacingLocoTurnusNumber = "23"
+             }.AsEnumerable(),
+             _ => Enumerable.Empty<LocoExchangeRecord>(),
         };
     }
 
@@ -240,7 +256,7 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 CallId = 1,
                 DutyOperationDaysFlags = OperationDayFlags.Daily,
                 TrainOperationDaysFlags = OperationDayFlags.Daily,
-                LocoOperationDaysFlags = OperationDayFlags.Daily,
+                DisplayDaysFlags = OperationDayFlags.Daily,
                 TwoLetterIsoLanguageName = "sv",
                 Text = "Manuell not på svenska.",
                 IsForDeparture = true,
@@ -254,7 +270,7 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                     CallId = 2,
                     DutyOperationDaysFlags = OperationDayFlags.Daily,
                     TrainOperationDaysFlags = OperationDayFlags.Daily,
-                    LocoOperationDaysFlags = OperationDayFlags.Daily,
+                    DisplayDaysFlags = OperationDayFlags.Daily,
                     TwoLetterIsoLanguageName = "en",
                     Text = "Manual note in english.",
                     IsForDeparture = true,
@@ -265,7 +281,7 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                     CallId = 2,
                     DutyOperationDaysFlags = OperationDayFlags.Daily,
                     TrainOperationDaysFlags = OperationDayFlags.Daily,
-                    LocoOperationDaysFlags = OperationDayFlags.Daily,
+                    DisplayDaysFlags = OperationDayFlags.Daily,
                     TwoLetterIsoLanguageName = "sv",
                     Text = "Manuell not på svenska.",
                     IsForDeparture = true,

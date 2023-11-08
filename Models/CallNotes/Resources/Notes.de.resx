@@ -171,4 +171,16 @@
   <data name="TurnAndReverseLoco" xml:space="preserve">
     <value>Lok drehen und umkehren.</value>
   </data>
+  <data name="ReplaceLoco" xml:space="preserve">
+    <value>Lok ersetzen.</value>
+  </data>
+  <data name="UseLoco" xml:space="preserve">
+    <value>Benutze die Lok</value>
+  </data>
+  <data name="SwitchWagonsToFreightCustomers" xml:space="preserve">
+    <value>Verteilen Wagen an Frachtkunden.</value>
+  </data>
+  <data name="CollectWagonsFromFreightCustomers" xml:space="preserve">
+    <value>Sammeln Waggons von Frachtkunden.</value>
+  </data>
 </root>

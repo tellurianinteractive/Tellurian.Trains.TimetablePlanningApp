@@ -8,12 +8,15 @@ public class AccessCallNoteRecordsService(string connectionString, CancellationT
     private CancellationTokenSource CancellationTokenSource { get; } = cancellationTokenSource;
     private CancellationToken CancellationToken => CancellationTokenSource.Token;
     private OdbcConnection Connection => new(connectionString);
+
     public Task<IEnumerable<LocoConnectRecord>> GetLocoConnectRecordsAsync(int layoutId) =>
         GetRecordsAsync(layoutId, "LocoConnectRecords", LocoRecordMapper.ToLocoConnectRecord);
     public Task<IEnumerable<LocoDisconnectRecord>> GetLocoDisconnectRecordsAsync(int layoutId) =>
         GetRecordsAsync(layoutId, "LocoDisconnectRecords", LocoRecordMapper.ToLocoDisconnectRecord);
 
-    public Task<IEnumerable<LocoExchangeRecord>> GetLocoExchangeRecordsAsync(int layoutId) => throw new NotImplementedException();
+    public Task<IEnumerable<LocoExchangeRecord>> GetLocoExchangeRecordsAsync(int layoutId) =>
+        GetRecordsAsync(layoutId, "LocoExchangeRecords", LocoRecordMapper.ToLocoExchangeRecord);
+
     public Task<IEnumerable<LocoTurnOrCirculateRecord>> GetLocoTurnOrCirculateRecordsAsync(int layoutId) => throw new NotImplementedException();
     public Task<IEnumerable<ManualNoteRecord>> GetManualNoteRecordsAsync(int layoutId) => throw new NotImplementedException();
     public Task<IEnumerable<ScheduledWagonsConnectRecord>> GetScheduledWagonsConnectRecordsAsync(int layoutId) => throw new NotImplementedException();

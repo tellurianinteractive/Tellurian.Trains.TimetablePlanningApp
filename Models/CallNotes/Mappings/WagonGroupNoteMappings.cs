@@ -16,7 +16,7 @@ internal static class WagonGroupNoteMappings
             ForCallId = records.First().CallId,
             DutyOperationDays = records.First().DutyOperationDaysFlags.ToOperationDays(),
             TrainOperationDays = records.First().TrainOperationDaysFlags.ToOperationDays(),
-            GroupsDestinations = records
+            GroupDestinations = records
                 .OrderBy(r => r.PositionInTrain)
                 .ThenBy(r => r.DisplayOrder)
                 .Select(r => r.ToGroupDestination()),
@@ -28,7 +28,7 @@ internal static class WagonGroupNoteMappings
             ForCallId = records.First().CallId,
             DutyOperationDays = records.First().DutyOperationDaysFlags.ToOperationDays(),
             TrainOperationDays = records.First().TrainOperationDaysFlags.ToOperationDays(),
-            GroupsDestinations = records
+            GroupDestinations = records
                 .OrderBy(r=> r.PositionInTrain)
                 .ThenBy(r => r.DisplayOrder)
                 .Select(r => r.ToGroupDestination()),

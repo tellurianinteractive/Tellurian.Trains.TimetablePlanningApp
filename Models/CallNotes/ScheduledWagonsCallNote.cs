@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using TimetablePlanning.Models.CallNotes.Extensions;
+using TimetablePlanning.Models.Common;
 
 namespace TimetablePlanning.Models.CallNotes;
 
@@ -20,12 +21,12 @@ public abstract class ScheduledWagonsCallNote : TrainCallNote {
         }
     }
     public override MarkupString Markup() => new(MarkupString);
-
-    private string MarkupString => $"{LocalizedText.DivText()}{string.Join("", Wagons.Select(w => w.Markup(ServiceOperationDays, ShowAllOperationDays)))}";
+    private string MarkupString => $"{LocalizedText.DivText()}{string.Join("", Wagons.Select(w => w.Markup(OperationDays, ShowAllOperationDays)))}";
     protected bool HasBlocks => _wagons.Any();
-    private bool ShowAllOperationDays => _wagons.Any(w => !w.OperationDays.IsAllOtherDays(ServiceOperationDays));
+    private bool ShowAllOperationDays => _wagons.Any(w => !w.OperationDays.IsAllOtherDays(OperationDays));
 
     protected abstract string LocalizedText { get; }
+    protected override OperationDays NoteDays => OperationDays.Daily;
 }
 
 public sealed class ScheduledWagonsConnectNote : ScheduledWagonsCallNote {

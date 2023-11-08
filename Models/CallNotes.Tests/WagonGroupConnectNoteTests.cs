@@ -3,7 +3,7 @@
 namespace TimetablePlanning.Models.CallNotes.Tests;
 
 [TestClass]
-public class WaybillWagonsConnectNoteTests: NoteTestsBase
+public class WagonGroupConnectNoteTests: NoteTestsBase
 {
     [TestMethod]
     public async Task SingleNote()

@@ -9,7 +9,7 @@ public static class ManualNoteRecordMapper
             CallId = record.GetInt(nameof(LocoRecord.CallId)),
             DutyOperationDaysFlags = record.GetByte(nameof(ManualNoteRecord.DutyOperationDaysFlags)),
             TrainOperationDaysFlags = record.GetByte(nameof(ManualNoteRecord.TrainOperationDaysFlags)),
-            LocoOperationDaysFlags = record.GetByte(nameof(ManualNoteRecord.LocoOperationDaysFlags)),
+            DisplayDaysFlags = record.GetByte(nameof(ManualNoteRecord.DisplayDaysFlags)),
             TwoLetterIsoLanguageName = record.GetString(nameof(ManualNoteRecord.TwoLetterIsoLanguageName)),
             Text = record.GetString(nameof(ManualNoteRecord.Text)),
         };

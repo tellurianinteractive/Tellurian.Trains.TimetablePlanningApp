@@ -32,4 +32,12 @@ public class AccessCallNoteRecordsServiceTests
         Assert.IsNotNull(result);
         foreach (var record in result) { Console.WriteLine(record); }
     }
+
+    [TestMethod]
+    public async Task ReadLocoExchangeRecords()
+    {
+        var result = await _callNoteRecordsService!.GetLocoExchangeRecordsAsync(27);
+        Assert.IsNotNull(result);
+        foreach (var record in result) { Console.WriteLine(record); }
+    }
 }

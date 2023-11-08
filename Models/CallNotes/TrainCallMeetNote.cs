@@ -21,12 +21,11 @@ public class TrainCallMeetNote : TrainCallNote
 
     public override MarkupString Markup() => new(MarkupText);
     private string MarkupText => TrainCall.IsOverlapping(MeetingTrainCall) ?
-            NoteDays.IsAnyOtherDays(ServiceOperationDays) ? string.Concat(Days, LocalizedText.SpanText(), MeetingTrain.Markup, Time) :
-            string.Empty :
+            string.Concat(Days.SpanDays(), LocalizedText.SpanText(), MeetingTrain.Markup, Time) :
         string.Empty;
 
     private string LocalizedText => IsPassing ? Resources.Notes.Passes : Resources.Notes.Meets;
     private string Time => $"{TrainCall.ArrivalTime.Max(MeetingTrainCall.ArrivalTime):hh\\:mm}-{TrainCall.DepartureTime.Min(MeetingTrainCall.DepartureTime):hh\\:mm}".SpanValue();
-    private string Days => NoteDays.IsAllOtherDays(ServiceOperationDays) ? string.Empty : NoteDays.ShortName.SpanDays();
-    private OperationDays NoteDays => MeetingTrain.OperationDays & ServiceOperationDays;
+
+    protected override OperationDays NoteDays =>TrainOperationDays & MeetingTrain.OperationDays;
 }

@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Numerics;
 using System.Text;
 
 namespace TimetablePlanning.Models.Common;
@@ -14,17 +15,19 @@ public class OperationDays
     public int NumberOfDays { get; init; }
     public required byte Flags;
 
-    public override bool Equals(object? obj) => obj is OperationDays other && other.ShortName.Equals(ShortName, StringComparison.OrdinalIgnoreCase);
+    public override bool Equals(object? obj) => obj is OperationDays other && other.Flags == Flags;
     public override int GetHashCode() => ShortName.GetHashCode(StringComparison.OrdinalIgnoreCase);
     public override string ToString() => ShortName;
 
     public static OperationDays Daily => OperationDayFlags.Daily.ToOperationDays();
     public static OperationDays OnDemand => OperationDayFlags.OnDemand.ToOperationDays();
 
-
-    public static OperationDays operator &(OperationDays days1, OperationDays days2) => 
+   public static OperationDays operator &(OperationDays days1, OperationDays days2) => 
         days1.IsOnDemand || days2.IsOnDemand ? OnDemand : 
         ((byte)(days1.Flags & days2.Flags)).ToOperationDays();
+
+    public static bool operator == (OperationDays one, OperationDays another) => one.Equals(another);
+    public static bool operator !=(OperationDays one, OperationDays another) => !one.Equals(another);
 
     public bool IsAllOtherDays(OperationDays operationDays) => And(Flags) == operationDays.Flags;
     public bool IsAnyOtherDays(OperationDays operationDays) => And(operationDays.Flags) > 0;
@@ -44,7 +47,7 @@ public static class OperationDayFlags
 public static class OperationDaysExtensions
 {
 
-    private static readonly Day[] Days = new[] {
+    private static readonly Day[] Days = [
             new Day(0, 0x7F, "Daily"),
             new Day(1, 0x01, "Monday"),
             new Day(2, 0x02, "Tuesday"),
@@ -53,7 +56,7 @@ public static class OperationDaysExtensions
             new Day(5, 0x10, "Friday"),
             new Day(6, 0x20, "Saturday"),
             new Day(7, 0x40, "Sunday"),
-            new Day(0, 0x80, "OnDemand") };
+            new Day(0, 0x80, "OnDemand") ];
 
     private static Day[] GetDays(this byte flags) =>
         flags == Days[0].Flag ? new Day[] { Days[0] } :
@@ -158,19 +161,12 @@ public static class OperationDaysExtensions
     #endregion
 }
 
-internal class Day
+internal class Day(byte number, byte flag, string resourceKey)
 {
-    public Day(byte number, byte flag, string resourceKey)
-    {
-        Number = number;
-        Flag = flag;
-        FullNameResourceKey = resourceKey;
-        ShortNameResourceKey = resourceKey + "Short";
-    }
-    public byte Flag { get; }
-    public byte Number { get; }
-    private string FullNameResourceKey { get; }
-    private string ShortNameResourceKey { get; }
+    public byte Flag { get; } = flag;
+    public byte Number { get; } = number;
+    private string FullNameResourceKey { get; } = resourceKey;
+    private string ShortNameResourceKey { get; } = resourceKey + "Short";
     public string FullName => Resources.Days.ResourceManager.GetString(FullNameResourceKey, CultureInfo.CurrentCulture) ?? FullNameResourceKey;
     public string ShortName => Resources.Days.ResourceManager.GetString(ShortNameResourceKey, CultureInfo.CurrentCulture) ?? ShortNameResourceKey;
 }

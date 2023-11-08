@@ -171,4 +171,16 @@
   <data name="TurnAndReverseLoco" xml:space="preserve">
     <value>Vänd lok och gör rundgång.</value>
   </data>
+  <data name="ReplaceLoco" xml:space="preserve">
+    <value>Lokbyte.</value>
+  </data>
+  <data name="UseLoco" xml:space="preserve">
+    <value>Använd lok</value>
+  </data>
+  <data name="SwitchWagonsToFreightCustomers" xml:space="preserve">
+    <value>Växla vagnar till godskunder.</value>
+  </data>
+  <data name="CollectWagonsFromFreightCustomers" xml:space="preserve">
+    <value>Hämta vagnar från godskunder.</value>
+  </data>
 </root>
