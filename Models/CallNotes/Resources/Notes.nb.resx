@@ -177,7 +177,7 @@
   <data name="UseLoco" xml:space="preserve">
     <value>Bruk loko</value>
   </data>
-  <data name="SwitchWagonsToFreightCustomers" xml:space="preserve">
+  <data name="DeliverWagonsToFreightCustomers" xml:space="preserve">
     <value>Skift vogner til fraktkunder.</value>
   </data>
   <data name="CollectWagonsFromFreightCustomers" xml:space="preserve">

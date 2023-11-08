@@ -13,8 +13,9 @@ public class WagonGroupConnectNoteTests: NoteTestsBase
 
         const string expected = """
 
+            <div class="callnote">
             <div class="callnote text">Connect wagons to </div>
-            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
+            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());
@@ -28,9 +29,10 @@ public class WagonGroupConnectNoteTests: NoteTestsBase
 
         const string expected = """
 
+            <div class="callnote">
             <div class="callnote text">Connect wagons to </div>
             <div class="callnote item"><span class="callnote destination other">Ytterby</span></div>
-            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
+            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());
@@ -44,9 +46,10 @@ public class WagonGroupConnectNoteTests: NoteTestsBase
 
         const string expected = """
             
+            <div class="callnote">
             <div class="callnote text">Connect wagons to </div>
             <div class="callnote item"><span class="callnote days">Tu,Th,Sa: </span><span class="callnote destination other">Ytterby</span></div>
-            <div class="callnote item"><span class="callnote days">Mo,We,Fr: </span><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
+            <div class="callnote item"><span class="callnote days">Mo,We,Fr: </span><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div></div>
             """;
         Assert.AreEqual(new MarkupString(expected), note.Markup());
     }

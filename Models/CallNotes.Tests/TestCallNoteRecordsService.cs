@@ -469,5 +469,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
         };
     }
 
+    public Task<IEnumerable<WagonGroupFromCustomersRecord>> GetWagonGroupFromCustomersRecordsAsync(int layoutId) => 
+        Task.FromResult( Enumerable.Empty<WagonGroupFromCustomersRecord>());
+    public Task<IEnumerable<WagonGroupToCustomersRecord>> GetWagonGroupToCustomersRecordsAsync(int layoutId) => 
+        Task.FromResult(Enumerable.Empty<WagonGroupToCustomersRecord>());
 }
 

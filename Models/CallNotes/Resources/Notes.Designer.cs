@@ -115,6 +115,15 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deliver wagons to freight customers..
+        /// </summary>
+        internal static string DeliverWagonsToFreightCustomers {
+            get {
+                return ResourceManager.GetString("DeliverWagonsToFreightCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disconnect loco.
         /// </summary>
         internal static string DisconnectLoco {
@@ -201,15 +210,6 @@ namespace TimetablePlanning.Models.CallNotes.Resources {
         internal static string ReplaceLoco {
             get {
                 return ResourceManager.GetString("ReplaceLoco", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Switch wagons to freight customers..
-        /// </summary>
-        internal static string SwitchWagonsToFreightCustomers {
-            get {
-                return ResourceManager.GetString("SwitchWagonsToFreightCustomers", resourceCulture);
             }
         }
         

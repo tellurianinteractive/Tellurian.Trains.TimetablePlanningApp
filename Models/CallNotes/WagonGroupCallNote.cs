@@ -15,7 +15,7 @@ public abstract class WagonGroupCallNote : TrainCallNote
 
     public IEnumerable<GroupDestination> GroupDestinations { get; internal set; } = Enumerable.Empty<GroupDestination>();
 
-    public override MarkupString Markup() => new(MarkupText);
+    public override MarkupString Markup() => new(MarkupText.Div());
     private string MarkupText => 
         GroupDestinations.Any() ? $"{LocalizedText.DivText()}{string.Join("", GroupDestinationsMarkup)}" : 
         string.Empty;
@@ -48,9 +48,9 @@ public sealed class WagonGroupDisconnectNote : WagonGroupCallNote
     protected override string LocalizedText => Resources.Notes.DisconnectWagonsTo;
 }
 
-public abstract class WagonGroupSwitchOrCollectCallNote : TrainCallNote
+public abstract class WagonGroupShuntingCallNote : TrainCallNote
 {
-    public WagonGroupSwitchOrCollectCallNote()
+    public WagonGroupShuntingCallNote()
     {
         IsToLocoDriver = true;
         IsToShunter = true;
@@ -61,17 +61,17 @@ public abstract class WagonGroupSwitchOrCollectCallNote : TrainCallNote
 
 }
 
-public sealed class WagonGroupSwitchCallNote : WagonGroupSwitchOrCollectCallNote
+public sealed class WagonGroupToCustomersCallNote : WagonGroupShuntingCallNote
 {
-    public WagonGroupSwitchCallNote()
+    public WagonGroupToCustomersCallNote()
     {
         IsForArrival=true;
     }
-    protected override string LocalizedText => Notes.SwitchWagonsToFreightCustomers;
+    protected override string LocalizedText => Notes.DeliverWagonsToFreightCustomers;
 }
-public sealed class WagonGroupCollectCallNote : WagonGroupSwitchOrCollectCallNote
+public sealed class WagonGroupFromCustomersCallNote : WagonGroupShuntingCallNote
 {
-    public WagonGroupCollectCallNote()
+    public WagonGroupFromCustomersCallNote()
     {
         IsForDeparture = true;
     }

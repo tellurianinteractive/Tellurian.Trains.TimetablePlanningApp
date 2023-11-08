@@ -10,6 +10,12 @@ internal static class WagonGroupNoteMappings
     public static IEnumerable<WagonGroupDisconnectNote> ToWagonGroupsDisconnectNotes(this IEnumerable<WagonGroupDisconnectRecord> records) =>
         records.GroupBy(b => b.CallId).Select(g => g.ToWagonGroupDisconnectNote());
 
+    public static IEnumerable<WagonGroupFromCustomersCallNote> ToWagonGroupFromCustomersCallNotes(this IEnumerable<WagonGroupFromCustomersRecord> records) =>
+        records.Select(r => r.ToWagonGroupFromCustomersCallNote());
+
+    public static IEnumerable<WagonGroupToCustomersCallNote> ToWagonGroupToCustomersCallNote(this IEnumerable<WagonGroupToCustomersRecord> records) =>
+        records.Select(r => r.ToWagonGroupToCustomersCallNote());
+
     private static WagonGroupConnectNote ToWagonGroupConnectNote(this IEnumerable<WagonGroupConnectRecord> records) =>
         new()
         {
@@ -32,5 +38,19 @@ internal static class WagonGroupNoteMappings
                 .OrderBy(r=> r.PositionInTrain)
                 .ThenBy(r => r.DisplayOrder)
                 .Select(r => r.ToGroupDestination()),
+        };
+
+    private static WagonGroupFromCustomersCallNote ToWagonGroupFromCustomersCallNote(this WagonGroupFromCustomersRecord record) =>
+        new()
+        {
+            ForCallId = record.CallId,
+            DutyOperationDays = record.DutyOperationDaysFlags.ToOperationDays(),
+            TrainOperationDays = record.TrainOperationDaysFlags.ToOperationDays(),
+        }; 
+    private static WagonGroupToCustomersCallNote ToWagonGroupToCustomersCallNote(this WagonGroupToCustomersRecord record) =>
+        new() { 
+             ForCallId = record.CallId,
+             DutyOperationDays = record.DutyOperationDaysFlags.ToOperationDays(),
+             TrainOperationDays = record.TrainOperationDaysFlags.ToOperationDays(),
         };
 }

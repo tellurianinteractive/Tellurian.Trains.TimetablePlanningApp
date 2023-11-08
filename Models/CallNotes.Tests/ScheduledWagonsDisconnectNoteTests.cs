@@ -12,8 +12,9 @@ public class ScheduledWagonsDisconnectNoteTests : NoteTestsBase
 
         const string expected = """
 
+            <div class="callnote">
             <div class="callnote text">Disconnect wagon groups </div>
-            <div class="callnote item"><span class="callnote days">Mo,We,Fr: </span><span class="callnote value">turnus 21 (max 2 wagons) </span></div>
+            <div class="callnote item"><span class="callnote days">Mo,We,Fr: </span><span class="callnote value">turnus 21 (max 2 wagons) </span></div></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());

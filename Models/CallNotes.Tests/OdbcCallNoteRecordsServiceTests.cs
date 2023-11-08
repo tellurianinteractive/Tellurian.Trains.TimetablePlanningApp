@@ -4,17 +4,16 @@ using TimetablePlanning.Models.CallNotes.Data.Mappers;
 namespace TimetablePlanning.Models.CallNotes.Tests;
 
 [TestClass]
-public class AccessCallNoteRecordsServiceTests
+public class OdbcCallNoteRecordsServiceTests
 {
     const string connectionString = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};Dbq=C:\\Users\\Stefan\\OneDrive\\Modelljärnväg\\Träffar\\2023\\2023-11 Värnamo\\Timetable.accdb;Uid=Admin;Pwd=;";
 
     private ICallNoteRecordsService? _callNoteRecordsService;
-    private readonly CancellationTokenSource _cancellationTokenSource = new ();
 
     [TestInitialize]
     public void TestInitialize()
     {
-        _callNoteRecordsService = new AccessCallNoteRecordsService(connectionString, _cancellationTokenSource);
+        _callNoteRecordsService = new OdbcCallNoteRecordsService(connectionString);
     }
 
     [TestMethod]

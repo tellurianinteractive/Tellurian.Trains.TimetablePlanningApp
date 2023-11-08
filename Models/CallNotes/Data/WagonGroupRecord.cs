@@ -1,4 +1,6 @@
-﻿namespace TimetablePlanning.Models.CallNotes.Data;
+﻿using TimetablePlanning.Models.CallNotes.Resources;
+
+namespace TimetablePlanning.Models.CallNotes.Data;
 
 public abstract class WagonGroupRecord : WagonRecord
 {
@@ -19,4 +21,17 @@ public sealed class WagonGroupDisconnectRecord : WagonGroupRecord
 
 public sealed class WagonGroupConnectRecord : WagonGroupRecord
 {
+}
+
+public abstract class WagonGroupShuntingRecord : NoteRecord
+{
+    protected abstract string LocalizedText { get; }
+}
+public sealed class WagonGroupToCustomersRecord : WagonGroupShuntingRecord
+{
+    protected override string LocalizedText => Notes.DeliverWagonsToFreightCustomers;
+}
+public sealed class WagonGroupFromCustomersRecord : WagonGroupShuntingRecord
+{
+    protected override string LocalizedText => Notes.CollectWagonsFromFreightCustomers;
 }

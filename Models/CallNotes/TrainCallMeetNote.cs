@@ -19,7 +19,7 @@ public class TrainCallMeetNote : TrainCallNote
     public required TrainCallInfo MeetingTrainCall { get; init; }
     public bool IsPassing { get; init; }
 
-    public override MarkupString Markup() => new(MarkupText);
+    public override MarkupString Markup() => new(MarkupText.Div());
     private string MarkupText => TrainCall.IsOverlapping(MeetingTrainCall) ?
             string.Concat(Days.SpanDays(), LocalizedText.SpanText(), MeetingTrain.Markup, Time) :
         string.Empty;

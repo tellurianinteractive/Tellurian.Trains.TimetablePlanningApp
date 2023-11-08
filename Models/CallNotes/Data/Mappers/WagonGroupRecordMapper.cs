@@ -45,4 +45,20 @@ public static class WagonGroupRecordMapper
             TransferDestinationName = record.GetString(nameof(WagonGroupRecord.TransferDestinationName))
         };
 
+    public static WagonGroupToCustomersRecord ToWagonGroupToCustomersRecord(this IDataRecord record) =>
+        new()
+        {
+            CallId = record.GetInt(nameof(WagonGroupShuntingRecord.CallId)),
+            DutyOperationDaysFlags = record.GetByte(nameof(WagonGroupShuntingRecord.DutyOperationDaysFlags)),
+            TrainOperationDaysFlags = record.GetByte(nameof(WagonGroupShuntingRecord.TrainOperationDaysFlags)),
+        };
+
+    public static WagonGroupFromCustomersRecord ToWagonGroupFromCustomersRecord(this IDataRecord record) =>
+        new()
+        {
+            CallId = record.GetInt(nameof(WagonGroupShuntingRecord.CallId)),
+            DutyOperationDaysFlags = record.GetByte(nameof(WagonGroupShuntingRecord.DutyOperationDaysFlags)),
+            TrainOperationDaysFlags = record.GetByte(nameof(WagonGroupShuntingRecord.TrainOperationDaysFlags)),
+        };
+
 }

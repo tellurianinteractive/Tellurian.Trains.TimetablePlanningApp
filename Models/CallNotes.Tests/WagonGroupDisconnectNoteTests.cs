@@ -13,8 +13,9 @@ public class WagonGroupDisconnectNoteTests : NoteTestsBase
 
         const string expected = """
 
+            <div class="callnote">
             <div class="callnote text">Disconnect wagons to </div>
-            <div class="callnote item"><span class="callnote destination other">Göteborg</span></div>
+            <div class="callnote item"><span class="callnote destination other">Göteborg</span></div></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), note.Markup());
@@ -34,9 +35,10 @@ public class WagonGroupDisconnectNoteTests : NoteTestsBase
 
         const string expected = """
 
+            <div class="callnote">
             <div class="callnote text">Disconnect wagons to </div>
             <div class="callnote item"><span class="callnote destination other">Ytterby</span></div>
-            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
+            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div></div>
             """;
 
         Assert.AreEqual(new MarkupString(expected), notes.First().Markup());
@@ -51,14 +53,16 @@ public class WagonGroupDisconnectNoteTests : NoteTestsBase
 
         const string extected1 = """
 
+            <div class="callnote">
             <div class="callnote text">Disconnect wagons to </div>
-            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div>
+            <div class="callnote item"><span class="callnote destination region" style="background-color: #009933; color: #FFFFFF">Göteborg</span></div></div>
             """; ;
 
         const string expected2 = """
 
+            <div class="callnote">
             <div class="callnote text">Disconnect wagons to </div>
-            <div class="callnote item"><span class="callnote destination other">Ytterby</span></div>
+            <div class="callnote item"><span class="callnote destination other">Ytterby</span></div></div>
             """;
 
         Assert.AreEqual(1, note1.ForCallId);
