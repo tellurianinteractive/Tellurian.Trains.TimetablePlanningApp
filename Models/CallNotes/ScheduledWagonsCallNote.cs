@@ -23,7 +23,7 @@ public abstract class ScheduledWagonsCallNote : TrainCallNote {
     public override MarkupString Markup() => new(MarkupString.Div());
     private string MarkupString => $"{LocalizedText.DivText()}{string.Join("", Wagons.Select(w => w.Markup(OperationDays, ShowAllOperationDays)))}";
     protected bool HasBlocks => _wagons.Any();
-    private bool ShowAllOperationDays => _wagons.Any(w => !w.OperationDays.IsAllOtherDays(OperationDays));
+    private bool ShowAllOperationDays => _wagons.Any(w => !w.OperationDays.IsAllDaysOf(OperationDays));
 
     protected abstract string LocalizedText { get; }
     protected override OperationDays NoteDays => OperationDays.Daily;

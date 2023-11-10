@@ -64,4 +64,17 @@ public class LocoTurnOrCirculateCallNoteTests : NoteTestsBase
             """;
         Assert.AreEqual(new MarkupString(expected), notes.First().Markup());
     }
+
+
+    [TestMethod]
+    public async Task TurnAllDaysOfDuty()
+    {
+        var notes = await Notes(29);
+        var expected =
+            $"""
+
+            <div class="callnote"><span class="callnote text">Turn and circulate loco.</span></div>
+            """;
+        Assert.AreEqual(new MarkupString(expected), notes.First().Markup());
+    }
 }

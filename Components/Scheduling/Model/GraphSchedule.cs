@@ -36,9 +36,9 @@ public static class GraphScheduleModelExtensions
                 var graphicalTrack = new GraphTrack(start, end, station, track, AsInputArea(start, end, (me.GraphSettings.TrackSpacing / 2) - 1));
                 tracks.Add(graphicalTrack);
             }
-            stations.Add(new GraphStation(me.StationLabelOffset(s), me.StationLabelOffset(s), station, tracks.ToArray()));
+            stations.Add(new GraphStation(me.StationLabelOffset(s), me.StationLabelOffset(s), station, [.. tracks]));
         }
-        return new GraphSchedule(stations.ToArray(), Times(me));
+        return new GraphSchedule([.. stations], Times(me));
     }
 
     static GraphTime[] Times(Schedule me)
@@ -51,7 +51,7 @@ public static class GraphScheduleModelExtensions
             var (Start, End) = me.TimeLine(TimeSpan.FromHours(hour));
             times.Add(new GraphTime(Start, End, hour));
         }
-        return times.ToArray();
+        return [.. times];
     }
 
 

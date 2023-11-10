@@ -1,18 +1,13 @@
 ﻿namespace TimetablePlanning.Models.Common;
 
-public class Station
+public class Station(string name, string signature)
 {
-    public Station(string name, string signature)
-    {
-        Name = name;
-        Signature = signature;
-    }
-    public string Name { get; }
-    public string Signature { get;  }
+    public string Name { get; } = name;
+    public string Signature { get; } = signature;
     public int Km { get; init; }
     public StationTrack[] Tracks { get { return _Tracks; } init { _Tracks = value; UpdateTrackReferences(); } }
 
-    private StationTrack[] _Tracks = Array.Empty<StationTrack>();
+    private StationTrack[] _Tracks = [];
 
     public override string ToString() => Signature;
 

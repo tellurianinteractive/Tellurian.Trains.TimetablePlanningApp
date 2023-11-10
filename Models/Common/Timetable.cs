@@ -2,5 +2,5 @@
 
 public record Timetable()
 {
-    public List<Train> Trains { get; } = new List<Train>();
+    public List<Train> Trains { get; } = [];
 }

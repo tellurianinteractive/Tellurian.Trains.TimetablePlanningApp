@@ -8,16 +8,10 @@ namespace TimetablePlanning.App.Server.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class XplnController : ControllerBase
+public class XplnController(ILogger<OdsDataSetProvider> datasetLogger, ILogger<XplnDataImporter> importerLogger) : ControllerBase
 {
-    public XplnController(ILogger<OdsDataSetProvider> datasetLogger, ILogger<XplnDataImporter> importerLogger)
-    {
-        DatasetLogger = datasetLogger;
-        ImporterLogger = importerLogger;
-    }
-
-    public ILogger<OdsDataSetProvider> DatasetLogger { get; }
-    public ILogger<XplnDataImporter> ImporterLogger { get; }
+    public ILogger<OdsDataSetProvider> DatasetLogger { get; } = datasetLogger;
+    public ILogger<XplnDataImporter> ImporterLogger { get; } = importerLogger;
 
     [HttpPost, Route("validate")]
     public IActionResult Validate([FromForm] List<IFormFile> files)

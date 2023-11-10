@@ -13,10 +13,10 @@ public abstract class TrainCallNote
     public bool IsToDispatcher { get; init; }
     public required OperationDays TrainOperationDays { get; init; }
     public required OperationDays DutyOperationDays { get; init; }
-    private OperationDays ServiceOperationDays => TrainOperationDays & DutyOperationDays;
-    protected OperationDays OperationDays => DutyOperationDays & TrainOperationDays & NoteDays;
+    private OperationDays ServiceOperationDays => DutyOperationDays & TrainOperationDays;
+    protected OperationDays OperationDays => ServiceOperationDays & NoteDays;
     protected abstract OperationDays NoteDays { get; }
-    protected string Days => NoteDays.IsAllOtherDays(ServiceOperationDays) ? string.Empty: OperationDays.ShortName;
+    protected string Days => NoteDays.IsAllDaysOf(DutyOperationDays) && TrainOperationDays.IsAllDaysOf(NoteDays)? string.Empty: OperationDays.ShortName;
     public abstract MarkupString Markup();
 }
 

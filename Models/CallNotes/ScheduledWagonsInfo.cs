@@ -18,8 +18,8 @@ public class ScheduledWagonsInfo
     public string Markup(OperationDays scheduledDays, bool alwaysShowOperationDays = false) =>
         MarkupExtensions.Div(
             alwaysShowOperationDays ? string.Concat(OperationDays.ShortName.SpanDays(), ToString().SpanValue()) :
-            OperationDays.IsAllOtherDays(scheduledDays) ? ToString().SpanValue() :
-            OperationDays.IsAnyOtherDays(scheduledDays) ? string.Concat(OperationDays.ShortName.SpanDays(), ToString().SpanValue()) :
+            OperationDays.IsAllDaysOf(scheduledDays) ? ToString().SpanValue() :
+            OperationDays.IsAnyDaysOf(scheduledDays) ? string.Concat(OperationDays.ShortName.SpanDays(), ToString().SpanValue()) :
             string.Empty
         , "item");
 

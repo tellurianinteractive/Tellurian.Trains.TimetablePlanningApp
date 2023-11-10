@@ -68,8 +68,8 @@ public static class GroupDestinationMarkup
     private static string ToMarkupText(this GroupDestination destination, OperationDays scheduledDays, bool alwaysShowOperationDays = false) =>
          MarkupExtensions.Div(
              alwaysShowOperationDays ? string.Concat(destination.OperationDays.ShortName.SpanDays(), destination.ToMarkupText()) :
-             destination.OperationDays.IsAllOtherDays(scheduledDays) ? destination.ToMarkupText() :
-             destination.OperationDays.IsAnyOtherDays(scheduledDays) ? string.Concat(destination.OperationDays.ShortName.SpanDays(), destination.ToMarkupText()) :
+             destination.OperationDays.IsAllDaysOf(scheduledDays) ? destination.ToMarkupText() :
+             destination.OperationDays.IsAnyDaysOf(scheduledDays) ? string.Concat(destination.OperationDays.ShortName.SpanDays(), destination.ToMarkupText()) :
              string.Empty,
              "item");
 

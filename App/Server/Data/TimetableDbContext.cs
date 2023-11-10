@@ -2,12 +2,9 @@
 
 namespace TimetablePlanning.App.Server.Data;
 
-    public class TimetablesDbContext : DbContext
+    public class TimetablesDbContext(DbContextOptions<TimetablesDbContext> options) : DbContext(options)
     {
-        public TimetablesDbContext(DbContextOptions<TimetablesDbContext> options) : base(options)
-        {
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // NOTE: User is fully implemented in Module Registry App
             modelBuilder.Entity<User>(entity =>

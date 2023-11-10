@@ -51,7 +51,8 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 DutyOperationDaysFlags = 0b00010101,
                 CollectFromStagingArea = true,
             }.AsEnumerable(),
-            _ => Enumerable.Empty<LocoConnectRecord>(),
+            
+        _ => Enumerable.Empty<LocoConnectRecord>(),
         };
     }
     public Task<IEnumerable<LocoDisconnectRecord>> GetLocoDisconnectRecordsAsync(int layoutId)
@@ -140,10 +141,20 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
             {
                 CallId = 25,
                 LocoOperationDaysFlags = OperationDayFlags.Daily,
-                TrainOperationDaysFlags = OperationDayFlags.Daily,
-                DutyOperationDaysFlags = OperationDayFlags.MoWeFr,
+                TrainOperationDaysFlags = OperationDayFlags.MoWeFr,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
                 TurnLoco = true,
                 CirculateLoco= true,
+            }.AsEnumerable(),
+            29 => new LocoTurnOrCirculateRecord()
+            {
+                CallId = 3,
+                DutyOperationDaysFlags = OperationDayFlags.MoWeFr,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                LocoOperationDaysFlags = OperationDayFlags.Daily,
+                CirculateLoco = true,
+                TurnLoco = true,
+
             }.AsEnumerable(),
             _ => Enumerable.Empty<LocoTurnOrCirculateRecord>(),
         };

@@ -49,20 +49,23 @@ a, .btn-link {
         top: 0.5rem;
     }
 
-.note-days {
-    color: red;
-    font-weight: bold;
+.callnote {
 }
 
-.note-text {
-}
+    .callnote.days {
+        color: red;
+        font-weight: bold;
+    }
 
-.note-item {    
-    padding-left: 2mm;
-    display:inline-block;
-}
+    .callnote.text {
+    }
 
-.note-value {
-    font-weight: bold;
-    display: inline-block;
-}
+    .callnote.item {
+        padding-left: 2mm;
+        display: inline-block;
+    }
+
+    .callnote.value {
+        font-weight: bold;
+        display: inline-block;
+    }

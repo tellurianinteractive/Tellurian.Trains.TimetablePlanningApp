@@ -27,7 +27,7 @@ public class Schedule
     public Station[] Stations { get; }
     public TrackStretch[] Streches { get; }
     public Train[] Trains => _Trains.ToArray();
-    private readonly List<Train> _Trains = new();
+    private readonly List<Train> _Trains = [];
 
     public void Add(Train train)
     {

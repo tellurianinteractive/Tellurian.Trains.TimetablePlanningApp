@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Numerics;
 using System.Text;
 
 namespace TimetablePlanning.Models.Common;
@@ -8,12 +7,12 @@ public class OperationDays
 {
     public required string FullName { get; init; }
     public required string ShortName { get; init; }
+    public required byte Flags { get; init; }
 
     public bool IsDaily => Flags == OperationDayFlags.Daily;
     public bool IsSingleDay => NumberOfDays == 1;
     public bool IsOnDemand => Flags == OperationDayFlags.OnDemand;
-    public int NumberOfDays { get; init; }
-    public required byte Flags;
+    public int NumberOfDays { get; internal init; }
 
     public override bool Equals(object? obj) => obj is OperationDays other && other.Flags == Flags;
     public override int GetHashCode() => ShortName.GetHashCode(StringComparison.OrdinalIgnoreCase);
@@ -29,9 +28,9 @@ public class OperationDays
     public static bool operator == (OperationDays one, OperationDays another) => one.Equals(another);
     public static bool operator !=(OperationDays one, OperationDays another) => !one.Equals(another);
 
-    public bool IsAllOtherDays(OperationDays operationDays) => And(Flags) == operationDays.Flags;
-    public bool IsAnyOtherDays(OperationDays operationDays) => And(operationDays.Flags) > 0;
-    public bool IsNoneOtherDays(OperationDays operationDays) => And(operationDays.Flags) == 0;
+    public bool IsAllDaysOf(OperationDays operationDays) => (operationDays.Flags | Flags) == Flags;
+    public bool IsAnyDaysOf(OperationDays operationDays) => And(operationDays.Flags) > 0;
+    public bool IsNoDaysOf(OperationDays operationDays) => And(operationDays.Flags) == 0;
     private byte And(byte otherFlags) => IsOnDemand ? Flags : (byte)(Flags & otherFlags);
     public int DisplayOrder => ~Flags;
 }

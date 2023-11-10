@@ -31,6 +31,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.CallNotes.Tests", "M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models.Common", "Models\Common\Models.Common.csproj", "{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models.Common.Tests", "Models.Common.Tests\Models.Common.Tests.csproj", "{1C61C910-B97C-4799-AD1D-96272CE8B644}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FA0BB09-E06B-4292-85F1-40A0AF0958D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C61C910-B97C-4799-AD1D-96272CE8B644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C61C910-B97C-4799-AD1D-96272CE8B644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C61C910-B97C-4799-AD1D-96272CE8B644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C61C910-B97C-4799-AD1D-96272CE8B644}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
