@@ -29,9 +29,9 @@ public class OperationDays
     public static bool operator !=(OperationDays one, OperationDays another) => !one.Equals(another);
 
     public bool IsAllDaysOf(OperationDays operationDays) => (operationDays.Flags | Flags) == Flags;
-    public bool IsAnyDaysOf(OperationDays operationDays) => And(operationDays.Flags) > 0;
-    public bool IsNoDaysOf(OperationDays operationDays) => And(operationDays.Flags) == 0;
-    private byte And(byte otherFlags) => IsOnDemand ? Flags : (byte)(Flags & otherFlags);
+    public bool IsAnyDaysOf(OperationDays operationDays) => Flags.And(operationDays.Flags) > 0;
+    public bool IsNoDaysOf(OperationDays operationDays) => Flags.And(operationDays.Flags) == 0;
+
     public int DisplayOrder => ~Flags;
 }
 
@@ -61,6 +61,9 @@ public static class OperationDaysExtensions
         flags == Days[0].Flag ? new Day[] { Days[0] } :
         flags == Days[8].Flag ? new Day[] { Days[8] } :
         Days.Where(d => d.Number > 0 && (d.Flag & flags) > 0).ToArray();
+
+    public static byte And(this byte flags, byte and) => flags == OperationDayFlags.OnDemand ? flags : (byte)(flags & and);
+    public static byte AsFlags(this string? value) => (byte)(string.IsNullOrWhiteSpace(value) ? 0 : GetFlagsFromDigits(value));
 
     public static OperationDays ToOperationDays(this byte flags)
     {
@@ -143,6 +146,22 @@ public static class OperationDaysExtensions
         fullNames.Append(fullText);
         fullNames.Append(' ');
         shortNames.Append(shortText);
+    }
+    private static byte GetFlagsFromDigits(this string value)
+    {
+        var x = value.Where(c => char.IsDigit(c))
+            .Select(c => c switch
+            {
+                '1' => 0b00000001,
+                '2' => 0b00000010,
+                '3' => 0b00000100,
+                '4' => 0b00001000,
+                '5' => 0b00010000,
+                '6' => 0b00100000,
+                '7' => 0b01000000,
+                _ => 0
+            });
+        return (byte)x.Sum();
     }
 
     #region WORK IN PROGRESS For checking overlapping days
