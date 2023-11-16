@@ -23,7 +23,6 @@ public static class StationExtensions
 {
     public static int StationTrackIndex(this Station me, string number) => me.Tracks.IndexOf( x => x.Number.Equals(number, StringComparison.OrdinalIgnoreCase));
     public static bool HasPassengerExchange(this Station me) => me.Tracks.Any(t => t.HasPlatform);
-
 }
 
 
