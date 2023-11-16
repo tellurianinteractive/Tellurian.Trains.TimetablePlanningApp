@@ -6,32 +6,78 @@ namespace TimetablePlanning.Models.CallNotes.Mappings;
 internal static class TrainMeetNoteMappings
 {
 
-    public static IEnumerable<TrainCallMeetNote> ToTrainMeetNotes(this IEnumerable<TrainMeetRecord> records) =>
-        records.Select(e => e.ToTrainMeetNote());
+    public static IEnumerable<TrainMeetsOrPassesCallNote> ToTrainMeetCallNotes(this IEnumerable<TrainMeetOrPassRecord> records) =>
+        records.Where(r => r.TrainDirection != r.OtherTrainDirection)
+        .GroupBy(r => r.CallId).Select(e => e.ToTrainMeetsCallNote());
+    public static IEnumerable<TrainMeetsOrPassesCallNote> ToTrainPassingCallNotes(this IEnumerable<TrainMeetOrPassRecord> records) =>
+        records.GroupBy(r => r.CallId).Select(e => e.ToTrainPassesCallNote());
 
-    public static TrainCallMeetNote ToTrainMeetNote(this TrainMeetRecord record) =>
-        new()
+    private static TrainMeetsCallNote ToTrainMeetsCallNote(this IEnumerable<TrainMeetOrPassRecord> records)
+    {
+        var common = records.First();
+        var result = new TrainMeetsCallNote
         {
-            ForCallId = record.CallId,
-            TrainNumber = record.TrainNumber,
+            ForCallId = common.CallId,
+            DutyOperationDays = common.DutyOperationDaysFlags.ToOperationDays(),
+            TrainOperationDays = common.TrainOperationDaysFlags.ToOperationDays(),
+            TrainNumber = common.TrainNumber,
             TrainCall = new()
             {
-                ArrivalTime = record.TrainArrivalTime,
-                DepartureTime = record.TrainDepartureTime
-            },
-            DutyOperationDays = record.DutyOperationDaysFlags.ToOperationDays(),
-            TrainOperationDays = record.TrainOperationDaysFlags.ToOperationDays(),
-            MeetingTrain = new()
-            {
-                Number = record.MeetingTrainNumber,
-                OperatorSignature = record.MeetingTrainOperatorSignature,
-                OperationDays = record.MeetingTrainOperationDaysFlags.ToOperationDays(),
-            },
-            MeetingTrainCall = new()
-            {
-                ArrivalTime = record.MeetingTrainArrivalTime,
-                DepartureTime = record.MeetingTrainDepartureTime
-            },
-            IsPassing = record.IsPassing,
+                ArrivalTime = common.TrainArrivalTime,
+                DepartureTime = common.TrainDepartureTime,
+            }
         };
+        foreach (var record in records)
+        {
+            var meetingTrain = new TrainInfo
+            {
+                Direction = record.OtherTrainDirection,
+                Number = record.OtherTrainNumber,
+                OperationDays = record.OtherTrainOperationDaysFlags.ToOperationDays(),
+                OperatorSignature = record.OtherTrainOperatorSignature,
+            };
+            var meetingTrainCall = new TrainCallInfo()
+            {
+                ArrivalTime = record.OtherTrainArrivalTime,
+                DepartureTime = record.OtherTrainDepartureTime,
+            };
+            result.OtherTrains.Add((meetingTrain, meetingTrainCall));
+        }
+        return result;
+    }
+
+    private static TrainPassesCallNote ToTrainPassesCallNote(this IEnumerable<TrainMeetOrPassRecord> records)
+    {
+        var common = records.First();
+        var result = new TrainPassesCallNote
+        {
+            ForCallId = common.CallId,
+            DutyOperationDays = common.DutyOperationDaysFlags.ToOperationDays(),
+            TrainOperationDays = common.TrainOperationDaysFlags.ToOperationDays(),
+            TrainNumber = common.TrainNumber,
+            TrainCall = new()
+            {
+                ArrivalTime = common.TrainArrivalTime,
+                DepartureTime = common.TrainDepartureTime,
+            }
+        };
+        foreach (var record in records)
+        {
+            var meetingTrain = new TrainInfo
+            {
+                Direction = record.OtherTrainDirection,
+                Number = record.OtherTrainNumber,
+                OperationDays = record.OtherTrainOperationDaysFlags.ToOperationDays(),
+                OperatorSignature = record.OtherTrainOperatorSignature,
+            };
+            var meetingTrainCall = new TrainCallInfo()
+            {
+                ArrivalTime = record.OtherTrainArrivalTime,
+                DepartureTime = record.OtherTrainDepartureTime,
+            };
+            result.OtherTrains.Add((meetingTrain, meetingTrainCall));
+        }
+        return result;
+    }
 }
+

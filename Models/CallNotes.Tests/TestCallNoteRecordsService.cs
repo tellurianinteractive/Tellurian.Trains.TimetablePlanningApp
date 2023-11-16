@@ -51,8 +51,8 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 DutyOperationDaysFlags = 0b00010101,
                 CollectFromStagingArea = true,
             }.AsEnumerable(),
-            
-        _ => Enumerable.Empty<LocoConnectRecord>(),
+
+            _ => Enumerable.Empty<LocoConnectRecord>(),
         };
     }
     public Task<IEnumerable<LocoDisconnectRecord>> GetLocoDisconnectRecordsAsync(int layoutId)
@@ -144,7 +144,7 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 TrainOperationDaysFlags = OperationDayFlags.MoWeFr,
                 DutyOperationDaysFlags = OperationDayFlags.Daily,
                 TurnLoco = true,
-                CirculateLoco= true,
+                CirculateLoco = true,
             }.AsEnumerable(),
             29 => new LocoTurnOrCirculateRecord()
             {
@@ -178,19 +178,19 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
                 ReplacingLocoNumber = "1422",
                 ReplacingLocoTurnusNumber = "23"
             }.AsEnumerable(),
-             32 => new LocoExchangeRecord()
-             {
-                 CallId = 31,
-                 DutyOperationDaysFlags = OperationDayFlags.Daily,
-                 TrainOperationDaysFlags = OperationDayFlags.Daily,
-                 LocoOperationDaysFlags = OperationDayFlags.MoWeFr,
-                 ReplacingLocoOperationDaysFlags = OperationDayFlags.MoWeFr,
-                 ReplacingLocoOperatorSignature = "SJ",
-                 ReplacingLocoClass = "Rc5",
-                 ReplacingLocoNumber = "1422",
-                 ReplacingLocoTurnusNumber = "23"
-             }.AsEnumerable(),
-             _ => Enumerable.Empty<LocoExchangeRecord>(),
+            32 => new LocoExchangeRecord()
+            {
+                CallId = 31,
+                DutyOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperationDaysFlags = OperationDayFlags.Daily,
+                LocoOperationDaysFlags = OperationDayFlags.MoWeFr,
+                ReplacingLocoOperationDaysFlags = OperationDayFlags.MoWeFr,
+                ReplacingLocoOperatorSignature = "SJ",
+                ReplacingLocoClass = "Rc5",
+                ReplacingLocoNumber = "1422",
+                ReplacingLocoTurnusNumber = "23"
+            }.AsEnumerable(),
+            _ => Enumerable.Empty<LocoExchangeRecord>(),
         };
     }
 
@@ -303,45 +303,98 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
         };
     }
 
-    public Task<IEnumerable<TrainMeetRecord>> GetTrainMeetRecordsAsync(int layoutId)
+    public Task<IEnumerable<TrainMeetsRecord>> GetTrainMeetsRecordsAsync(int layoutId)
     {
 
         return Task.FromResult(Data(layoutId));
 
-        static IEnumerable<TrainMeetRecord> Data(int layoutId) => layoutId switch
+        static IEnumerable<TrainMeetsRecord> Data(int layoutId) => layoutId switch
         {
-            71 => new TrainMeetRecord()
+            71 => new TrainMeetsRecord()
             {
                 CallId = 1,
                 TrainOperationDaysFlags = OperationDayFlags.Daily,
                 DutyOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperatorSignature = "SJ",
                 TrainNumber = "Pt 124",
                 TrainArrivalTime = new TimeSpan(12, 10, 0),
                 TrainDepartureTime = new TimeSpan(12, 15, 0),
-                MeetingTrainNumber = "Gt 4001",
-                MeetingTrainOperatorSignature = "SJ",
-                MeetingTrainOperationDaysFlags = OperationDayFlags.Daily,
-                MeetingTrainArrivalTime = new TimeSpan(12, 11, 0),
-                MeetingTrainDepartureTime = new TimeSpan(12, 16, 0),
+                TrainDirection = 1,
+                OtherTrainNumber = "Gt 4001",
+                OtherTrainOperatorSignature = "SJ",
+                OtherTrainOperationDaysFlags = OperationDayFlags.Daily,
+                OtherTrainArrivalTime = new TimeSpan(12, 11, 0),
+                OtherTrainDepartureTime = new TimeSpan(12, 16, 0),
+                OtherTrainDirection = 2,
             }.AsEnumerable(),
-            72 => new TrainMeetRecord()
+            _ => Enumerable.Empty<TrainMeetsRecord>(),
+        }; ;
+    }
+    public Task<IEnumerable<TrainPassesRecord>> GetTrainPassesRecordsAsync(int layoutId)
+    {
+        return Task.FromResult(Data(layoutId));
+
+        static IEnumerable<TrainPassesRecord> Data(int layoutId) => layoutId switch
+        {
+
+            76 => new TrainPassesRecord()
             {
                 CallId = 1,
                 DutyOperationDaysFlags = OperationDayFlags.Daily,
                 TrainOperationDaysFlags = OperationDayFlags.Daily,
+                TrainOperatorSignature = "SJ",
                 TrainNumber = "Pt 123",
                 TrainArrivalTime = new TimeSpan(12, 10, 0),
                 TrainDepartureTime = new TimeSpan(12, 15, 0),
-                MeetingTrainNumber = "Gt 4001",
-                MeetingTrainOperatorSignature = "SJ",
-                MeetingTrainOperationDaysFlags = OperationDayFlags.MoWeFr,
-                MeetingTrainArrivalTime = new TimeSpan(12, 11, 0),
-                MeetingTrainDepartureTime = new TimeSpan(12, 16, 0),
-                IsPassing = true,
+                TrainDirection = 1,
+                OtherTrainNumber = "Gt 4001",
+                OtherTrainOperatorSignature = "SJ",
+                OtherTrainOperationDaysFlags = OperationDayFlags.MoWeFr,
+                OtherTrainArrivalTime = new TimeSpan(12, 11, 0),
+                OtherTrainDepartureTime = new TimeSpan(12, 16, 0),
+                OtherTrainDirection = 1,
             }.AsEnumerable(),
-            _ => Enumerable.Empty<TrainMeetRecord>(),
+            77 => new TrainPassesRecord[]
+            {
+                new ()
+                {
+                    CallId = 1,
+                    DutyOperationDaysFlags = OperationDayFlags.Daily,
+                    TrainOperationDaysFlags = OperationDayFlags.Daily,
+                    TrainOperatorSignature = "SJ",
+                    TrainNumber = "Pt 123",
+                    TrainArrivalTime = new TimeSpan(12, 10, 0),
+                    TrainDepartureTime = new TimeSpan(12, 45, 0),
+                    TrainDirection = 1,
+                    OtherTrainNumber = "Gt 4001",
+                    OtherTrainOperatorSignature = "BSX",
+                    OtherTrainOperationDaysFlags = OperationDayFlags.MoWeFr,
+                    OtherTrainArrivalTime = new TimeSpan(12, 11, 0),
+                    OtherTrainDepartureTime = new TimeSpan(12, 16, 0),
+                    OtherTrainDirection = 1,
+                },
+                new ()
+                {
+                    CallId = 1,
+                    DutyOperationDaysFlags = OperationDayFlags.Daily,
+                    TrainOperationDaysFlags = OperationDayFlags.Daily,
+                    TrainOperatorSignature = "SJ",
+                    TrainNumber = "Pt 123",
+                    TrainArrivalTime = new TimeSpan(12, 10, 0),
+                    TrainDepartureTime = new TimeSpan(12, 45, 0),
+                    TrainDirection = 1,
+                    OtherTrainNumber = "Xt 501",
+                    OtherTrainOperatorSignature = "SJ",
+                    OtherTrainOperationDaysFlags = OperationDayFlags.Daily,
+                    OtherTrainArrivalTime = new TimeSpan(12, 41, 0),
+                    OtherTrainDepartureTime = new TimeSpan(12, 43, 0),
+                    OtherTrainDirection = 1,
+                }
+            },
+            _ => Enumerable.Empty<TrainPassesRecord>(),
         }; ;
     }
+
     public Task<IEnumerable<WagonGroupConnectRecord>> GetWagonGroupsConnectRecordsAsync(int layoutId)
     {
 
@@ -480,9 +533,9 @@ internal class TestCallNoteRecordsService : ICallNoteRecordsService
         };
     }
 
-    public Task<IEnumerable<WagonGroupFromCustomersRecord>> GetWagonGroupFromCustomersRecordsAsync(int layoutId) => 
-        Task.FromResult( Enumerable.Empty<WagonGroupFromCustomersRecord>());
-    public Task<IEnumerable<WagonGroupToCustomersRecord>> GetWagonGroupToCustomersRecordsAsync(int layoutId) => 
+    public Task<IEnumerable<WagonGroupFromCustomersRecord>> GetWagonGroupFromCustomersRecordsAsync(int layoutId) =>
+        Task.FromResult(Enumerable.Empty<WagonGroupFromCustomersRecord>());
+    public Task<IEnumerable<WagonGroupToCustomersRecord>> GetWagonGroupToCustomersRecordsAsync(int layoutId) =>
         Task.FromResult(Enumerable.Empty<WagonGroupToCustomersRecord>());
 }
 

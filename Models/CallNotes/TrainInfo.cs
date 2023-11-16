@@ -8,6 +8,7 @@ public sealed class TrainInfo
     public string? OperatorSignature { get; init; }
     public required string Number { get; init; }
     public required OperationDays OperationDays { get; init; }
+    public required int Direction { get; init; }
 
     public override string ToString() => $"{OperatorSignature} {Number}".TrimStart();
     public string Markup => ToString().SpanValue();

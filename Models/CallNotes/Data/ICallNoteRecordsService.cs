@@ -13,7 +13,8 @@ public interface ICallNoteRecordsService {
     Task<IEnumerable<ManualNoteRecord>> GetManualNoteRecordsAsync(int layoutId);
     Task<IEnumerable<ScheduledWagonsConnectRecord>> GetScheduledWagonsConnectRecordsAsync(int layoutId);
     Task<IEnumerable<ScheduledWagonsDisconnectRecord>> GetScheduledWagonsDisconnectRecordsAsync(int layoutId);
-    Task<IEnumerable<TrainMeetRecord>> GetTrainMeetRecordsAsync(int layoutId);
+    Task<IEnumerable<TrainMeetsRecord>> GetTrainMeetsRecordsAsync(int layoutId);
+    Task<IEnumerable<TrainPassesRecord>> GetTrainPassesRecordsAsync(int layoutId);
     Task<IEnumerable<WagonGroupConnectRecord>> GetWagonGroupsConnectRecordsAsync(int layoutId);
     Task<IEnumerable<WagonGroupDisconnectRecord>> GetWagonGroupsDisconnectRecordsAsync(int layoutId);
     Task<IEnumerable<WagonGroupFromCustomersRecord>> GetWagonGroupFromCustomersRecordsAsync(int layoutId);

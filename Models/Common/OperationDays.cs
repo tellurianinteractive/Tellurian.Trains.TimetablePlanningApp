@@ -12,6 +12,7 @@ public class OperationDays
     public bool IsDaily => Flags == OperationDayFlags.Daily;
     public bool IsSingleDay => NumberOfDays == 1;
     public bool IsOnDemand => Flags == OperationDayFlags.OnDemand;
+    public bool IsNoDays => Flags == 0;
     public int NumberOfDays { get; internal init; }
 
     public override bool Equals(object? obj) => obj is OperationDays other && other.Flags == Flags;
@@ -58,8 +59,8 @@ public static class OperationDaysExtensions
             new Day(0, 0x80, "OnDemand") ];
 
     private static Day[] GetDays(this byte flags) =>
-        flags == Days[0].Flag ? new Day[] { Days[0] } :
-        flags == Days[8].Flag ? new Day[] { Days[8] } :
+        flags == Days[0].Flag ? [Days[0]] :
+        flags == Days[8].Flag ? [Days[8]] :
         Days.Where(d => d.Number > 0 && (d.Flag & flags) > 0).ToArray();
 
     public static byte And(this byte flags, byte and) => flags == OperationDayFlags.OnDemand ? flags : (byte)(flags & and);
@@ -168,7 +169,7 @@ public static class OperationDaysExtensions
 
     public static int OneBitsCount(this byte it)
     {
-        ReadOnlySpan<byte> nibbleLookup = new byte[] { 0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4 };
+        ReadOnlySpan<byte> nibbleLookup = [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4];
         return nibbleLookup[it & 0x0F] + nibbleLookup[it >> 4];
     }
 

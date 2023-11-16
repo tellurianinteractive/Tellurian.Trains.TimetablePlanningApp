@@ -30,9 +30,11 @@ public abstract class CallNoteRecordsService() : ICallNoteRecordsService
     public Task<IEnumerable<ScheduledWagonsDisconnectRecord>> GetScheduledWagonsDisconnectRecordsAsync(int layoutId) =>
         GetRecordsAsync(layoutId, "ScheduledWagonsDisconnectRecords", ScheduledWagonsRecordMapper.ToScheduledWagonsDisconnectNote);
 
-    public Task<IEnumerable<TrainMeetRecord>> GetTrainMeetRecordsAsync(int layoutId) =>
-        GetRecordsAsync(layoutId, "TrainMeetRecords", TrainMeetRecordMapper.ToTrainMeetRecord);
+    public Task<IEnumerable<TrainMeetsRecord>> GetTrainMeetsRecordsAsync(int layoutId) =>
+        GetRecordsAsync(layoutId, "TrainMeetRecords", TrainMeetOrPassRecordMapper.ToTrainMeetsRecord);
 
+    public Task<IEnumerable<TrainPassesRecord>> GetTrainPassesRecordsAsync(int layoutId) =>
+       GetRecordsAsync(layoutId, "TrainMeetRecords", TrainMeetOrPassRecordMapper.ToTrainPassesRecord);
     public Task<IEnumerable<WagonGroupConnectRecord>> GetWagonGroupsConnectRecordsAsync(int layoutId) =>
         GetRecordsAsync(layoutId, "WagonGroupsConnectRecords", WagonGroupRecordMapper.ToWagonGroupConnectRecord);
 

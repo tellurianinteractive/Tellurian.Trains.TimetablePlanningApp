@@ -34,7 +34,8 @@ public class CallNotesService(ICallNoteRecordsService callEventsService, int exp
         result.AddRange((await CallEventsService.GetManualNoteRecordsAsync(layoutId)).ToManualTrainCallNotes());
         result.AddRange((await CallEventsService.GetScheduledWagonsConnectRecordsAsync(layoutId)).ToScheduledWagonsConnectNotes());
         result.AddRange((await CallEventsService.GetScheduledWagonsDisconnectRecordsAsync(layoutId)).ToScheduledWagonsDisconnectNotes());
-        result.AddRange((await CallEventsService.GetTrainMeetRecordsAsync(layoutId)).ToTrainMeetNotes());
+        result.AddRange((await CallEventsService.GetTrainMeetsRecordsAsync(layoutId)).ToTrainMeetCallNotes());
+        result.AddRange((await CallEventsService.GetTrainPassesRecordsAsync(layoutId)).ToTrainPassingCallNotes());
         result.AddRange((await CallEventsService.GetWagonGroupsConnectRecordsAsync(layoutId)).ToWagonGroupsConnectNotes());
         result.AddRange((await CallEventsService.GetWagonGroupsDisconnectRecordsAsync(layoutId)).ToWagonGroupsDisconnectNotes());
         result.AddRange((await CallEventsService.GetWagonGroupFromCustomersRecordsAsync(layoutId)).ToWagonGroupFromCustomersCallNotes());

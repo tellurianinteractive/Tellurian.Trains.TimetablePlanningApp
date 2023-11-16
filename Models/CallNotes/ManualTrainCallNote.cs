@@ -32,7 +32,6 @@ public class ManualTrainCallNote : TrainCallNote
             {
                 return string.Empty;
             }
-
         }
     }
 
