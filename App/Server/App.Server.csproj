@@ -1,25 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
-	<PropertyGroup>
-		<AssemblyName>TimetablePlanning.App.Server</AssemblyName>
-		<RootNamespace>TimetablePlanning.App.Server</RootNamespace>
-		<UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.13" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.13" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.13">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="TimetablePlanning.Importers.Xpln" Version="1.0.10" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\Client\App.Client.csproj" />
-		<ProjectReference Include="..\Shared\App.Shared.csproj" />
-	</ItemGroup>
-
-
+  <PropertyGroup>
+    <AssemblyName>TimetablePlanning.App.Server</AssemblyName>
+    <RootNamespace>TimetablePlanning.App.Server</RootNamespace>
+    <UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="TimetablePlanning.Importers.Xpln" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\App.Client.csproj" />
+    <ProjectReference Include="..\Shared\App.Shared.csproj" />
+  </ItemGroup>
 </Project>

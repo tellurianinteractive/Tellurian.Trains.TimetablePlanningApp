@@ -1,28 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
-
   <PropertyGroup>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
     <AssemblyName>TimetablePlanning.App.Client</AssemblyName>
     <RootNamespace>TimetablePlanning.App.Client</RootNamespace>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Markdig" Version="0.33.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.13" />
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.13" />
-    <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
-    <PackageReference Include="TimetablePlanning.Importers.Interfaces" Version="1.0.10" />
+    <PackageReference Include="Markdig" Version="0.34.0" />
+    <PackageReference Include="TimetablePlanning.Importers.Interfaces" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.0" />
+    <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Components\Scheduling\Components.Scheduling.csproj" />
     <ProjectReference Include="..\..\Models\CallNotes\Models.CallNotes.csproj" />
     <ProjectReference Include="..\..\Models\Common\Models.Common.csproj" />
     <ProjectReference Include="..\Shared\App.Shared.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
   </ItemGroup>
-
 </Project>

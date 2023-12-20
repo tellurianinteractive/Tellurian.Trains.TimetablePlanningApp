@@ -15,7 +15,7 @@ public class Schedule
     {
         Description = description;
         Stations = stations.ToArray();
-        Streches = CreateStretchesFrom(stations).ToArray();
+        Streches = [.. CreateStretchesFrom(stations)];
         GraphSettings = graphSettings ?? GraphSettings.Default;
         _Trains.AddRange(trains);
         StartTime = GetStartTime();
@@ -26,7 +26,7 @@ public class Schedule
     public string Description { get; }
     public Station[] Stations { get; }
     public TrackStretch[] Streches { get; }
-    public Train[] Trains => _Trains.ToArray();
+    public Train[] Trains => [.. _Trains];
     private readonly List<Train> _Trains = [];
 
     public void Add(Train train)
@@ -40,7 +40,7 @@ public class Schedule
 
     private TimeSpan GetStartTime()
     {
-        if (Trains.Any())
+        if (Trains.Length > 0)
         {
             var time = Trains.SelectMany(t => t.Calls).Select(c => c.Arrival).Min(d => d.Time);
             return new TimeSpan(time.Days, time.Hours, 0, 0);
@@ -53,7 +53,7 @@ public class Schedule
     public TimeSpan EndTime { get; private set; }
     private TimeSpan GetEndTime()
     {
-        if (Trains.Any())
+        if (Trains.Length > 0)
         {
             var time = Trains.SelectMany(t => t.Calls).Select(c => c.Departure).Max(d => d.Time);
             return new TimeSpan(time.Days, time.Hours + 1, 0, 0);
@@ -63,7 +63,7 @@ public class Schedule
     }
 
 
-    private static IEnumerable<TrackStretch> CreateStretchesFrom(IEnumerable<Station> stations)
+    private static List<TrackStretch> CreateStretchesFrom(IEnumerable<Station> stations)
     {
         var result = new List<TrackStretch>(stations.Count());
         var ss = stations.ToArray();

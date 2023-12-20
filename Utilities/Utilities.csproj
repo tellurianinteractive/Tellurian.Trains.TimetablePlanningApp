@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-	  <TargetFramework>net7.0</TargetFramework>
-	  <AssemblyName>TimetablePlanning.Utilities</AssemblyName>
-	  <RootNamespace>TimetablePlanning.Utilities</RootNamespace>
-	  <UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
-	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>TimetablePlanning.Utilities</AssemblyName>
+    <RootNamespace>TimetablePlanning.Utilities</RootNamespace>
+    <UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
-
 </Project>

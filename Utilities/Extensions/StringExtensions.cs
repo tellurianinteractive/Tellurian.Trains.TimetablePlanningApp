@@ -5,7 +5,7 @@ namespace TimetablePlanning.Utilities.Extensions;
 public static class StringExtensions
 {
     public static string[] AsArray(this string? value) =>
-        value is null ? [] : new string[] { value };
+        value is null ? [] : [value];
 
     public static bool HasValue([NotNullWhen(true)] this string? me) =>
         !string.IsNullOrWhiteSpace(me);

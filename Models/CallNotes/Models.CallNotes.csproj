@@ -1,44 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
-		<Title>Timetable Planning Call Notes</Title>
-		<AssemblyName>TimetablePlanning.Models.CallNotes</AssemblyName>
-		<RootNamespace>TimetablePlanning.Models.CallNotes</RootNamespace>
-		<UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-		<IncludeSymbols>True</IncludeSymbols>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.13" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-		<PackageReference Include="System.Data.Odbc" Version="7.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\..\Utilities\Utilities.csproj" />
-		<ProjectReference Include="..\Common\Models.Common.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Update="Resources\Notes.Designer.cs">
-			<DesignTime>True</DesignTime>
-			<AutoGen>True</AutoGen>
-			<DependentUpon>Notes.resx</DependentUpon>
-		</Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Update="Resources\Notes.resx">
-			<Generator>ResXFileCodeGenerator</Generator>
-			<LastGenOutput>Notes.Designer.cs</LastGenOutput>
-		</EmbeddedResource>
-	</ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Title>Timetable Planning Call Notes</Title>
+    <AssemblyName>TimetablePlanning.Models.CallNotes</AssemblyName>
+    <RootNamespace>TimetablePlanning.Models.CallNotes</RootNamespace>
+    <UserSecretsId>TimetablePlanningDevelopmentSecrets</UserSecretsId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <IncludeSymbols>True</IncludeSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="8.0.0" />
+    <PackageReference Include="System.Data.Odbc" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\Common\Models.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\Notes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Notes.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Notes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Notes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

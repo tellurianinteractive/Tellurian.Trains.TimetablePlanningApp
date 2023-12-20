@@ -7,8 +7,8 @@ public static class ScheduleBuilder
     public static Schedule Bohusbanan() => new("Södra Bohusbanan", BohusbananStations, Trains_Uddevalla_Göteborg );
     public static Schedule Bohusbanan(GraphSettings graphSettings) => new("Södra Bohusbanan", BohusbananStations, Trains_Uddevalla_Göteborg, graphSettings);
 
-    private static Station[] BohusbananStations => new Station[]
-    {
+    private static Station[] BohusbananStations =>
+    [
             new ("Uddevalla C", "Uv") { Km = 89, Tracks = [new("1"), new("2"), new("3")] },
             new ("Uddevalla Ö", "Uö") { Km = 87, Tracks = [new("1")] },
             new ("Grohed", "Gro") { Km = 75, Tracks = [new("1") , new("2")] },
@@ -22,7 +22,7 @@ public static class ScheduleBuilder
             new ("Göteborg Kville", "Gk") { Km = 4, Tracks = [new("1"), new("2")]},
             new ("Olskroken", "Or") { Km = 2 ,Tracks = [new("1"), new("2")]},
             new ("Göteborg C", "G") { Km = 0,Tracks = [new("6"), new("7"), new("8"),new("9"), new("10"), new("11")]}
-    };
+    ];
 
     private static TrainPattern Uddevalla_Göteborg => new("Uv-G", "red")
     {

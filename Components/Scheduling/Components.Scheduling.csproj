@@ -1,38 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-
-	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
-		<AssemblyName>TimetablePlanning.Components.Scheduling</AssemblyName>
-		<RootNamespace>TimetablePlanning.Components.Scheduling</RootNamespace>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Description>Razor components and data contracts for train scheduling.</Description>
-		<IncludeSymbols>True</IncludeSymbols>
-		<PackageTags></PackageTags>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<None Remove="Components\GraphicalScheduleEditor.razor.css" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="Components\GraphicalScheduleEditor.razor.css" />
-	</ItemGroup>
-
-
-	<ItemGroup>
-		<SupportedPlatform Include="browser" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.13" />
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Models\Common\Models.Common.csproj" />
-	</ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>TimetablePlanning.Components.Scheduling</AssemblyName>
+    <RootNamespace>TimetablePlanning.Components.Scheduling</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Razor components and data contracts for train scheduling.</Description>
+    <IncludeSymbols>True</IncludeSymbols>
+    <PackageTags>
+    </PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Components\GraphicalScheduleEditor.razor.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Components\GraphicalScheduleEditor.razor.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Models\Common\Models.Common.csproj" />
+  </ItemGroup>
 </Project>
