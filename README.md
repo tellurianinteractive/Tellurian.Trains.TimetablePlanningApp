@@ -3,7 +3,7 @@
 This project will not be further developed.
 
 This application tries out some improvements and new features based on the experiences with [the timetable prototype application](https://github.com/fjallemark/TimetablePlanningApp).
-Features from this app and from the prototype application will eventually finds its way into the Timetable App that is currently under cevelopment but not yet open sourced.
+Features from this app and from the prototype application will eventually finds its way into the Timetable App that will be open sourced.
 
 ## Graphical Schedule Component
 This conponent can present graphical timetables with time axis horisontally or vertically just by a configuration setting.
